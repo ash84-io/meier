@@ -6,6 +6,8 @@ python:
   - "3.5"
   - "3.6"
   - "3.7-dev"
+before_script:
+  - flake8 --count --exclude ./tests,./doc --ignore E402,F401,E501
 install: pip install pytest
 script:
   - pytest ./tests
