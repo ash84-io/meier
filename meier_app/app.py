@@ -31,6 +31,12 @@ def configure_app(app):
     from meier_app.config import meier_config
     app.config['MEIER_CONFIG'] = meier_config
 
+    if 'SQLALCHEMY_DATABASE_URI' in app.config['MEIER_CONFIG']:
+        app.config['SQLALCHEMY_DATABASE_URI'] = app.config['MEIER_CONFIG']['SQLALCHEMY_DATABASE_URI']
+        app.config["SQLALCHEMY_MAX_OVERFLOW"] = -1
+        app.config["SQLALCHEMY_ECHO"] = False
+        app.config['SQLALCHEMY_POOL_RECYCLE'] = 20
+
 
 def configure_extensions(app):
     from extensions import db, compress, login_manager
