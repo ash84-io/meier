@@ -6,9 +6,10 @@ sys.path.append(ROOT_DIR)
 
 from flask import Flask
 import traceback
+from flask import render_template
 from flask_script import Manager, Server
-from flask_migrate import MigrateCommand
 from meier_app.commons.logger import logger
+from meier_app.extensions import db, login_manager, sentry, compress
 
 __all__ = ['create_app']
 
@@ -19,6 +20,7 @@ def create_app():
     configure_extensions(app)
     configure_blueprints(app)
     configure_jinja(app)
+    configure_error_handlers(app)
     return app
 
 
@@ -43,11 +45,25 @@ def configure_app(app):
 
 
 def configure_extensions(app):
-    from meier_app.extensions import db, compress, migrate
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
     compress.init_app(app)
     #login_manager.init_app(app)
-    migrate.init_app(app=app, db=db)
+
+
+def configure_error_handlers(app):
+    @app.errorhandler(401)
+    def unauthorized(error):
+        return render_template("/errors/401.html"), 401
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template("/errors/404.html"), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return render_template("/errors/404.html"), 500
 
 
 def configure_jinja(app):
@@ -55,17 +71,7 @@ def configure_jinja(app):
     app.jinja_env.lstrip_blocks = True
 
 
-if __name__ == '__main__':
-    try:
-        app = create_app()
-        manager = Manager(app)
-        from meier_app.db.post import Post
-        from meier_app.db.tag import Tag
-        from meier_app.db.post_tag import PostTag
-        from meier_app.db.setting import Settings
-        from meier_app.db.user import User
-        manager.add_command('db', MigrateCommand)
-        manager.add_command('runserver', Server(host="0.0.0.0", port=8080))
-        manager.run()
-    except BaseException as e:
-        logger.exception(traceback.format_exc())
+
+app = create_app()
+app.run(port=8080)
+

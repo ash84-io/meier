@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from sqlalchemy import Column, String, Integer
 
-from meier_app.db.base import MixinBase
+from meier_app.models.base import MixinBase
 from meier_app.extensions import db
 
 

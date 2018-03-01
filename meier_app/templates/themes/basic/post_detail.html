@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ blog_title }}</title>
+</head>
+<body>
+<header>
+    <h1>
+        <a href="{{ blog_link }}">{{ blog_title }}</a>
+    </h1>
+    <h5>{{ blog_desc }}</h5>
+</header>
+
+<h2><a href="{{ post.link }}">{{ post.title }}</a></h2>
+<h4>{{ post.created_at }} | {{ post.modified_at }}</h4>
+<div class="article">
+{{ post.content | safe }}
+</div>
+
+
+<footer>
+</footer>
+</body>
+</html>

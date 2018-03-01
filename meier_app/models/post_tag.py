@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, Integer, String
 
-from meier_app.db.base import MixinBase
+from meier_app.models.base import MixinBase
 from meier_app.extensions import db
 
 
