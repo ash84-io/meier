@@ -55,15 +55,19 @@ def configure_extensions(app):
 def configure_error_handlers(app):
     @app.errorhandler(401)
     def unauthorized(error):
-        return render_template("/errors/401.html"), 401
+        return render_template("/errors/error.html", status_code=401), 401
+
+    @app.errorhandler(403)
+    def forbidden(error):
+        return render_template("/errors/error..html", status_code=403), 403
 
     @app.errorhandler(404)
     def page_not_found(error):
-        return render_template("/errors/404.html"), 404
+        return render_template("/errors/error.html", status_code=404), 404
 
     @app.errorhandler(500)
     def internal_server_error(error):
-        return render_template("/errors/404.html"), 500
+        return render_template("/errors/error.html", status_code=500), 500
 
 
 def configure_jinja(app):

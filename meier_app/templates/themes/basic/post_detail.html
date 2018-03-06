@@ -7,12 +7,13 @@
 <body>
 <header>
     <h1>
-        <a href="{{ blog_link }}">{{ blog_title }}</a>
+        <a href="/">{{ blog_title }}</a>
     </h1>
     <h5>{{ blog_desc }}</h5>
 </header>
 
 <h2><a href="{{ post.link }}">{{ post.title }}</a></h2>
+<p>{{ post_tag }}</p>
 <h4>{{ post.created_at }} | {{ post.modified_at }}</h4>
 <div class="article">
 {{ post.content | safe }}
