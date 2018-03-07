@@ -47,6 +47,7 @@ def configure_app(app):
 def configure_extensions(app):
     db.init_app(app)
     with app.app_context():
+        from meier_app.models import PostTag, Post, Tag
         db.create_all()
     compress.init_app(app)
     #login_manager.init_app(app)
@@ -73,7 +74,6 @@ def configure_error_handlers(app):
 def configure_jinja(app):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
-
 
 
 app = create_app()

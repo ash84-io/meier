@@ -13,7 +13,10 @@
 </header>
 
 {% for post in post_list %}
-    <a href="{{ post.link }}">{{ post.title }}</a>
+    <div>
+
+        <a href="{{ post.link }}">{{ post.title }}</a>
+    </div>
 {%  endfor %}
 
 
