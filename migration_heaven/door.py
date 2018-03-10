@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from migration_heaven.ghost import migrate
 
 if __name__ == '__main__':
-	parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser()
     parser.add_argument("-m", help="ghost(default) more than...")
     parser.add_argument("-src", help="src")
     parser.add_argument("-dst", help="dst(sqlalchemy connection string format)")
@@ -25,12 +25,12 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
     try:
-    	if post_list:
-    	    session.add_all(post_list)
-    	if tag_list:
-        	session.add_all(tag_list)
-        if post_tag_list
-        	session.add_all(post_tag_list)
+        if post_list:
+            session.add_all(post_list)
+        if tag_list:
+            session.add_all(tag_list)
+        if post_tag_list:
+            session.add_all(post_tag_list)
         session.commit()
     except Exception:
         print(traceback.format_exc())

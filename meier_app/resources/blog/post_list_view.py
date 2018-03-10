@@ -12,7 +12,7 @@ post_list_view = Blueprint('post_list_view', __name__, url_prefix='/')
 
 @post_list_view.route('', methods=['GET'])
 def get_post_list_view():
-    page = request.args.get('page', 1)
+    page = int(request.args.get('page', 1))
     
     settings = Settings.query.first()
     post_paging_result = Post.query.filter(Post.status == PostStatus.PUBLISH.value)\
@@ -26,8 +26,7 @@ def get_post_list_view():
                            blog_desc=settings.blog_desc,
                            post_list=post_list,
                            has_next=post_paging_result.has_next,
-                           next="/page/{}".format(page+1),
+                           next="?page={}".format(page+1),
                            has_prev=post_paging_result.has_prev,
-                           prev=next="/page/{}".format(page-1)
+                           prev="?page={}".format(page-1)
                            )
-                           

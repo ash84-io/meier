@@ -13,17 +13,19 @@
 </header>
 
 {% for post in post_list %}
-    <div>
+    <div class="post-list">
         <a href="{{ post.link }}">{{ post.title }}</a>
     </div>
 {%  endfor %}
 
+<nav class="pagination">
 {% if has_prev %}
-	<a href="{{ prev }}">PREV</a>
+	<a class='next' href="{{ prev }}">PREV</a>
 {% endif %}
 {% if has_next %}
-	<a href="{{ next }}">NEXT</a>
+	<a class="prev" href="{{ next }}">NEXT</a>
 {% endif %}
+</nav>
 
 <footer>
 </footer>
