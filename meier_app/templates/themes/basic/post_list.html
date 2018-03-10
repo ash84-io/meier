@@ -14,11 +14,16 @@
 
 {% for post in post_list %}
     <div>
-
         <a href="{{ post.link }}">{{ post.title }}</a>
     </div>
 {%  endfor %}
 
+{% if has_prev %}
+	<a href="{{ prev }}">PREV</a>
+{% endif %}
+{% if has_next %}
+	<a href="{{ next }}">NEXT</a>
+{% endif %}
 
 <footer>
 </footer>
