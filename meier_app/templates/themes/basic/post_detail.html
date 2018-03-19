@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{ blog_title }}</title>
+    <style>
+    .blog-title{
+        text-decoration: none;
+    }
+</style>
 </head>
 <body>
 <header>
-    <h1>
+    <h1 class="blog-title">
         <a href="/">{{ blog_title }}</a>
     </h1>
     <h5>{{ blog_desc }}</h5>
@@ -21,6 +28,7 @@
 
 
 <footer>
+테스트
 </footer>
 </body>
 </html>

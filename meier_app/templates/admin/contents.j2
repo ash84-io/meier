@@ -1,0 +1,125 @@
+{% extends "/admin/layout.j2" %}
+
+{% block css_section %}
+    <link href="{{ url_for('static', filename='css/tui/pagination/tui-pagination.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/tui/grid/tui-grid.min.css') }}" rel="stylesheet" />
+{% endblock css_section %}
+
+{% block content_section %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Draft</h4>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Posts</h4>
+                </div>
+                <div class="card-body">
+                    <div id="grid"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+
+{% block javascript_section %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+    <script src="{{ url_for('static', filename='js/tui/code-snippet/tui-code-snippet.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tui/pagination/tui-pagination.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tui/datepicker/tui-date-picker.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tui/grid/tui-grid.min.js') }}"></script>
+    <script>
+        var Grid = tui.Grid;
+        var grid = new Grid({
+            el: $('#grid'),
+            scrollX: false,
+            scrollY: false,
+            pagination:true,
+            rowHeaders: ['checkbox'],
+            columns: [
+                {
+                    title: 'created_at',
+                    name: 'created_at',
+                    width:100
+                },
+                {
+                    title: 'title',
+                    name: 'title'
+                },
+                {
+                    title: 'post-name',
+                    name: 'post_name'
+                },
+                {
+                    title: 'visibility',
+                    name: 'visibility',
+                    width:100,
+                    editOptions: {
+                        type: 'select',
+                        listItems: [
+                            { text: 'PRIVATE', value: '0' },
+                            { text: 'PUBLIC', value: '1' }
+                        ],
+                        useViewMode: true
+                    },
+                    formatter: function(value, rowData) {
+                        if(rowData.visibility === 0){
+                            return "PRIVATE"
+                        }else{
+                            return "PUBLIC"
+                        }
+                    }
+
+                },
+                {
+                    title: 'status',
+                    name: 'status',
+                    width:100,
+                    formatter: function(value, rowData) {
+                        if(rowData.status === 0){
+                            return "DRAFT"
+                        }else{
+                            return "PUBLISH"
+                        }
+                    }
+                }
+
+            ]
+        });
+
+        grid.use('Net', {
+            perPage: 15,
+            readDataMethod: 'GET',
+            api: {
+                readData: 'api/posts'
+            }
+        });
+
+        grid.on('response', function(data) {
+            var pagination = grid.getPagination();
+            grid.setData(data.responseData.data.items);
+            pagination.setTotalItems(data.responseData.data.total);
+            pagination._currentPage = data.responseData.data.page;
+            pagination.reset();
+
+        }).on('dblclick', function(data){
+            console.log(data);
+            var row = data.rowKey;
+            var postId = grid.getRow(row)['id'];
+            console.log(postId);
+
+        });
+
+    </script>
+{% endblock %}

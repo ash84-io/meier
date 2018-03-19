@@ -7,12 +7,20 @@ sys.path.append(ROOT_DIR)
 from flask import Flask
 import traceback
 from flask import render_template
-from flask_script import Manager, Server
 from meier_app.commons.logger import logger
 from meier_app.extensions import db, login_manager, sentry, compress
+from flask.sessions import SessionInterface
+from beaker.middleware import SessionMiddleware
 
 __all__ = ['create_app']
 
+class BeakerSessionInterface(SessionInterface):
+    def open_session(self, app, request):
+        session = request.environ['beaker.session']
+        return session
+
+    def save_session(self, app, session, response):
+        session.save()
 
 def create_app():
     app = Flask(__name__, static_url_path="", static_folder="static")
@@ -50,7 +58,28 @@ def configure_extensions(app):
         from meier_app.models import PostTag, Post, Tag
         db.create_all()
     compress.init_app(app)
-    #login_manager.init_app(app)
+
+    # flask-login
+    login_manager.login_view = "/admin/user/login"
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(token):
+        # logger.debug('load_user:{}'.format(token))
+        from meier_app.models import User
+        return User.get_from_token(token)
+
+    session_opts = {
+        'session.type': 'ext:database',
+        'session.url': app.config['SQLALCHEMY_DATABASE_URI'],
+        'session.cookie_expires': True,
+        'session.httponly': True,
+        #'session.secure': True,
+        'session.timeout': 43200,
+        'session.sa.pool_recycle': 250
+    }
+    app.wsgi_app = SessionMiddleware(app.wsgi_app, session_opts)
+    app.session_interface = BeakerSessionInterface()
 
 
 def configure_error_handlers(app):
@@ -77,5 +106,5 @@ def configure_jinja(app):
 
 
 app = create_app()
-app.run(port=8080)
+app.run(port=7878)
 

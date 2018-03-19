@@ -1,0 +1,33 @@
+<div class="logo">
+    <a href="/admin" class="simple-text logo-normal">
+        Meier - {{ blog_title  }}
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+{#        <li class="active">#}
+{#            <a href="/admin/dashboard">#}
+{#                <i class="now-ui-icons education_atom"></i>#}
+{#                <p>Dashboard</p>#}
+{#            </a>#}
+{#        </li>#}
+        <li class={% if title|upper =="CONTENTS" %}"active"{% endif %}>
+            <a href="/admin/contents">
+                <i class="now-ui-icons design_bullet-list-67"></i>
+                <p>Contents</p>
+            </a>
+        </li>
+        <li class={% if title|upper =="WRITER" %}"active"{% endif %}>
+            <a href="/admin/writer">
+                <i class="now-ui-icons design-2_ruler-pencil"></i>
+                <p>Writer</p>
+            </a>
+        </li>
+        <li class={% if title|upper =="SETTINGS" %}"active"{% endif %}>
+            <a href="/admin/settings">
+                <i class="now-ui-icons ui-2_settings-90"></i>
+                <p>Settings</p>
+            </a>
+        </li>
+    </ul>
+</div>
