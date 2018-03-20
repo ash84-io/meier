@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 
-from sqlalchemy import Column, Integer, Text, String
+from sqlalchemy import Column, Integer, String
 
-from meier_app.models.base import MixinBase
 from meier_app.extensions import db
+from meier_app.models.base import MixinBase
 
 
 class Settings(db.Model, MixinBase):

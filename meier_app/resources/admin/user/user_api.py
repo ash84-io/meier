@@ -17,7 +17,6 @@ admin_user_api = Blueprint('admin_user_api', __name__, url_prefix='/admin/user')
 @admin_user_api.route('/login', methods=['POST'])
 def login_api():
     logger.debug(request.referrer)
-    logger.debug(request.get_json())
     req_data = AttrDict(request.get_json())
     logger.debug(req_data)
     settings = Settings.query.first()
@@ -25,15 +24,13 @@ def login_api():
         user = User.query.filter(User.email == req_data.email.strip()) \
             .filter(User.password == req_data.password.strip()).scalar()
         if user:
-            token =  create_token(token_info=TokenInfo(
+            token = create_token(token_info=TokenInfo(
                 user_name=user.user_name,
                 email=user.email,
                 profile_image=user.profile_image,
                 blog_title=settings.blog_title if settings else None
             ))
-            # session = request.environ['beaker.session']
-            # session['meier_admin_token'] = token
-            # logger.debug('token : {}'.format(token))
+
             user.token = token
             login_user(user)
             next = '/admin/contents'

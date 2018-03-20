@@ -17,6 +17,7 @@ def create_token(token_info: TokenInfo) -> str:
     if isinstance(token_info, TokenInfo):
         return jwt.encode(token_info.to_dict(), 'meire_ppp', algorithm='HS256')
 
-def parse_token(token:str):
+
+def parse_token(token: str):
     return jwt.decode(token, 'meire_ppp', algorithm='HS256')
 

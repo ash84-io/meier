@@ -41,7 +41,6 @@ def migrate(src, dest):
             else:
                 visibility = 0
 
-
             post_list.append(Post(id=id,
                                   title=title,
                                   content=markdown,
@@ -69,6 +68,5 @@ def migrate(src, dest):
             post_tag_list.append(PostTag(id=id, post_id=post_id, tag_id=tag_id))
         return post_list, tag_list, post_tag_list 
     except Exception as e:
-        raise e 
+        raise e
 
-    

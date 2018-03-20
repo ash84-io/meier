@@ -5,14 +5,13 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(ROOT_DIR)
 
 from flask import Flask
-import traceback
 from flask import render_template
-from meier_app.commons.logger import logger
-from meier_app.extensions import db, login_manager, sentry, compress
+from meier_app.extensions import db, login_manager
 from flask.sessions import SessionInterface
 from beaker.middleware import SessionMiddleware
 
 __all__ = ['create_app']
+
 
 class BeakerSessionInterface(SessionInterface):
     def open_session(self, app, request):
@@ -21,6 +20,7 @@ class BeakerSessionInterface(SessionInterface):
 
     def save_session(self, app, session, response):
         session.save()
+
 
 def create_app():
     app = Flask(__name__, static_url_path="", static_folder="static")
@@ -40,24 +40,13 @@ def configure_blueprints(app):
 
 
 def configure_app(app):
-    from meier_app.config import meier_config
-    app.config['MEIER_CONFIG'] = meier_config
-    app.config['DEBUG'] = True
-
-    if 'SQLALCHEMY_DATABASE_URI' in app.config['MEIER_CONFIG']:
-        app.config['SQLALCHEMY_DATABASE_URI'] = app.config['MEIER_CONFIG']['SQLALCHEMY_DATABASE_URI']
-        app.config["SQLALCHEMY_MAX_OVERFLOW"] = -1
-        app.config["SQLALCHEMY_ECHO"] = False
-        app.config['SQLALCHEMY_POOL_RECYCLE'] = 20
-        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config.from_object('config.DevelopmentConfig')
 
 
 def configure_extensions(app):
     db.init_app(app)
     with app.app_context():
-        from meier_app.models import PostTag, Post, Tag
         db.create_all()
-    compress.init_app(app)
 
     # flask-login
     login_manager.login_view = "/admin/user/login"
