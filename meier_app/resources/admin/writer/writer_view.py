@@ -18,14 +18,3 @@ def get_new_writer_view():
                            current_user=current_user)
 
 
-@admin_writer_view.route('/<post_id:int>', methods=['GET'])
-def get_modify_writer_view(post_id):
-    settings = Settings.query.first()
-    post = Post.query.filter(Post.id == post_id).scalar()
-    if post:
-        # TODO : IMPLEMENTATION
-        pass
-    return render_template("/admin/writer.j2",
-                           title="Writer",
-                           blog_title=settings.blog_title,
-                           current_user=current_user)

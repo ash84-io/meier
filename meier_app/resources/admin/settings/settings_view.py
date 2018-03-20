@@ -15,5 +15,8 @@ def get_settings_view():
     return render_template("/admin/settings.j2",
                            title="Settings",
                            blog_title=settings.blog_title,
+                           post_per_page=settings.post_per_page,
+                           blog_desc=settings.blog_desc,
+                           theme=settings.theme,
                            current_user=current_user)
 

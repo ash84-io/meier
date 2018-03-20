@@ -23,7 +23,7 @@ def get_contents_posts_api():
     return ResponseData(code=HttpStatusCode.SUCCESS, data={'items': post_list, 'page': page, 'total': post_paging_result.total}).json
 
 
-def _get_post_list_by_status(status:PostStatus=None, page=1, per_page=10):
+def _get_post_list_by_status(status: PostStatus=None, page=1, per_page=10):
     qs = Post.query
     if status:
         qs = qs.filter(Post.status == status.value)

@@ -12,6 +12,18 @@ from meier_app.commons.logger import logger
 admin_settings_api = Blueprint('admin_settings_api', __name__, url_prefix='/admin/settings/api')
 
 
+@admin_settings_api.route('/blog_info', methods=['GET'])
+@login_required
+def get_settings_blog_info():
+    try:
+        settings = Settings.query.first()
+        logger.debug(settings.for_dict)
+        return ResponseData(code=HttpStatusCode.SUCCESS, data=settings.for_dict).json
+    except BaseException:
+        logger.exception(traceback.format_exc())
+        return ResponseData(code=HttpStatusCode.INTERNAL_SERVER_ERROR).json
+
+
 @admin_settings_api.route('/blog_info', methods=['POST'])
 @login_required
 def set_settings_blog_info():
