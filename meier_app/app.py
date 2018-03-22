@@ -95,5 +95,5 @@ def configure_jinja(app):
 
 
 app = create_app()
-app.run(port=7878)
+app.run(host='0.0.0.0', port=7878)
 

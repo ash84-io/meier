@@ -80,9 +80,11 @@ draftGrid.on('response', function(data) {
 
 }).on('dblclick', function(data){
     console.log(data);
-    var row = data.rowKey;
-    var postId = draftGrid.getRow(row)['id'];
-    console.log(postId);
+    if(data.hasOwnProperty('rowKey')) {
+        var row = data.rowKey;
+        var postId = draftGrid.getRow(row)['id'];
+        console.log(postId);
+    }
 });
 
 // CONTENT-GRID
@@ -160,7 +162,9 @@ contentGrid.on('response', function(data) {
 
 }).on('dblclick', function(data){
     console.log(data);
-    var row = data.rowKey;
-    var postId = contentGrid.getRow(row)['id'];
-    console.log(postId);
+    if(data.hasOwnProperty('rowKey')) {
+        var row = data.rowKey;
+        var postId = contentGrid.getRow(row)['id'];
+        console.log(postId);
+    }
 });

@@ -6,10 +6,9 @@ vm = new Vue({
         blog_desc: "",
         post_per_page: "",
         theme: ""
-
     },
     mounted: function () {
-         var self = this;
+        var self = this;
         axios({
             method:'get',
             url:'/admin/settings/api/blog_info',
@@ -38,39 +37,34 @@ vm = new Vue({
             if(!data.blog_title){
                 showNotification("top", "center");
             }
-            axios.get('/admin/settings/api/blog_info',
+            axios.post('/admin/settings/api/blog_info',
                 JSON.stringify(data), {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
                 .then(function (res) {
-                    console.log(res.data.data.next);
+                    alert("Save Changed.");
                 })
                 .catch(function (err) {
-                    alert("Retry Sign in");
+                    alert("Save Error.");
                 });
+        },
+        showNotification : function (from, align) {
+            color = 'primary';
+
+            $(jQuery).notify({
+                icon: "now-ui-icons ui-1_bell-53",
+                message: "test"
+            },{
+                type: color,
+                timer: 8000,
+                placement: {
+                    from: from,
+                    align: align
+                }
+            });
         }
     }
 });
-
-
-
-function showNotification(from, align){
-    color = 'primary';
-
-    $(jQuery).notify({
-        icon: "now-ui-icons ui-1_bell-53",
-        message: "test"
-
-    },{
-        type: color,
-        timer: 8000,
-        placement: {
-            from: from,
-            align: align
-        }
-    });
-}
-
 

@@ -13,5 +13,5 @@ Blog
     - material-kit
     - axios
     - nhnent tui.editor, tui.grid
-    - todo : vue.js
+    - vue.js
 
