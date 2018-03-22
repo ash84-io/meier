@@ -22,6 +22,7 @@ vm = new Vue({
         }).catch(function (err) {
             // todo : erorr
 
+
         });
     },
     methods: {

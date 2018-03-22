@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 from enum import Enum
 
-from sqlalchemy import Column, Integer, Text, String
+from sqlalchemy import Column, Integer, Text, String, Boolean
 
 from meier_app.models.base import MixinBase
 from meier_app.extensions import db
@@ -24,6 +24,7 @@ class Post(db.Model, MixinBase):
     title = Column(String(255), nullable=False, index=True)
     content = Column(Text, nullable=False)
     html = Column(Text, nullable=True, default=None)
+    is_page = Column(Boolean, default=False, index=True)
     visibility = Column(Integer, nullable=False, default=PostVisibility.PRIVATE.value)
     status = Column(Integer, nullable=False, default=PostStatus.DRAFT.value)
 
