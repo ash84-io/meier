@@ -1,0 +1,126 @@
+{
+  "_args": [
+    [
+      "tui-chart@^2.13.0",
+      "/home/ash84/workspace/node_modules/tui-editor"
+    ]
+  ],
+  "_from": "tui-chart@>=2.13.0 <3.0.0",
+  "_id": "tui-chart@2.17.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/tui-chart",
+  "_nodeVersion": "8.9.3",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/tui-chart_2.17.0_1520922075207_0.8251446789467154"
+  },
+  "_npmUser": {
+    "email": "dl_javascript@nhnent.com",
+    "name": "nhnent"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "tui-chart",
+    "raw": "tui-chart@^2.13.0",
+    "rawSpec": "^2.13.0",
+    "scope": null,
+    "spec": ">=2.13.0 <3.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/tui-editor"
+  ],
+  "_resolved": "https://registry.npmjs.org/tui-chart/-/tui-chart-2.17.0.tgz",
+  "_shasum": "5e4ec789d6252cd7d49c66bc4c8e9ecc7d920553",
+  "_shrinkwrap": null,
+  "_spec": "tui-chart@^2.13.0",
+  "_where": "/home/ash84/workspace/node_modules/tui-editor",
+  "author": {
+    "email": "dl_javascript@nhnent.com",
+    "name": "NHN Ent. FE Development Lab"
+  },
+  "bugs": {
+    "url": "https://github.com/nhnent/tui.chart/issues"
+  },
+  "dependencies": {
+    "raphael": "git+https://github.com/nhnent/raphael.git#2.2.0-c",
+    "tui-code-snippet": "^1.2.5"
+  },
+  "description": "TOAST UI Application: Chart",
+  "devDependencies": {
+    "codemirror": "5.24.0",
+    "copy-webpack-plugin": "^4.0.0",
+    "cpy-cli": "^1.0.1",
+    "css-loader": "^0.25.0",
+    "es5-shim": "^4.5.9",
+    "eslint": "4.16.0",
+    "eslint-config-tui": "^1.0.3",
+    "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "istanbul-instrumenter-loader": "^1.0.0",
+    "jasmine-core": "^2.5.2",
+    "jsdoc": "^3.4.2",
+    "karma": "1.3.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-es5-shim": "0.0.4",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-junit-reporter": "^1.1.0",
+    "karma-mocha-reporter": "^2.2.0",
+    "karma-narrow-reporter": "^2.0.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webdriver-launcher": "git+https://github.com/nhnent/karma-webdriver-launcher.git#v1.1.0",
+    "karma-webpack": "^1.8.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "safe-umd-webpack-plugin": "^0.0.1",
+    "style-loader": "^0.19.0",
+    "tui-jsdoc-template": "^1.0.4",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "directories": {},
+  "dist": {
+    "fileCount": 357,
+    "integrity": "sha512-tYZGVM3UWY9nfOCFYtCos0/+5LWVqzImp+T+Y65OQasBqsdZH1Wui7jbPowbvkA+0SAjb4xwkZieme0+K1KhXA==",
+    "shasum": "5e4ec789d6252cd7d49c66bc4c8e9ecc7d920553",
+    "tarball": "https://registry.npmjs.org/tui-chart/-/tui-chart-2.17.0.tgz",
+    "unpackedSize": 4996969
+  },
+  "gitHead": "b5847bb9c5144beb61839feb79c28fcd39497aa7",
+  "homepage": "https://github.com/nhnent/tui.chart#readme",
+  "keywords": [
+    "application",
+    "chart",
+    "nhnent",
+    "tui"
+  ],
+  "license": "MIT",
+  "main": "dist/tui-chart",
+  "maintainers": [
+    {
+      "name": "nhnent",
+      "email": "dl_javascript@nhnent.com"
+    }
+  ],
+  "name": "tui-chart",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhnent/tui.chart.git"
+  },
+  "scripts": {
+    "deploy": "webpack --production & webpack --production --minify && cp -R ./maps ./dist",
+    "doc": "jsdoc -c ./jsdoc.conf.json && git checkout gh-pages && npm run update",
+    "eslint": "eslint src/js test/",
+    "serve": "webpack-dev-server --inline --hot -d",
+    "serve:ie8": "webpack-dev-server -d",
+    "test": "karma start",
+    "test:ne": "KARMA_SERVER=ne karma start"
+  },
+  "version": "2.17.0"
+}

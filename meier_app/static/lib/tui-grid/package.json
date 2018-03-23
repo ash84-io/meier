@@ -1,0 +1,149 @@
+{
+  "_args": [
+    [
+      "tui-grid",
+      "/home/ash84/workspace"
+    ]
+  ],
+  "_from": "tui-grid@latest",
+  "_id": "tui-grid@2.9.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/tui-grid",
+  "_nodeVersion": "8.9.4",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/tui-grid_2.9.0_1521103843035_0.06871370954454581"
+  },
+  "_npmUser": {
+    "email": "dl_javascript@nhnent.com",
+    "name": "nhnent"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "tui-grid",
+    "raw": "tui-grid",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/tui-grid/-/tui-grid-2.9.0.tgz",
+  "_shasum": "02e8bf62eb286a7502e7e069afb68fb8eed1d1b2",
+  "_shrinkwrap": null,
+  "_spec": "tui-grid",
+  "_where": "/home/ash84/workspace",
+  "author": {
+    "name": "NHN Ent. FE Development Lab"
+  },
+  "bugs": {
+    "url": "https://github.com/nhnent/tui.grid/issues"
+  },
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "jquery": "^1.11.0",
+    "tui-code-snippet": "^1.2.5",
+    "tui-date-picker": "^3.0.0",
+    "tui-pagination": "^3.0.0",
+    "underscore": "^1.8.3"
+  },
+  "description": "TOAST UI Grid : Powerful data grid control supported by TOAST UI",
+  "devDependencies": {
+    "body-parser": "^1.12.4",
+    "copy-webpack-plugin": "^3.0.1",
+    "cpy-cli": "^1.0.1",
+    "css-loader": "^0.25.0",
+    "del-cli": "^0.2.1",
+    "es5-shim": "^4.5.9",
+    "eslint": "^4.5.0",
+    "eslint-config-tui": "^1.0.1",
+    "eslint-loader": "^1.5.0",
+    "express": "^4.12.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "istanbul-instrumenter-loader": "^1.0.0",
+    "jasmine-ajax": "^2.99.0",
+    "jasmine-core": "2.5.2",
+    "jasmine-jquery": "^2.0.5",
+    "jsdoc": "^3.5.4",
+    "karma": "1.3.0",
+    "karma-browserstack-launcher": "^0.1.10",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^0.5.1",
+    "karma-es5-shim": "0.0.4",
+    "karma-htmlfile-reporter": "^0.2.2",
+    "karma-jasmine": "1.0.2",
+    "karma-jasmine-ajax": "^0.1.13",
+    "karma-jquery": "^0.2.2",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-simple-reporter": "^2.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webdriver-launcher": "git+https://github.com/nhnent/karma-webdriver-launcher.git#v1.1.0",
+    "karma-webpack": "^1.8.0",
+    "safe-umd-webpack-plugin": "^0.0.1",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.3.1",
+    "tui-jsdoc-template": "^1.0.4",
+    "vinyl-source-stream": "^1.1.0",
+    "wdio-jasmine-framework": "^0.2.19",
+    "wdio-selenium-standalone-service": "0.0.7",
+    "wdio-static-server-service": "^1.0.1",
+    "wdio-visual-regression-service": "^0.5.0",
+    "webdriverio": "^4.5.2",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "directories": {},
+  "dist": {
+    "fileCount": 200,
+    "integrity": "sha512-iLFRvFisBf1HQ4XDrTLUv0N1vh2pk3Aw8wWpPrklopQhbdZqVutEftkE5zGOdD0INvQIKpyzNGgg6nZfgH6Z1g==",
+    "shasum": "02e8bf62eb286a7502e7e069afb68fb8eed1d1b2",
+    "tarball": "https://registry.npmjs.org/tui-grid/-/tui-grid-2.9.0.tgz",
+    "unpackedSize": 3719618
+  },
+  "gitHead": "64b16eb339a68f3277ff1e57ee55229a40543022",
+  "homepage": "https://github.com/nhnent/tui.grid#readme",
+  "keywords": [
+    "application",
+    "grid",
+    "nhnent",
+    "tui",
+    "tui-grid"
+  ],
+  "license": "MIT",
+  "main": "dist/tui-grid.js",
+  "maintainers": [
+    {
+      "name": "nhnent",
+      "email": "dl_javascript@nhnent.com"
+    }
+  ],
+  "name": "tui-grid",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhnent/tui.grid.git"
+  },
+  "scripts": {
+    "bundle": "npm run bundle:normal & npm run bundle:combine",
+    "bundle:combine": "webpack --production --combine & webpack --production --combine --minify",
+    "bundle:normal": "webpack --production & webpack --production --minify",
+    "dev": "webpack-dev-server",
+    "dev:ie8": "webpack-dev-server -d",
+    "docs": "npm run docs:jsdoc && npm run docs:copy",
+    "docs:copy": "cpy dist/tui-grid.{js,css} doc/dist & cpy dist/images/* doc/dist/images",
+    "docs:jsdoc": "jsdoc -c ./jsdoc.conf.json",
+    "sshot:clean": "del screenshots/diff screenshots/screen",
+    "sshot:cleanRef": "del screenshots/reference",
+    "test": "karma start --no-single-run",
+    "test:e2e": "npm run sshot:clean && wdio wdio.conf.js",
+    "test:ne": "KARMA_SERVER=ne karma start"
+  },
+  "version": "2.9.0"
+}

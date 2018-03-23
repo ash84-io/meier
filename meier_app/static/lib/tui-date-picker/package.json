@@ -1,0 +1,128 @@
+{
+  "_args": [
+    [
+      "tui-date-picker@^3.0.0",
+      "/home/ash84/workspace/node_modules/tui-grid"
+    ]
+  ],
+  "_from": "tui-date-picker@>=3.0.0 <4.0.0",
+  "_id": "tui-date-picker@3.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/tui-date-picker",
+  "_nodeVersion": "6.10.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/tui-date-picker-3.0.0.tgz_1501077119705_0.09803825244307518"
+  },
+  "_npmUser": {
+    "email": "dl_javascript@nhnent.com",
+    "name": "nhnent"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "tui-date-picker",
+    "raw": "tui-date-picker@^3.0.0",
+    "rawSpec": "^3.0.0",
+    "scope": null,
+    "spec": ">=3.0.0 <4.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/tui-grid"
+  ],
+  "_resolved": "https://registry.npmjs.org/tui-date-picker/-/tui-date-picker-3.0.0.tgz",
+  "_shasum": "9cd2f98cbfb8886e85f058be822ce01cae26a163",
+  "_shrinkwrap": null,
+  "_spec": "tui-date-picker@^3.0.0",
+  "_where": "/home/ash84/workspace/node_modules/tui-grid",
+  "author": {
+    "email": "dl_javascript@nhnent.com",
+    "name": "NHNEnt FE Development Lab"
+  },
+  "bugs": {
+    "url": "https://github.com/nhnent/tui.date-picker/issues"
+  },
+  "dependencies": {
+    "jquery": "^1.11.0",
+    "tui-code-snippet": "^1.2.5",
+    "tui-time-picker": "^1.0.0"
+  },
+  "description": "TOAST UI Components: DatePicker",
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "es5-shim": "^4.5.9",
+    "eslint": "^3.19.0",
+    "eslint-config-tui": "^1.0.1",
+    "eslint-loader": "^1.6.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "handlebars": "4.0.6",
+    "handlebars-loader": "^1.4.0",
+    "istanbul-instrumenter-loader": "^1.0.0",
+    "jasmine-core": "^2.4.1",
+    "jasmine-jquery": "^2.1.0",
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
+    "karma": "1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "latest",
+    "karma-es5-shim": "0.0.4",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-jquery": "^0.1.1",
+    "karma-jquery": "^0.2.2",
+    "karma-junit-reporter": "latest",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webdriver-launcher": "git+https://github.com/nhnent/karma-webdriver-launcher.git",
+    "karma-webpack": "^1.8.0",
+    "phantomjs-prebuilt": "^2.1.5",
+    "safe-umd-webpack-plugin": "^0.0.1",
+    "style-loader": "^0.13.1",
+    "tui-jsdoc-template": "^1.1.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.11.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "9cd2f98cbfb8886e85f058be822ce01cae26a163",
+    "tarball": "https://registry.npmjs.org/tui-date-picker/-/tui-date-picker-3.0.0.tgz"
+  },
+  "gitHead": "328efa8892c932a6c0a1536a863875d49aeb8191",
+  "homepage": "https://github.com/nhnent/tui.date-picker#readme",
+  "keywords": [
+    "calendar",
+    "component",
+    "date-picker",
+    "date-range-picker",
+    "nhnent",
+    "tui",
+    "tui-date-picker"
+  ],
+  "license": "MIT",
+  "main": "dist/tui-date-picker",
+  "maintainers": [
+    {
+      "name": "nhnent",
+      "email": "dl_javascript@nhnent.com"
+    }
+  ],
+  "name": "tui-date-picker",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhnent/tui.date-picker.git"
+  },
+  "scripts": {
+    "bundle": "webpack && webpack -p",
+    "cpy-dist2doc": "mkdir -p doc/dist && cp -f -r dist doc",
+    "doc": "jsdoc -c jsdoc.conf.json && npm run cpy-dist2doc",
+    "serve": "webpack-dev-server --inline --hot -d",
+    "serve:ie8": "webpack-dev-server -d",
+    "test": "karma start --no-single-run",
+    "test:ne": "KARMA_SERVER=ne karma start"
+  },
+  "version": "3.0.0"
+}
