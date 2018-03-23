@@ -1,24 +1,51 @@
-var vm;
-vm = new Vue({
-    el: '#vue-section',
-    data:{},
-    mounted: function () {
-        // var editor = new tui.Editor({
-        //     el: document.querySelector('#editor'),
-        //     initialEditType: 'markdown',
-        //     previewStyle: 'vertical',
-        //     height: '600px',
-        //     codeBlockLanguages: ['python', 'javascript'],
-        //     useCommandShortcut: true,
-        //     exts: ['scrollSync', 'colorSyntax', 'uml', 'chart', 'mark', 'table', 'taskCounter']
-        // });
-    },
-    methods: {
-        save: function (event) {
-            console.log("save");
-        },
-        delete: function(event){
-            console.log("delete");
-        }
+let mark_to_html=null;
+let vm = new Vue({
+  el: '#vue-section',
+  data: {
+    input: '### title',
+  },
+  computed: {
+    compiledMarkdown: function () {
+        let converted_html = marked(this.input, {sanitize: true, gfm:true, tables:true});
+        mark_to_html = converted_html;
+        return converted_html;
     }
+  },
+  methods: {
+    update: _.debounce(function (e) {
+      this.input = e.target.value
+    }, 100),
+      publish:function () {
+
+      },
+      draft:function () {
+
+      },
+      bold:function () {
+
+      },
+      gist:function () {
+
+      },
+      italic:function () {
+
+      },
+      table:function () {
+
+      },
+      image:function () {
+
+      },
+      code:function () {
+
+      },
+      link:function () {
+
+      },
+      quote:function () {
+
+      }
+
+  }
+
 });
