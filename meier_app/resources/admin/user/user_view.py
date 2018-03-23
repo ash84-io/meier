@@ -7,6 +7,7 @@ from flask_login import logout_user, login_required, current_user
 
 from meier_app.commons.logger import logger
 from meier_app.models.setting import Settings
+from meier_app.models.user import User
 
 admin_user_view = Blueprint('admin_user_view', __name__, url_prefix='/admin/user')
 

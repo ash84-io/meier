@@ -7,12 +7,14 @@ from sqlalchemy import desc
 from meier_app.commons.logger import logger
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
 from meier_app.models.post import Post, PostStatus
+from meier_app.resources.admin import base
 
 admin_contents_api = Blueprint('admin_contents_api', __name__, url_prefix='/admin/contents/api')
 
 
 @admin_contents_api.route('/posts', methods=['GET'])
 @login_required
+@base.api_exception_handler
 def get_contents_posts_api():
     logger.debug(request.args)
     page = int(request.args.get('page', 1))
@@ -32,6 +34,7 @@ def _get_post_list_by_status(status: PostStatus=None, page=1, per_page=10):
 
 @admin_contents_api.route('/draft', methods=['GET'])
 @login_required
+@base.api_exception_handler
 def get_contents_draft_api():
     logger.debug(request.args)
     page = int(request.args.get('page', 1))

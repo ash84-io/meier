@@ -1,5 +1,5 @@
-var vm;
-vm = new Vue({
+
+var vm = new Vue({
     el: '#vue-section',
     data: {
         blog_title: "",
@@ -21,8 +21,6 @@ vm = new Vue({
             showNotification('top', 'center', 'ok');
         }).catch(function (err) {
             // todo : erorr
-
-
         });
     },
     methods: {

@@ -15,6 +15,10 @@ class User(db.Model, MixinBase, UserMixin):
     password = Column(String(255), nullable=False, index=True)
     user_name = Column(String(20), nullable=False)
     profile_image = Column(String(255), nullable=True)
+    user_desc = db.Column(String(255), nullable=True)
+    twitter_profile = db.Column(String(255), nullable=True)
+    facebook_profile = db.Column(String(255), nullable=True)
+    website = db.Column(String(255), nullable=True)
 
     __str__, __unicode__ = autotext("{self.email} {self.user_name} {self.profile_image}")
 
@@ -25,6 +29,17 @@ class User(db.Model, MixinBase, UserMixin):
     def get_id(self):
         return self.token
 
+    @property
+    def for_user_info(self):
+        return {
+            'email':self.email,
+            'user_name':self.user_name,
+            'profile_image': self.profile_image,
+            'user_desc': self.user_desc,
+            'twitter_profile': self.twitter_profile,
+            'facebook_profile': self.facebook_profile,
+            'website': self.website,
+        }
 
     @staticmethod
     def get_from_token(token):

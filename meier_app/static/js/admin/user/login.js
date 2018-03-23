@@ -12,7 +12,7 @@ vm = new Vue({
                 email: this.email,
                 password: this.password
             };
-            axios.post('/admin/user/login',
+            axios.post('/admin/user/api/login',
                 JSON.stringify(data), {
                     headers: {
                         'Content-Type': 'application/json'
