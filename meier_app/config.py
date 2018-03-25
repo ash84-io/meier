@@ -13,7 +13,7 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://ash84:xxx@ash84.net:3306/meier'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://ash84:ash84@ash84.net:3306/meier'
 
 
 class TestingConfig(Config):

@@ -12,6 +12,5 @@ Blog
 - Frontend
     - material-kit
     - [axios](https://github.com/axios/axios)
-    - nhnent tui.editor, tui.grid
     - vue.js
 
