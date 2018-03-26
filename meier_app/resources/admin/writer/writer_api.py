@@ -47,10 +47,38 @@ def update_post(post_id):
 def save_post():
     req_data = AttrDict(request.get_json())
     post = Post()
-    # TODO : MARKDOWN TO HTML CONVERSION
-    for k, v in req_data.items():
-        setattr(post, k, v)
+    post.title = req_data.title
+    post.content = req_data.content
+    post.html = req_data.html
     post.in_date = datetime.now()
+    post.mo_date = datetime.now()
+
+    # todo : status, visibility
     db.session.add(post)
     db.session.commit()
+
+    logger.debug(post.id)
+
+    tags_id = []
+    for tag in req_data.tags:
+        tag = str(tag).strip()
+        tag_instance = Tag.query.filter(Tag.tag == tag).scalar()
+        if tag_instance is None:
+            tag_instance = Tag(tag=tag)
+            db.session.add(tag_instance)
+            db.session.flush()
+            tags_id.append(tag_instance.id)
+        else:
+            tags_id.append(tag_instance.id)
+
+    db.session.commit()
+    logger.debug(tags_id)
+
+    for tag_id in tags_id:
+        post_tag = PostTag.query.filter(PostTag.post_id == post.id).filter(PostTag.tag_id == tag_id).all()
+        if not post_tag:
+            post_tag = PostTag(post_id=post.id, tag_id=tag_id)
+            db.session.add(post_tag)
+            db.session.commit()
+            logger.debug(post_tag.id)
     return ResponseData(code=HttpStatusCode.SUCCESS).json

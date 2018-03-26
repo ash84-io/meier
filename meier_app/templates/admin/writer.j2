@@ -43,7 +43,7 @@
                 <div class="card-body" id="vue-section">
                     <!-- TITLE -->
                     <div class="title-section">
-                        <textarea rows="1" class="form-control title" placeholder="title"></textarea>
+                        <textarea rows="1" class="form-control title" placeholder="title" v-model="title"></textarea>
                     </div>
                     <!-- //TITLE -->
 
@@ -73,8 +73,8 @@
                     <!-- //TAG -->
                     <!-- EDITOR -->
                     <div id="editor">
-                        <textarea :value="input" @input="update"></textarea>
-                        <div v-html="compiledMarkdown"></div>
+                        <textarea :value="content" @input="update"></textarea>
+                        <div v-html="compiledMarkdown" v-model="content"></div>
                     </div>
                     <!-- //EDITOR -->
                 </div>
