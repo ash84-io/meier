@@ -7,10 +7,8 @@ let vm = new Vue({
     data: {
         title:'',
         content: '### title',
-        tagsArray:''
-    },
-    updated:function () {
-        console.log('mounted');
+        tagsArray:'',
+        postPageURL:''
     },
     computed: {
         compiledMarkdown: function () {
@@ -32,9 +30,14 @@ let vm = new Vue({
                 title:this.title,
                 content:this.content,
                 html:mark_to_html,
-                tags:tags
+                tags:tags,
+                post_name:this.postPageURL
             };
             console.log(data);
+            if(!data.post_name){
+                alert('required post or page uRL');
+            }
+            else{
 
             axios.post('/admin/writer/api/post',
                 JSON.stringify(data), {
@@ -46,7 +49,7 @@ let vm = new Vue({
                 .catch(function (err) {
                     alert("Save Error.");
                 });
-
+            }
         },
         draft:function () {
 

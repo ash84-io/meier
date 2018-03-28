@@ -10,6 +10,7 @@
             font-size: 20px;
             height: auto;
         }
+
         textarea, #editor div {
             display: inline-block;
             width: 49%;
@@ -47,7 +48,6 @@
                     </div>
                     <!-- //TITLE -->
 
-
                     <!-- TOOLBAR -->
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group btn-group-sm mr-2" role="group">
@@ -60,7 +60,9 @@
                             <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="code"><i class="fas fa-code"></i></button>
                             <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="gist"><i class="fab fa-github"></i></button>
                         </div>
-
+                        <div class="btn-group btn-group-sm mr-2 col-md-6" role="group">
+                            <input type="text" class="form-control" placeholder="post or page url" v-model="postPageURL" style="height: 31px;margin-top: 10px;"/>
+                        </div>
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-secondary" v-on:click="draft"><strong>DRAFT</strong></button>
                             <button type="button" class="btn btn-primary" v-on:click="publish"><strong>PUBLISH</strong></button>
@@ -69,7 +71,7 @@
                     </div>
                     <!-- //TOOLBAR -->
                     <!-- TAG -->
-                    <input-tag placeholder="Add Tag"  :tags.sync="tagsArray"></input-tag>
+                    <input-tag placeholder="Add Tag(,)"  :tags.sync="tagsArray" style="border: none;"></input-tag>
                     <!-- //TAG -->
                     <!-- EDITOR -->
                     <div id="editor">
