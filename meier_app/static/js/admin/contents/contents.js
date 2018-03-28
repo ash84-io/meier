@@ -71,14 +71,7 @@ draftGrid.use('Net', {
     }
 });
 
-draftGrid.on('response', function(data) {
-    var pagination = draftGrid.getPagination();
-    draftGrid.setData(data.responseData.data.items);
-    pagination.setTotalItems(data.responseData.data.total);
-    pagination._currentPage = data.responseData.data.page;
-    pagination.reset();
-
-}).on('dblclick', function(data){
+draftGrid.on('dblclick', function(data){
     console.log(data);
     if(data.hasOwnProperty('rowKey')) {
         var row = data.rowKey;
@@ -153,14 +146,7 @@ contentGrid.use('Net', {
     }
 });
 
-contentGrid.on('response', function(data) {
-    var pagination = contentGrid.getPagination();
-    contentGrid.setData(data.responseData.data.items);
-    pagination.setTotalItems(data.responseData.data.total);
-    pagination._currentPage = data.responseData.data.page;
-    pagination.reset();
-
-}).on('dblclick', function(data){
+contentGrid.on('dblclick', function(data){
     console.log(data);
     if(data.hasOwnProperty('rowKey')) {
         var row = data.rowKey;

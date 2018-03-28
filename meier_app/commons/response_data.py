@@ -17,18 +17,17 @@ class ResponseBase(object):
 
 
 class ResponseData(ResponseBase):
-    meta = None
-    data = None
 
-    def __init__(self, code, data=None):
+    def __init__(self, code, data=None, **kwargs):
         self.meta = Meta(code=code)
         self.data = data
+        self.dummy_data = kwargs if kwargs else {}
 
     def to_dict(self):
         result = dict()
         result["meta"] = self.meta.__dict__
-        if self.data is not None:
-            result["data"] = self.data
+        result["data"] = self.data if self.data is not None else []
+        result.update(self.dummy_data)
         return result
 
     @property
