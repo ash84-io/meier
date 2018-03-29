@@ -154,3 +154,54 @@ contentGrid.on('dblclick', function(data){
         console.log(postId);
     }
 });
+
+let vm_draft = new Vue({
+    el: '#vue-draft-button-section',
+    methods: {
+        deleteDraft: function (event) {
+            console.log(event);
+            let willDeletePostIDList = [];
+            let rows = draftGrid.getCheckedRows();
+            for (let i in rows){
+                willDeletePostIDList.push(rows[i].id);
+            }
+            deletePosts(willDeletePostIDList);
+        }
+    }
+});
+
+let vm_posts = new Vue({
+    el: '#vue-posts-button-section',
+    methods: {
+        deletePosts:function (event) {
+            console.log(event);
+            let willDeletePostIDList = [];
+            let rows = contentGrid.getCheckedRows();
+            for (let i in rows){
+                willDeletePostIDList.push(rows[i].id);
+            }
+            deletePosts(willDeletePostIDList);
+        }
+    }
+});
+
+function deletePosts(postIdList) {
+    let delFunctionList = [];
+    for (let i in postIdList) {
+        function getUserAccount() {
+            return axios.delete('/admin/contents/api/posts/' + (postIdList[i].toString()));
+        }
+        delFunctionList.push(getUserAccount());
+    }
+
+    axios.all(delFunctionList)
+        .then(axios.spread(function (acct, perms) {
+            // Both requests are now complete
+            console.log(acct);
+            alert("Deleted");
+            location.href="/admin/contents";
+        })).catch(function (err) {
+                    alert("Delete Error.");
+                });
+}
+

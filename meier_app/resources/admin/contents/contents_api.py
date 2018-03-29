@@ -8,6 +8,8 @@ from meier_app.commons.logger import logger
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
 from meier_app.models.post import Post, PostStatus
 from meier_app.resources.admin import base
+from meier_app.extensions import db
+
 
 admin_contents_api = Blueprint('admin_contents_api', __name__, url_prefix='/admin/contents/api')
 
@@ -52,3 +54,13 @@ def get_contents_draft_api():
                         result=is_result).json
 
 
+@admin_contents_api.route('/posts/<int:post_id>', methods=['DELETE'])
+@login_required
+@base.api_exception_handler
+def delete_contents_posts_api(post_id):
+    logger.debug(post_id)
+    Post.query.filter(Post.id == post_id).delete()
+
+    # todo : post-tag 연결 끊기
+    db.session.commit()
+    return ResponseData(code=HttpStatusCode.SUCCESS).json
