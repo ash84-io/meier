@@ -71,7 +71,7 @@
                     </div>
                     <!-- //TOOLBAR -->
                     <!-- TAG -->
-                    <input-tag placeholder="Add Tag(,)"  :tags.sync="tagsArray" style="border: none;"></input-tag>
+                    <input-tag :placeholder="tagsArray ? '' : 'AddTags (,)'"  :tags.sync="tagsArray" style="border: none;"></input-tag>
                     <!-- //TAG -->
                     <!-- EDITOR -->
                     <div id="editor">

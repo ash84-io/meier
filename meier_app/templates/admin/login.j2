@@ -33,7 +33,7 @@
                             <input type="text" id="email" v-model="email" class="form-control" placeholder="EMAIL">
                         </div>
                         <div class="input-group form-group-no-border input-lg">
-                            <input type="password" id="password" v-model="password" placeholder="PASSWORD" class="form-control" />
+                            <input type="password" id="password" v-model="password" v-on:keyup.13='login' placeholder="PASSWORD" class="form-control" />
                         </div>
                     </div>
                     <div class="footer text-center" >

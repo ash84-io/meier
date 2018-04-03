@@ -43,6 +43,7 @@ class Post(db.Model, MixinBase):
         return {
             'id': self.id,
             'title': self.title,
+            'raw_content': self.content,
             'created_at': self.in_date.strftime("%Y-%m-%d") if self.in_date else '',
             'modified_at': self.mo_date.strftime("%Y-%m-%d") if self.mo_date else '',
             'post_name': self.post_name,

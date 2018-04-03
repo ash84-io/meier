@@ -7,6 +7,8 @@ from sqlalchemy import desc
 from meier_app.commons.logger import logger
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
 from meier_app.models.post import Post, PostStatus
+from meier_app.models.post_tag import PostTag
+from meier_app.models.tag import Tag
 from meier_app.resources.admin import base
 from meier_app.extensions import db
 
@@ -64,3 +66,18 @@ def delete_contents_posts_api(post_id):
     # todo : post-tag 연결 끊기
     db.session.commit()
     return ResponseData(code=HttpStatusCode.SUCCESS).json
+
+
+@admin_contents_api.route('/posts/<int:post_id>', methods=['GET'])
+@login_required
+@base.api_exception_handler
+def get_contents_post_detail_api(post_id):
+    logger.debug(request.args)
+    post = Post.query.filter(Post.id == int(post_id)).scalar()
+    tag_id_list = [pt.tag_id for pt in PostTag.query.filter(PostTag.post_id == int(post_id)).all()]
+    tag_list = [t.for_admin for t in Tag.query.filter(Tag.id.in_(tag_id_list)).all()]
+    if not post:
+        return ResponseData(code=HttpStatusCode.NOT_FOUND).json
+    return ResponseData(code=HttpStatusCode.SUCCESS,
+                        data={'post': post.for_admin, 'tag_list': tag_list}
+                        ).json

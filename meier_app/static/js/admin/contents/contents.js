@@ -74,9 +74,11 @@ draftGrid.use('Net', {
 draftGrid.on('dblclick', function(data){
     console.log(data);
     if(data.hasOwnProperty('rowKey')) {
-        var row = data.rowKey;
-        var postId = draftGrid.getRow(row)['id'];
+        let row = data.rowKey;
+        let postId = draftGrid.getRow(row)['id'];
         console.log(postId);
+
+        location.href = "/admin/writer?post_id="+postId;
     }
 });
 
@@ -152,6 +154,7 @@ contentGrid.on('dblclick', function(data){
         var row = data.rowKey;
         var postId = contentGrid.getRow(row)['id'];
         console.log(postId);
+        location.href = "/admin/writer?post_id="+postId;
     }
 });
 
@@ -201,7 +204,7 @@ function deletePosts(postIdList) {
             alert("Deleted");
             location.href="/admin/contents";
         })).catch(function (err) {
-                    alert("Delete Error.");
-                });
+        alert("Delete Error.");
+    });
 }
 

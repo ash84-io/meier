@@ -17,4 +17,3 @@ def get_new_writer_view():
                            blog_title=settings.blog_title,
                            current_user=current_user)
 
-

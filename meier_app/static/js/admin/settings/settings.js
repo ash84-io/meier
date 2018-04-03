@@ -8,7 +8,7 @@ var vm = new Vue({
         theme: ""
     },
     mounted: function () {
-        var self = this;
+        let self = this;
         axios({
             method:'get',
             url:'/admin/settings/api/blog_info',
@@ -18,7 +18,7 @@ var vm = new Vue({
             self.theme = res.data.data.theme;
             self.blog_desc = res.data.data.blog_desc;
             self.post_per_page = res.data.data.post_per_page;
-            showNotification('top', 'center', 'ok');
+
         }).catch(function (err) {
             // todo : erorr
         });
