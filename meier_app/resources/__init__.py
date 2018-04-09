@@ -7,8 +7,10 @@ from .admin import admin_user_api
 from .admin import admin_writer_view, admin_writer_api
 from .blog.post_detail_view import post_detail_view
 from .blog.post_list_view import post_list_view
+from .blog.assets import assets
 
 resource_blueprints = [
+    assets,
     post_list_view,
     post_detail_view,
     admin_index_view,

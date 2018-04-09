@@ -76,7 +76,7 @@
                     <!-- EDITOR -->
                     <div id="editor">
                         <textarea :value="content" @input="update"></textarea>
-                        <div v-html="compiledMarkdown" v-model="content"></div>
+                        <div style="overflow: scroll" v-html="compiledMarkdown" v-model="content"></div>
                     </div>
                     <!-- //EDITOR -->
                 </div>
