@@ -23,6 +23,8 @@ def get_post_list_view():
     post_list = [post.for_detail for post in post_paging_result.items]
     logger.debug(post_list)
 
+    # todo : add tags
+
     return render_template("/themes/" + settings.theme + "/post_list.html",
                            blog_title=settings.blog_title,
                            blog_desc=settings.blog_desc,

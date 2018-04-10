@@ -32,7 +32,8 @@ class Post(db.Model, MixinBase):
     def for_detail(self):
         return {
             'title': self.title,
-            'content': self.html,
+            'content': self.content,
+            'html': self.html,
             'created_at': self.in_date.strftime("%Y-%m-%d") if self.in_date else '',
             'modified_at': self.mo_date.strftime("%Y-%m-%d") if self.mo_date else '',
             'link': "/posts/" + self.post_name
