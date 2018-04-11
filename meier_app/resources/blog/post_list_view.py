@@ -4,7 +4,7 @@ from flask import request
 
 from meier_app.commons.logger import logger
 from meier_app.models.post import Post, PostVisibility, PostStatus
-from meier_app.models.setting import Settings
+from meier_app.models.settings import Settings
 from sqlalchemy import desc
 
 post_list_view = Blueprint('post_list_view', __name__, url_prefix='/',)
@@ -23,11 +23,8 @@ def get_post_list_view():
     post_list = [post.for_detail for post in post_paging_result.items]
     logger.debug(post_list)
 
-    # todo : add tags
-
     return render_template("/themes/" + settings.theme + "/post_list.html",
-                           blog_title=settings.blog_title,
-                           blog_desc=settings.blog_desc,
+                           settings=settings,
                            post_list=post_list,
                            has_next=post_paging_result.has_next,
                            next="?page={}".format(page+1),

@@ -27,6 +27,7 @@ class Post(db.Model, MixinBase):
     is_page = Column(Boolean, default=False, index=True)
     visibility = Column(Integer, nullable=False, default=PostVisibility.PRIVATE.value)
     status = Column(Integer, nullable=False, default=PostStatus.DRAFT.value)
+    # todo : covered image 추가 여부 고민해보자
 
     @property
     def for_detail(self):

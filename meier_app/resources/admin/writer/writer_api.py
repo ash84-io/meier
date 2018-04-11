@@ -9,7 +9,7 @@ from meier_app.commons.logger import logger
 from meier_app.models.post import Post, PostStatus, PostVisibility
 from meier_app.models.post_tag import PostTag
 from meier_app.models.tag import Tag
-from meier_app.models.setting import Settings
+from meier_app.models.settings import Settings
 
 from meier_app.extensions import db
 from meier_app.resources.admin import base

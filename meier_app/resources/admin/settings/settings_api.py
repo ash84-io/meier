@@ -6,7 +6,7 @@ from flask_login import login_required
 from meier_app.commons.logger import logger
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
 from meier_app.extensions import db
-from meier_app.models.setting import Settings
+from meier_app.models.settings import Settings
 from meier_app.resources.admin import base
 
 admin_settings_api = Blueprint('admin_settings_api', __name__, url_prefix='/admin/settings/api')

@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ blog_title }}</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <title>{{ settings.blog_title }}</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+    <style>
+       .post-excerpt{
+        text-align:justify
+    }
+    </style>
 </head>
 <body class="home-template">
 
@@ -15,10 +20,10 @@
         <div class="nav-wrapper">
             <p class="nav-label">Menu</p>
             <ul>
-                <li class="nav-home active" role="presentation"><a href="/">Home</a></li>
+                <li class="nav-home active" role="presentation"><a href="{{settings.domain}}">Home</a></li>
                 <li class="nav-author" role="presentation"><a href="https://attila.zutrinken.com/author/zutrinken/">Author</a></li>
-                <li class="nav-twitter"><a href="https://twitter.com/sh84ahn" title="@sh84ahn"><i class="ic ic-twitter"></i> Twitter</a></li>
-                <li class="nav-facebook"><a href="https://www.facebook.com/sh84ahn" ><i class="ic ic-facebook"></i> Facebook</a></li>
+                <li class="nav-twitter"><a href="{{ settings.author_twitter | safe }}" ><i class="ic ic-twitter"></i> Twitter</a></li>
+                <li class="nav-facebook"><a href="{{ settings.author_facebook | safe }}" ><i class="ic ic-facebook"></i> Facebook</a></li>
                 <li class="nav-rss"><a href="/rss"><i class="ic ic-rss"></i> Subscribe</a></li>
             </ul>
         </div>
@@ -34,8 +39,8 @@
                         <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
                     </span>
                 </nav>
-                <h1 class="blog-name"><a href="/">{{ blog_title }}</a></h1>
-                <span class="blog-description">{{ blog_desc }}</span>
+                <h1 class="blog-name"><a href="/">{{ settings.blog_title }}</a></h1>
+                <span class="blog-description">{{ settings.blog_desc }}</span>
             </div>
         </header>
         <div id="index" class="container">
@@ -45,7 +50,7 @@
                     <div class="inner">
                         <header class="post-header">
                             <h2 class="post-title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
-                            <span class="post-meta">{{ blog_title}}   | <time datetime="{{ post.created_at }}">{{ post.created_at }}</time></span>
+                            <span class="post-meta">{{ settings.author_name}} | <time datetime="{{ post.created_at }}">{{ post.created_at }}</time></span>
                             <div class="clear"></div>
                         </header>
                         <section class="post-excerpt">
@@ -54,9 +59,23 @@
                     </div>
                 </article>
                 {%  endfor %}
+
+                <!-- pagination -->
+                <nav class="pagination" role="pagination">
+                    <div class="inner">
+                        {% if has_prev %}
+                        <a class="pagination-next" href="{{ prev }}"><i class="ic ic-arrow-left"></i>Newer Posts<span class="pagination-label"> </span></a>
+                        {% endif %}
+                        {% if has_next %}
+                        <a class="pagination-prev" href="{{ next }}"><span class="pagination-label"></span>Older Posts<i class="ic ic-arrow-right"></i></a>
+                        {% endif %}
+                        <div class="clear"></div>
+                    </div>
+                </nav>
+                <!-- pagination -->
             </main>
         </div>
    </section>
-<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="/assets/js/script.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ from meier_app.commons.jwt_token import TokenInfo, create_token
 from meier_app.commons.logger import logger
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
 from meier_app.extensions import db
-from meier_app.models.setting import Settings
+from meier_app.models.settings import Settings
 from meier_app.models.user import User
 from meier_app.resources.admin import base
 

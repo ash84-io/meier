@@ -4,7 +4,7 @@ from flask import render_template
 
 from meier_app.commons.logger import logger
 from meier_app.models.post import Post, PostVisibility, PostStatus
-from meier_app.models.setting import Settings
+from meier_app.models.settings import Settings
 from sqlalchemy import desc
 
 from flask_login import logout_user, login_required, current_user

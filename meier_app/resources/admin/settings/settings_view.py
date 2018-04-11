@@ -4,7 +4,7 @@ from flask import render_template
 
 admin_settings_view = Blueprint('admin_settings_view', __name__, url_prefix='/admin/settings')
 
-from meier_app.models.setting import Settings
+from meier_app.models.settings import Settings
 from flask_login import login_required, current_user
 
 

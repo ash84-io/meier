@@ -1,12 +1,10 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint
-from flask import abort, render_template, send_from_directory
+from flask import send_from_directory
 
-from meier_app.models.post import Post, PostStatus, PostVisibility
-from meier_app.models.post_tag import PostTag
-from meier_app.models.tag import Tag
-from meier_app.models.setting import Settings
 from meier_app.commons.logger import logger
+from meier_app.models.settings import Settings
+
 assets = Blueprint('assets', __name__, url_prefix='/assets')
 
 

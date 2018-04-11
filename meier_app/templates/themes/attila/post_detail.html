@@ -1,35 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{{ blog_title }}</title>
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ settings.blog_title }}-{{ post.title }}</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
     <style>
-    .blog-title{
-        text-decoration: none;
+    .post-content{
+        text-align:justify
     }
 </style>
 </head>
-<body>
-<header>
-    <h1 class="blog-title">
-        <a href="/">{{ blog_title }}</a>
-    </h1>
-    <h5>{{ blog_desc }}</h5>
-</header>
+<body class="post-template tag-general">
 
-<h2><a href="{{ post.link }}">{{ post.title }}</a></h2>
-<p>{{ post_tag }}</p>
-<h4>{{ post.created_at }} | {{ post.modified_at }}</h4>
-<div class="article">
-{{ post.content | safe }}
+    <!-- navigation -->
+	<nav id="menu">
+        <a class="close-button">Close</a>
+        <div class="nav-wrapper">
+            <p class="nav-label">Menu</p>
+            <ul>
+                <li class="nav-home active" role="presentation"><a href="{{settings.domain}}">Home</a></li>
+                <li class="nav-author" role="presentation"><a href="https://attila.zutrinken.com/author/zutrinken/">Author</a></li>
+                <li class="nav-twitter"><a href="{{ settings.author_twitter | safe }}" ><i class="ic ic-twitter"></i> Twitter</a></li>
+                <li class="nav-facebook"><a href="{{ settings.author_facebook | safe }}" ><i class="ic ic-facebook"></i> Facebook</a></li>
+                <li class="nav-rss"><a href="/rss"><i class="ic ic-rss"></i> Subscribe</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- navigation -->
+
+
+<div class="progress-container">
+	<span class="progress-bar"></span>
 </div>
 
+<header id="post-header">
+	<div class="inner">
+		<nav id="navigation">
+			<span id="home-button" class="nav-button">
+				<a class="home-button" href="/" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+			</span>
+			<span id="menu-button" class="nav-button">
+				<a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+			</span>
+		</nav>
+		<h1 class="post-title">{{ post.title }}</h1>
+		<span class="post-meta"><a href="/author/zutrinken/">{{ settings.author_name }}</a> | <time datetime="{{post.created_at}}">{{post.created_at}}</time></span>
+	</div>
+</header>
 
-<footer>
-테스트
-</footer>
+ <main class="content" role="main">
+	<article class="post tag-general">
+		<div class="inner">
+
+			<section class="post-content">
+				{{ post.html | safe }}
+			</section>
+
+			<section class="post-info">
+
+
+
+				<aside class="post-tags">
+					{{ post_tag }}
+				</aside>
+
+				<div class="clear"></div>
+
+			</section>
+		</div>
+	</article>
+</main>
+
+<script type="text/javascript" src="/assets/js/script.js"></script>
 </body>
 </html>
