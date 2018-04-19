@@ -28,6 +28,7 @@ def create_app():
     configure_extensions(app)
     configure_blueprints(app)
     configure_jinja(app)
+    configure_filter(app)
     configure_error_handlers(app)
     return app
 
@@ -92,6 +93,32 @@ def configure_error_handlers(app):
 def configure_jinja(app):
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
+
+
+def configure_filter(app):
+    @app.template_filter('numbers')
+    def numbers(amt):
+        """
+        금액에 대한 쉼표(,) 처리
+
+        :param amt: 금액
+        :return: 쉼표(,) 구분된 금액 문자열
+        """
+        if amt:
+            import locale
+            locale.setlocale(locale.LC_ALL, 'ko_KR')
+            return locale.format("%d", int(amt), grouping=True)
+        return amt
+
+    app.jinja_env.filters['numbers'] = numbers
+
+    @app.template_filter('clean')
+    def clean_html(raw_html):
+        from bs4 import BeautifulSoup
+        cleantext = BeautifulSoup(raw_html, "lxml").text
+        return cleantext
+
+    app.jinja_env.filters['clean'] = clean_html
 
 
 app = create_app()

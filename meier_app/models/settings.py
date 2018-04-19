@@ -19,3 +19,5 @@ class Settings(db.Model, MixinBase):
     author_desc = db.Column(String(255), nullable=True)
     author_twitter = db.Column(String(255), nullable=True)
     author_facebook = db.Column(String(255), nullable=True)
+    author_profile_img_url = db.Column(String(255), nullable=True)
+
