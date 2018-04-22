@@ -11,6 +11,19 @@
             text-align: justify;
         }
         </style>
+        <link rel="apple-touch-icon" sizes="57x57" href="/assets/img/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/assets/img/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
     </head>
     <body class="home-template">
         <div class="site-wrapper">
@@ -28,7 +41,7 @@
                                 <li class="nav-home nav-current" role="menuitem"><a href="/">Home</a></li>
                                 <li class="nav-about" role="menuitem"><a href="/">About</a></li>
                                 <li class="nav-getting-started" role="menuitem"><a href="/">Getting Started</a></li>
-                                <li class="nav-try-ghost" role="menuitem"><a href="/">Try Ghost</a></li>
+
                             </ul>
                         </div>
                         <div class="site-nav-right">
@@ -49,18 +62,22 @@
                     <div class="post-feed">
                         {% for post in post_list %}
                             <article class="post-card post">
-                                {% if post.feature_image %}
+                                {% if post.featured_image %}
                                 <a class="post-card-image-link" href="{{ post.link }}">
-                                    <div class="post-card-image" style="background-image: url({{ post.feature_image }})"></div>
+                                    <div class="post-card-image" style="background-image: url({{ post.featured_image }})"></div>
                                 </a>
                                 {% endif %}
-                                <div class="post-card-content" {% if not post.feature_image %}  style="flex: auto;" {% endif %}>
+                                <div class="post-card-content" {% if not post.featured_image %}  style="flex: auto;" {% endif %} >
                                     <a class="post-card-content-link" href="{{ post.link }}">
                                         <header class="post-card-header">
                                             <h2 class="post-card-title">{{ post.title }}</h2>
                                         </header>
                                         <section class="post-card-excerpt">
+                                            {% if post.featured_image %}
                                             <p>{{ post.html[:500] | clean }}</p>
+                                            {% else %}
+                                            <p>{{ post.html[:1000] | clean }}</p>
+                                            {% endif %}
                                         </section>
                                     </a>
                                     <footer class="post-card-meta">
@@ -91,4 +108,9 @@
             </footer>
         </div>
     </body>
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=669167c9b2"></script>
+
 </html>
