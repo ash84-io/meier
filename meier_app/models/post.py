@@ -27,7 +27,7 @@ class Post(db.Model, MixinBase):
     is_page = Column(Boolean, default=False, index=True)
     visibility = Column(Integer, nullable=False, default=PostVisibility.PRIVATE.value)
     status = Column(Integer, nullable=False, default=PostStatus.DRAFT.value)
-    # todo : covered/featured image 추가 여부 고민해보자
+    featured_image = Column(Text, nullable=True, default=None)
 
     @property
     def for_detail(self):
@@ -37,7 +37,8 @@ class Post(db.Model, MixinBase):
             'html': self.html,
             'created_at': self.in_date.strftime("%Y-%m-%d") if self.in_date else '',
             'modified_at': self.mo_date.strftime("%Y-%m-%d") if self.mo_date else '',
-            'link': "/posts/" + self.post_name if self.post_name else ''
+            'link': "/posts/" + self.post_name if self.post_name else '',
+            'featured_image': self.featured_image
         }
 
     @property
