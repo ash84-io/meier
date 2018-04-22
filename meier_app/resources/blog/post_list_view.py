@@ -17,6 +17,7 @@ def get_post_list_view():
     logger.debug(page)
     settings = Settings.query.first()
     post_paging_result = Post.query.filter(Post.status == PostStatus.PUBLISH.value)\
+        .filter(Post.is_page == False)\
         .filter(Post.visibility == PostVisibility.PUBLIC.value)\
         .order_by(desc(Post.in_date)).paginate(page, settings.post_per_page, error_out=False)
 
