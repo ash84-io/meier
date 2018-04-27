@@ -30,6 +30,7 @@ def create_app():
     configure_jinja(app)
     configure_filter(app)
     configure_error_handlers(app)
+    configure_dynamic_page(app)
     return app
 
 
@@ -119,6 +120,15 @@ def configure_filter(app):
         return cleantext
 
     app.jinja_env.filters['clean'] = clean_html
+
+
+def configure_dynamic_page(app):
+    from meier_app.resources.blog.post_detail_view import get_page_view
+    with app.app_context():
+        from meier_app.models.post import Post, PostStatus, PostVisibility
+        all_page = Post.query.filter(Post.is_page == True).all()
+        for page in all_page:
+            app.add_url_rule(rule='/<string:page_name>', endpoint=page.post_name, view_func=get_page_view)
 
 
 app = create_app()

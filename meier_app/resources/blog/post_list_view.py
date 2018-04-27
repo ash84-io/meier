@@ -27,11 +27,12 @@ def get_post_list_view():
     post_list = [post.for_detail for post in post_paging_result.items]
     logger.debug(post_list)
 
+    first_post = post_list[0]
     ogp_meta_tag = OpenGraphGenerator(site_name=settings.blog_title,
-                                      title=post_list[0].get('title', None),
-                                      description=post_list[0].get('content', None)[:300],
-                                      url=post_list[0].get('link', None),
-                                      image=post_list[0].get('featured_image', None)
+                                      title=first_post.get('title', None),
+                                      description=first_post.get('content', None)[:300],
+                                      url=first_post.get('link', None),
+                                      image=first_post.get('featured_image', None)
                                       )
 
     return render_template("/themes/" + settings.theme + "/post_list.html",
