@@ -8,14 +8,14 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://ash84:xxx@ash84.net:3306/meier'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{{user_name}}:{{password}}@{{ host }}:3306/meier'
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://ash84:ash84@ash84.net:3306/meier'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{{user_name}}:{{password}}@{{ host }}:3306/meier'
 
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://ash84:xxx@ash84.net:3306/meier_test'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{{user_name}}:{{password}}@{{ host }}:3306/meier_test'
