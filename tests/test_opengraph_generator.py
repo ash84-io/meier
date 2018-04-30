@@ -4,7 +4,7 @@ ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(ROOT_DIR)
 
 import unittest
-from meier_app.resources.blog.opengraph_generator import OpenGraphGenerator
+from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphGenerator
 
 
 class OpenGraphGenTestCase(unittest.TestCase):

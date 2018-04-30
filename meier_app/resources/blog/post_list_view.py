@@ -7,12 +7,12 @@ from meier_app.commons.logger import logger
 from meier_app.models.post import Post, PostVisibility, PostStatus
 from meier_app.models.settings import Settings
 from meier_app.models.user import User
-from meier_app.resources.blog.opengraph_generator import OpenGraphGenerator
+from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
 post_list_view = Blueprint('post_list_view', __name__, url_prefix='/',)
 
 
-@post_list_view.route('', methods=['GET'])
+@post_list_view.route('/', methods=['GET'])
 def get_post_list_view():
     author = User.query.first()
     logger.debug(post_list_view.static_folder)
@@ -28,7 +28,7 @@ def get_post_list_view():
     logger.debug(post_list)
 
     first_post = post_list[0]
-    ogp_meta_tag = OpenGraphGenerator(site_name=settings.blog_title,
+    ogp_meta_tag = OpenGraphMetaTagGenerator(site_name=settings.blog_title,
                                       title=first_post.get('title', None),
                                       description=first_post.get('content', None)[:300],
                                       url=first_post.get('link', None),

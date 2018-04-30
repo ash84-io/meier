@@ -7,14 +7,12 @@ from meier_app.models.post_tag import PostTag
 from meier_app.models.settings import Settings
 from meier_app.models.tag import Tag
 from meier_app.models.user import User
-from meier_app.resources.blog.opengraph_generator import OpenGraphGenerator
+from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
 post_detail_view = Blueprint('post_detail_view', __name__, url_prefix='/posts')
 
-def get_page_view(page_name):
-    settings = Settings.query.first()
-    author = User.query.first()
 
+def get_page_view(page_name):
     settings = Settings.query.first()
     author = User.query.first()
 
@@ -26,12 +24,12 @@ def get_page_view(page_name):
     tag_id_list = [post_tag.tag_id for post_tag in PostTag.query.filter(PostTag.post_id == post.id).all()]
     tag_list = [tag.tag for tag in Tag.query.filter(Tag.id.in_(tag_id_list)).all()]
 
-    ogp_meta_tag = OpenGraphGenerator(site_name=settings.blog_title,
-                                      title=post.for_detail.get('title', None),
-                                      description=post.for_detail.get('content', None)[:300],
-                                      url=post.for_detail.get('link', None),
-                                      image=post.for_detail.get('featured_image', None)
-                                      )
+    ogp_meta_tag = OpenGraphMetaTagGenerator(site_name=settings.blog_title,
+                                             title=post.for_detail.get('title', None),
+                                             description=post.for_detail.get('content', None)[:300],
+                                             url=post.for_detail.get('link', None),
+                                             image=post.for_detail.get('featured_image', None)
+                                             )
 
     return render_template("/themes/" + settings.theme + "/post_detail.html",
                            author=author,

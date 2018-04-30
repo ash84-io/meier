@@ -22,9 +22,9 @@ class BeakerSessionInterface(SessionInterface):
         session.save()
 
 
-def create_app():
+def create_app(config_obj='config.ProductionConfig'):
     app = Flask(__name__, static_url_path="", static_folder="static")
-    configure_app(app)
+    configure_app(app, config_obj)
     configure_extensions(app)
     configure_blueprints(app)
     configure_jinja(app)
@@ -41,8 +41,9 @@ def configure_blueprints(app):
         app.register_blueprint(blueprint)
 
 
-def configure_app(app):
-    app.config.from_object('config.DevelopmentConfig')
+def configure_app(app, config_obj='config.ProductionConfig'):
+    app.config.from_object(config_obj)
+
 
 
 def configure_extensions(app):
@@ -65,7 +66,7 @@ def configure_extensions(app):
         'session.url': app.config['SQLALCHEMY_DATABASE_URI'],
         'session.cookie_expires': True,
         'session.httponly': True,
-        #'session.secure': True,
+        'session.secure': True,
         'session.timeout': 43200,
         'session.sa.pool_recycle': 250
     }
@@ -125,12 +126,13 @@ def configure_filter(app):
 def configure_dynamic_page(app):
     from meier_app.resources.blog.post_detail_view import get_page_view
     with app.app_context():
-        from meier_app.models.post import Post, PostStatus, PostVisibility
+        from meier_app.models.post import Post
         all_page = Post.query.filter(Post.is_page == True).all()
         for page in all_page:
             app.add_url_rule(rule='/<string:page_name>', endpoint=page.post_name, view_func=get_page_view)
 
 
-app = create_app()
-app.run(host='0.0.0.0', port=7878)
+if __name__ == '__main__':
+    app = create_app(config_obj='config.DevelopmentConfig')
+    app.run(host='0.0.0.0', port=7878)
 
