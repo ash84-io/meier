@@ -129,7 +129,7 @@ def configure_dynamic_page(app):
         from meier_app.models.post import Post
         all_page = Post.query.filter(Post.is_page == True).all()
         for page in all_page:
-            app.add_url_rule(rule='/<string:page_name>', endpoint=page.post_name, view_func=get_page_view)
+            app.add_url_rule(rule='/page/<string:page_name>', endpoint=page.post_name, view_func=get_page_view)
 
 
 if __name__ == '__main__':

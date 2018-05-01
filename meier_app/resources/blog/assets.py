@@ -10,7 +10,6 @@ assets = Blueprint('assets', __name__, url_prefix='/assets')
 
 @assets.route('/css/<string:file_name>', methods=['GET'])
 def get_assets_css_file(file_name: str):
-    logger.debug(file_name)
     settings = Settings.query.first()
     return response_assets(theme=settings.theme, static_folder='css', file_name=file_name)
 

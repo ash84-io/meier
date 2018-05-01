@@ -21,6 +21,7 @@ def get_page_view(page_name):
         .filter(Post.is_page == True) \
         .filter(Post.visibility == int(PostVisibility.PUBLIC.value)) \
         .filter(Post.status == int(PostStatus.PUBLISH.value)).scalar()
+
     tag_id_list = [post_tag.tag_id for post_tag in PostTag.query.filter(PostTag.post_id == post.id).all()]
     tag_list = [tag.tag for tag in Tag.query.filter(Tag.id.in_(tag_id_list)).all()]
 
@@ -63,12 +64,12 @@ def get_post_detail_view(post_name: str):
         tag_id_list = [post_tag.tag_id for post_tag in PostTag.query.filter(PostTag.post_id == post.id).all()]
         tag_list = [tag.tag for tag in Tag.query.filter(Tag.id.in_(tag_id_list)).all()]
 
-        ogp_meta_tag = OpenGraphGenerator(site_name=settings.blog_title,
-                                          title=post.for_detail.get('title', None),
-                                          description=post.for_detail.get('content', None)[:300],
-                                          url=post.for_detail.get('link', None),
-                                          image=post.for_detail.get('featured_image', None)
-                                          )
+        ogp_meta_tag = OpenGraphMetaTagGenerator(site_name=settings.blog_title,
+                                                 title=post.for_detail.get('title', None),
+                                                 description=post.for_detail.get('content', None)[:300],
+                                                 url=post.for_detail.get('link', None),
+                                                 image=post.for_detail.get('featured_image', None)
+                                                 )
 
         return render_template("/themes/"+settings.theme+"/post_detail.html",
                                author=author,
