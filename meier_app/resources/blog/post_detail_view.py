@@ -43,7 +43,7 @@ def get_page_view(page_name):
                            )
 
 @post_detail_view.route('/<string:yyyy>/<string:mm>/<string:dd>/<string:post_name>', methods=['GET'])
-def get_post_detail_view(yyyy, mm, dd, post_name: str):
+def get_post_detail_view(yyyy: str, mm: str, dd: str, post_name: str):
     settings = Settings.query.first()
     author = User.query.first()
 
