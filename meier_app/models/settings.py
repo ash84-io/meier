@@ -15,3 +15,13 @@ class Settings(db.Model, MixinBase):
     post_per_page = db.Column(Integer, default=10)
     theme = db.Column(String(255), nullable=False)
     domain = db.Column(String(255), nullable=False)
+
+    @property
+    def for_dict(self):
+        return {
+            'blog_title': self.blog_title,
+            'blog_desc': self.blog_desc,
+            'theme': self.theme,
+            'post_per_page': self.post_per_page,
+            'domain': self.domain
+        }

@@ -17,7 +17,6 @@ admin_settings_api = Blueprint('admin_settings_api', __name__, url_prefix='/admi
 @base.api_exception_handler
 def get_settings_blog_info():
     settings = Settings.query.first()
-    logger.debug(settings.for_dict)
     return ResponseData(code=HttpStatusCode.SUCCESS, data=settings.for_dict).json
 
 
