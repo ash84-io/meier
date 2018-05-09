@@ -13,7 +13,14 @@ Blog
     - [axios](https://github.com/axios/axios)
     - vue.js
 
-### Server Start
+### ProdServer Start
+
 ```
-gunicorn -w6 meier:app -b 0.0.0.0:8080
+gunicorn --workers 4 --threads 4 --daemon meier:app -b 0.0.0.0:8080
+```
+
+### DevServer Start
+
+```
+gunicorn --workers 6--reload meier_dev:app -b 0.0.0.0:8080
 ```
