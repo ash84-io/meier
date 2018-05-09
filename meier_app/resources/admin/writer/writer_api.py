@@ -50,17 +50,18 @@ def save_post():
     post.title = req_data.title
     post.content = req_data.content
     post.html = req_data.html
+    post.status = int(req_data.status)
+    post.visibility = int(req_data.visibility)
     post.in_date = datetime.now()
     post.mo_date = datetime.now()
-
-    # todo : status, visibility
     db.session.add(post)
     db.session.commit()
 
     logger.debug(post.id)
 
     tags_id = []
-    for tag in req_data.tags:
+    tags = req_data.tags.strip().split(',')
+    for tag in tags:
         tag = str(tag).strip()
         tag_instance = Tag.query.filter(Tag.tag == tag).scalar()
         if tag_instance is None:

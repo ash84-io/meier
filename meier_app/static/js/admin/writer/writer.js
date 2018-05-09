@@ -7,8 +7,10 @@ let vm = new Vue({
     data: {
         title:'',
         content: '### title',
-        tagsArray:'',
-        postPageURL:''
+        tags:'',
+        postPageURL:'',
+        status:'1',
+        visibility : '0'
     },
     mounted: function () {
         let url = location.href;
@@ -31,7 +33,7 @@ let vm = new Vue({
                 self.title = payload.data.post.title;
                 self.content = payload.data.post.raw_content;
                 self.postPageURL = payload.data.post.post_name;
-                self.tagsArray =payload.data.tag_list;
+                self.tags = payload.data.tags;
             }).catch(function (err) {
                 alert('error');
             });
@@ -48,8 +50,8 @@ let vm = new Vue({
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
-        publish:function () {
-            let tags = this.tagsArray;
+        save:function () {
+            let tags = this.tags;
             if (tags ===''){
                 tags = [];
             }
@@ -58,11 +60,13 @@ let vm = new Vue({
                 content:this.content,
                 html:mark_to_html,
                 tags:tags,
-                post_name:this.postPageURL
+                post_name:this.postPageURL,
+                status:this.status,
+                visibility:this.visibility
             };
             console.log(data);
             if(!data.post_name){
-                alert('required post or page uRL');
+                alert('required post or page URL');
             }
             else{
                 axios.post('/admin/writer/api/post',
@@ -81,28 +85,36 @@ let vm = new Vue({
 
         },
         bold:function () {
-
+            this.content += ' ** **';
         },
         gist:function () {
-
+            this.content += "<script src='GIST_URL'></script>";
         },
         italic:function () {
-
+            this.content += ' * *';
         },
         table:function () {
+            let tableMarkdown='\nFirst Header | Second Header\n' +
+                '------------ | -------------\n' +
+                'Content from cell 1 | Content from cell 2\n' +
+                'Content in the first column | Content in the second column'
 
+            this.content +=tableMarkdown;
         },
         image:function () {
-
+            this.content += " ![Alt text](http://path/to/img.jpg)";
+        },
+        file_code:function(){
+            this.content += "\n```python\n```";
         },
         code:function () {
-
+            this.content += " `code`";
         },
         link:function () {
-
+            this.content += " [Title](link)";
         },
         quote:function () {
-
+            this.content += "\n> ";
         }
     }
 });

@@ -47,7 +47,17 @@
                         <textarea rows="1" class="form-control title" placeholder="title" v-model="title"></textarea>
                     </div>
                     <!-- //TITLE -->
+                    <!-- POST PAGE URL -->
+                    <div class="title-section">
+                        <textarea rows="1" class="form-control title" placeholder="post or page url" v-model="postPageURL"></textarea>
+                    </div>
+                    <!-- //POST PAGE URL -->
 
+                    <!-- TAG -->
+                    <div class="title-section">
+                        <textarea rows="1" class="form-control title" placeholder="Tag, Tag" v-model="tags"></textarea>
+                    </div>
+                    <!-- //TAG -->
                     <!-- TOOLBAR -->
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group btn-group-sm mr-2" role="group">
@@ -58,21 +68,44 @@
                             <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="image"><i class="far fa-file-image"></i></button>
                             <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="table"><i class="fas fa-table"></i></button>
                             <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="code"><i class="fas fa-code"></i></button>
+                            <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="file_code"><i class="fas fa-file-code"></i></button>
                             <button type="button" class="btn btn-primary btn-simple col-2" v-on:click="gist"><i class="fab fa-github"></i></button>
                         </div>
-                        <div class="btn-group btn-group-sm mr-2 col-md-6" role="group">
-                            <input type="text" class="form-control" placeholder="post or page url" v-model="postPageURL" style="height: 31px;margin-top: 10px;"/>
+
+                        <div class="btn-group btn-group-sm" role="group" style="padding-top:15px;">
+                            <div class="radio">
+                                <input type="radio" v-model="status" name="status" id="radio_status_draft" value="0">
+                                <label for="radio_status_draft">
+                                    DRAFT
+                                </label>
+                            </div>
+
+                            <div class="radio" >
+                                <input type="radio" v-model="status" name="status" id="radio_status_publish" value="1"  checked="">
+                                <label for="radio_status_publish">
+                                    PUBLISH
+                                </label>
+                            </div>
+
+                            <div class="radio">
+                                <input type="radio" v-model="visibility" name="visibility" id="radio_visibility_private" value="0">
+                                <label for="radio_visibility_private">
+                                    PRIVATE
+                                </label>
+                            </div>
+
+                            <div class="radio">
+                                <input type="radio" v-model="visibility" name="visibility" id="radio_visibility_public" value="1" checked="">
+                                <label for="radio_visibility_public">
+                                    PUBLIC
+                                </label>
+                            </div>
                         </div>
-                        <div class="btn-group btn-group-sm" role="group">
-                            <button type="button" class="btn btn-secondary" v-on:click="draft"><strong>DRAFT</strong></button>
-                            <button type="button" class="btn btn-primary" v-on:click="publish"><strong>PUBLISH</strong></button>
-                        </div>
+                        <button class="btn btn-sm btn-primary btn-simple" v-on:click="save" style="margin-left: 20px;">SAVE</button>
 
                     </div>
                     <!-- //TOOLBAR -->
-                    <!-- TAG -->
-                    <input-tag :placeholder="tagsArray ? '' : 'AddTags (,)'"  :tags.sync="tagsArray" style="border: none;"></input-tag>
-                    <!-- //TAG -->
+
                     <!-- EDITOR -->
                     <div id="editor">
                         <textarea :value="content" @input="update"></textarea>
