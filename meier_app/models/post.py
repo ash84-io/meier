@@ -37,7 +37,7 @@ class Post(db.Model, MixinBase):
             'html': self.html,
             'created_at': self.in_date.strftime("%Y-%m-%d") if self.in_date else '',
             'modified_at': self.mo_date.strftime("%Y-%m-%d") if self.mo_date else '',
-            'link': "/posts/{}/{}/{}/".format(self.in_date.strftime("%Y"), self.in_date.strftime("%m"), self.in_date.strftime("%d")) + self.post_name if self.post_name else '',
+            'link': "/{}/{}/{}/".format(self.in_date.strftime("%Y"), self.in_date.strftime("%m"), self.in_date.strftime("%d")) + self.post_name if self.post_name else '',
             'featured_image': self.featured_image
         }
 

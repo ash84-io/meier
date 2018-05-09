@@ -6,9 +6,6 @@ from sqlalchemy import desc
 from meier_app.models.post import Post, PostVisibility, PostStatus
 from meier_app.models.settings import Settings
 from meier_app.models.user import User
-from meier_app.models.post_tag import PostTag
-from meier_app.models.settings import Settings
-from meier_app.models.tag import Tag
 from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
 post_list_view = Blueprint('post_list_view', __name__, url_prefix='/',)

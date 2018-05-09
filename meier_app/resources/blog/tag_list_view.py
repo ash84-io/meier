@@ -14,6 +14,7 @@ tag_list_view = Blueprint('tag_list_view', __name__, url_prefix='/tag',)
 
 
 @tag_list_view.route('/<string:tag>', methods=['GET'])
+@tag_list_view.route('/<string:tag>/', methods=['GET'])
 def get_tag_list_view(tag: str):
     author = User.query.first()
     page = int(request.args.get('page', 1))
