@@ -34,6 +34,8 @@ let vm = new Vue({
                 self.content = payload.data.post.raw_content;
                 self.postPageURL = payload.data.post.post_name;
                 self.tags = payload.data.tags;
+                self.status = payload.data.post.status.toString();
+                self.visibility = payload.data.post.visibility.toString();
             }).catch(function (err) {
                 alert('error');
             });

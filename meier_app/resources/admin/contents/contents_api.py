@@ -62,8 +62,7 @@ def get_contents_draft_api():
 def delete_contents_posts_api(post_id):
     logger.debug(post_id)
     Post.query.filter(Post.id == post_id).delete()
-
-    # todo : post-tag 연결 끊기
+    PostTag.query.filter(PostTag.post_id == post_id).delete()
     db.session.commit()
     return ResponseData(code=HttpStatusCode.SUCCESS).json
 
@@ -75,9 +74,9 @@ def get_contents_post_detail_api(post_id):
     logger.debug(request.args)
     post = Post.query.filter(Post.id == int(post_id)).scalar()
     tag_id_list = [pt.tag_id for pt in PostTag.query.filter(PostTag.post_id == int(post_id)).all()]
-    tag_list = [t.for_admin for t in Tag.query.filter(Tag.id.in_(tag_id_list)).all()]
+    tags = ','.join([t.for_admin for t in Tag.query.filter(Tag.id.in_(tag_id_list)).all()])
     if not post:
         return ResponseData(code=HttpStatusCode.NOT_FOUND).json
     return ResponseData(code=HttpStatusCode.SUCCESS,
-                        data={'post': post.for_admin, 'tag_list': tag_list}
+                        data={'post': post.for_admin, 'tags': tags}
                         ).json
