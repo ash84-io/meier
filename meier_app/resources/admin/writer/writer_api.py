@@ -32,7 +32,7 @@ def delete_post(post_id):
 @base.api_exception_handler
 def update_post(post_id):
     req_data = AttrDict(request.get_json())
-    post = Post.query(Post.id == post_id).scalar()
+    post = Post.query.filter(Post.id == post_id).scalar()
     if post:
         for k, v in req_data.items():
             setattr(post, k, v)
@@ -49,9 +49,10 @@ def save_post():
     post = Post()
     post.title = req_data.title
     post.content = req_data.content
+    post.post_name = req_data.post_name
     post.html = req_data.html
-    post.status = int(req_data.status)
-    post.visibility = int(req_data.visibility)
+    post.status = req_data.status
+    post.visibility = req_data.visibility
     post.in_date = datetime.now()
     post.mo_date = datetime.now()
     db.session.add(post)
@@ -82,4 +83,4 @@ def save_post():
             db.session.add(post_tag)
             db.session.commit()
             logger.debug(post_tag.id)
-    return ResponseData(code=HttpStatusCode.SUCCESS).json
+    return ResponseData(code=HttpStatusCode.SUCCESS, data={'id' : post.id}).json

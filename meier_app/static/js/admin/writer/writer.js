@@ -5,6 +5,7 @@ Vue.component('input-tag', InputTag);
 let vm = new Vue({
     el: '#vue-section',
     data: {
+        postId:null,
         title:'',
         content: '### title',
         tags:'',
@@ -30,6 +31,7 @@ let vm = new Vue({
             }).then(function (res) {
                 console.log(res);
                 let payload = res.data;
+                self.postId = payload.data.post.id;
                 self.title = payload.data.post.title;
                 self.content = payload.data.post.raw_content;
                 self.postPageURL = payload.data.post.post_name;
@@ -63,20 +65,38 @@ let vm = new Vue({
                 html:mark_to_html,
                 tags:tags,
                 post_name:this.postPageURL,
-                status:this.status,
-                visibility:this.visibility
+                status:parseInt(this.status),
+                visibility:parseInt(this.visibility)
             };
             console.log(data);
             if(!data.post_name){
                 alert('required post or page URL');
             }
-            else{
+            else if(this.postId !== null) {
+                //update
+                axios.put('/admin/writer/api/post/'+this.postId.toString(),
+                    JSON.stringify(data), {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(function (res) {
+                        alert("Update Changed.");
+                    })
+                    .catch(function (err) {
+                        alert("Update Error.");
+                    });
+            }
+            else {
+                // new
                 axios.post('/admin/writer/api/post',
                     JSON.stringify(data), {
                         headers: {'Content-Type': 'application/json'}
                     })
                     .then(function (res) {
                         alert("Save Changed.");
+                        let payload = res.data;
+                        this.postId = payload.id;
                     })
                     .catch(function (err) {
                         alert("Save Error.");
