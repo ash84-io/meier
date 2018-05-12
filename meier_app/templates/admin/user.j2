@@ -6,11 +6,11 @@
 {% block content_section %}
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" id="vue-section">
                 <div class="card-header">
                     <h4 class="card-title">Edit Profile</h4>
                 </div>
-                <div class="card-body" id="vue-section">
+                <div class="card-body">
                     <!-- edit profile section -->
 
                     <div class="row">
@@ -61,24 +61,14 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary btn-round  float-right" v-on:click="update" style="margin-right: 10px;">
+                <button class="btn btn-primary btn-round  float-right"  v-on:click="update" style="margin-right: 10px;">
                     UPDATE
                 </button>
                 <!--//edit profile section -->
             </div>
         </div>
 
-        <!-- change password section -->
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Change Password</h4>
-                </div>
-                <div class="card-body">
-                </div>
-            </div>
-        </div>
-        <!--//change password section -->
+
     </div>
 {% endblock %}
 {% block javascript_section %}
