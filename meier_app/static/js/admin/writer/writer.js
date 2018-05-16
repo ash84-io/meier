@@ -12,7 +12,8 @@ let vm = new Vue({
         postPageURL:'',
         status:'1',
         visibility : '0',
-        featured_image:''
+        featured_image:'',
+        isExpand:false
     },
     mounted: function () {
         let url = location.href;
@@ -48,7 +49,7 @@ let vm = new Vue({
     },
     computed: {
         compiledMarkdown: function () {
-            let converted_html = marked(this.content , {sanitize: true, gfm:true, tables:true});
+            let converted_html = marked(this.content , {sanitize: false, gfm:true, tables:true, pedantic:true});
             mark_to_html = converted_html;
             return converted_html;
         }
@@ -57,11 +58,17 @@ let vm = new Vue({
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
+        expand:function(){
+            if(this.isExpand === false){
+
+
+                this.isExpand = true;
+            }else{
+                this.isExpand = false;
+            }
+        },
         save:function () {
             let tags = this.tags;
-            if (tags ===''){
-                tags = [];
-            }
             let data = {
                 title:this.title,
                 content:this.content,
