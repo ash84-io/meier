@@ -51,5 +51,6 @@ class Post(db.Model, MixinBase):
             'modified_at': self.mo_date.strftime("%Y-%m-%d") if self.mo_date else '',
             'post_name': self.post_name,
             'visibility': self.visibility,
-            'status': self.status
+            'status': self.status,
+            'featured_image': self.featured_image
         }

@@ -11,7 +11,8 @@ let vm = new Vue({
         tags:'',
         postPageURL:'',
         status:'1',
-        visibility : '0'
+        visibility : '0',
+        featured_image:''
     },
     mounted: function () {
         let url = location.href;
@@ -38,8 +39,10 @@ let vm = new Vue({
                 self.tags = payload.data.tags;
                 self.status = payload.data.post.status.toString();
                 self.visibility = payload.data.post.visibility.toString();
+                self.featured_image = payload.data.post.featured_image;
+                showNotification('primary', 'Load Complete');
             }).catch(function (err) {
-                alert('error');
+                showNotification('warning', 'Load Error');
             });
         }
     },
@@ -66,7 +69,8 @@ let vm = new Vue({
                 tags:tags,
                 post_name:this.postPageURL,
                 status:parseInt(this.status),
-                visibility:parseInt(this.visibility)
+                visibility:parseInt(this.visibility),
+                featured_image:this.featured_image
             };
             console.log(data);
             if(!data.post_name){
@@ -81,10 +85,10 @@ let vm = new Vue({
                         }
                     })
                     .then(function (res) {
-                        alert("Update Changed.");
+                        showNotification('primary', 'Update Complete');
                     })
                     .catch(function (err) {
-                        alert("Update Error.");
+                        showNotification('primary', 'Update Error');
                     });
             }
             else {
@@ -94,12 +98,12 @@ let vm = new Vue({
                         headers: {'Content-Type': 'application/json'}
                     })
                     .then(function (res) {
-                        alert("Save Changed.");
+                        showNotification('primary', 'Save Changed');
                         let payload = res.data;
                         this.postId = payload.id;
                     })
                     .catch(function (err) {
-                        alert("Save Error.");
+                        showNotification('danger', 'Save Error');
                     });
             }
         },

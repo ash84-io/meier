@@ -23,7 +23,7 @@ vm = new Vue({
                     location.href = $SCRIPT_ROOT + res.data.data.next;
                 })
                 .catch(function (err) {
-                    alert("Retry Sign in");
+                    showNotification('danger', 'Retry Signin');
                 });
         }
     }

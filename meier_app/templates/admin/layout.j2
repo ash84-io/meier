@@ -84,11 +84,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
 <!--  Notifications Plugin    -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
+<script src="{{ url_for('static', filename='js/bootstrap-notify.js') }}"></script>
 
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ url_for('static', filename='js/now-ui-dashboard.js') }}"></script>
-
+<script>
+	function showNotification(color, msg){
+    	$.notify({
+        	icon: null,
+        	message: '<strong>' + msg + '</strong>'
+        },{
+            type: color,
+            timer: 8000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+	}
+</script>
 {% block javascript_section %}
 {% endblock %}
 

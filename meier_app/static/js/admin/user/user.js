@@ -46,10 +46,10 @@ var vm = new Vue({
                     }
                 })
                 .then(function (res) {
-                    alert("Save Changed.");
+                    showNotification('primary', 'Save Changed');
                 })
                 .catch(function (err) {
-                    alert("Save Error.");
+                    showNotification('danger', 'Save Error');
                 });
         }
     }

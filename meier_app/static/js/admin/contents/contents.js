@@ -201,10 +201,10 @@ function deletePosts(postIdList) {
         .then(axios.spread(function (acct, perms) {
             // Both requests are now complete
             console.log(acct);
-            alert("Deleted");
+            showNotification('primart', 'Delete Complete');
             location.href="/admin/contents";
         })).catch(function (err) {
-        alert("Delete Error.");
+         showNotification('warning', 'Delete Error');
     });
 }
 

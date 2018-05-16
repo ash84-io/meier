@@ -18,9 +18,9 @@ var vm = new Vue({
             self.theme = res.data.data.theme;
             self.blog_desc = res.data.data.blog_desc;
             self.post_per_page = res.data.data.post_per_page;
-
+            showNotification('primary', 'Load Complete');
         }).catch(function (err) {
-            // todo : erorr
+            showNotification('warning', 'Load Error');
         });
     },
     methods: {
@@ -43,26 +43,11 @@ var vm = new Vue({
                     }
                 })
                 .then(function (res) {
-                    alert("Save Changed.");
+                    showNotification('primary', 'Save Changed');
                 })
                 .catch(function (err) {
-                    alert("Save Error.");
+                    showNotification('danger', 'Save Error');
                 });
-        },
-        showNotification : function (from, align) {
-            color = 'primary';
-
-            $(jQuery).notify({
-                icon: "now-ui-icons ui-1_bell-53",
-                message: "test"
-            },{
-                type: color,
-                timer: 8000,
-                placement: {
-                    from: from,
-                    align: align
-                }
-            });
         }
     }
 });
