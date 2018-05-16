@@ -37,6 +37,27 @@ def update_post(post_id):
         for k, v in req_data.items():
             setattr(post, k, v)
         post.mo_date = datetime.now()
+
+        tags_id = []
+        tags = req_data.tags.strip().split(',')
+
+        for tag in tags:
+            tag = str(tag).strip()
+            tag_instance = Tag.query.filter(Tag.tag == tag).scalar()
+            if tag_instance is None:
+                tag_instance = Tag(tag=tag)
+                db.session.add(tag_instance)
+                db.session.flush()
+                tags_id.append(tag_instance.id)
+            else:
+                tags_id.append(tag_instance.id)
+
+        for tag_id in tags_id:
+            post_tag = PostTag.query.filter(PostTag.post_id == post.id).filter(PostTag.tag_id == tag_id).all()
+            if not post_tag:
+                post_tag = PostTag(post_id=post.id, tag_id=tag_id)
+                db.session.add(post_tag)
+                logger.debug(post_tag.id)
         db.session.commit()
     return ResponseData(code=HttpStatusCode.SUCCESS).json
 
