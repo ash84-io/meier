@@ -35,12 +35,14 @@ def get_tag_list_view(tag: str):
         has_prev = post_paging_result.has_prev
         next = "?page={}".format(page+1)
         prev = "?page={}".format(page-1)
+        total_pages = post_paging_result.pages
     else:
         post_list = []
         has_next = None
         has_prev = None
         next = None
         prev = None
+        total_pages = 0
     ogp_meta_tag = OpenGraphMetaTagGenerator(site_name=settings.blog_title,
                                              title=settings.blog_title,
                                              description=settings.blog_desc,
@@ -51,6 +53,7 @@ def get_tag_list_view(tag: str):
                            author=author,
                            ogp_meta_tag=ogp_meta_tag(),
                            settings=settings,
+                           total_pages=total_pages,
                            post_list=post_list,
                            has_next=has_next,
                            next=next,

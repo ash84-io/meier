@@ -34,6 +34,7 @@ def get_post_list_view():
                            author=author,
                            ogp_meta_tag=ogp_meta_tag(),
                            settings=settings,
+                           total_pages=post_paging_result.pages,
                            post_list=post_list,
                            has_next=post_paging_result.has_next,
                            next="?page={}".format(page+1),
