@@ -36,12 +36,14 @@
 
 {% block content_section %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="vue-section">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> </h4>
+                    <button class="btn btn-sm btn-primary btn-simple" style="float:right;" v-if="!isExpand" v-on:click="toggleExpand">expand</button>
+                    <button class="btn btn-sm btn-primary btn-simple" style="float:right;" v-if="isExpand" v-on:click="toggleExpand">collapse</button>
                 </div>
-                <div class="card-body" id="vue-section">
+                <div class="card-body" >
                     <!-- TITLE -->
                     <div class="title-section">
                         <textarea rows="1" class="form-control title" placeholder="title" v-model="title"></textarea>

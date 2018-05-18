@@ -24,6 +24,10 @@
         #nav-user-name{
             font-size: 16px;
         }
+        .expand-writer{
+
+        }
+
     </style>
     {% block css_section %}
     {% endblock %}
@@ -34,11 +38,11 @@
 </head>
 
 <body class="">
-<div class="wrapper ">
-    <div class="sidebar" data-color="orange">
+<div class="wrapper">
+    <div class="sidebar" id="admin-sidebar" data-color="orange">
         {% include "/admin/sidebar.j2" %}
     </div>
-    <div class="main-panel">
+    <div class="main-panel" id="admin-main-panel">
         {% include "/admin/navigation.j2" %}
         <!-- End Navbar -->
         <div class="panel-header panel-header-sm">
@@ -75,18 +79,12 @@
 <!--   Core JS Files   -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-{#<script src="{{ url_for('static', filename='lib/vue/vue.js') }}"></script>#}
 <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.8.1/js/perfect-scrollbar.jquery.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<!-- Chart JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-
-<!--  Notifications Plugin    -->
 <script src="{{ url_for('static', filename='js/bootstrap-notify.js') }}"></script>
-
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ url_for('static', filename='js/now-ui-dashboard.js') }}"></script>
 <script>
 	function showNotification(color, msg){
@@ -102,6 +100,7 @@
             }
         });
 	}
+
 </script>
 {% block javascript_section %}
 {% endblock %}

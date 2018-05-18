@@ -58,12 +58,15 @@ let vm = new Vue({
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
-        expand:function(){
+        toggleExpand:function(){
             if(this.isExpand === false){
-
+                $("#admin-sidebar").css('display','none');
+                $("#admin-main-panel").css('width', '100%');
 
                 this.isExpand = true;
             }else{
+                $("#admin-sidebar").css('display','block');
+                $("#admin-main-panel").css('width', '');
                 this.isExpand = false;
             }
         },
