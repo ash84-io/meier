@@ -38,7 +38,8 @@ class Post(db.Model, MixinBase):
             'created_at': self.in_date.strftime("%Y-%m-%d") if self.in_date else '',
             'modified_at': self.mo_date.strftime("%Y-%m-%d") if self.mo_date else '',
             'link': "/{}/{}/{}/".format(self.in_date.strftime("%Y"), self.in_date.strftime("%m"), self.in_date.strftime("%d")) + self.post_name if self.post_name else '',
-            'featured_image': self.featured_image
+            'featured_image': self.featured_image,
+            'is_page': self.is_page
         }
 
     @property
@@ -52,5 +53,6 @@ class Post(db.Model, MixinBase):
             'post_name': self.post_name,
             'visibility': self.visibility,
             'status': self.status,
-            'featured_image': self.featured_image
+            'featured_image': self.featured_image,
+            'is_page': self.is_page
         }

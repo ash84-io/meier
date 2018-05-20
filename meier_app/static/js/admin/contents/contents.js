@@ -72,12 +72,9 @@ draftGrid.use('Net', {
 });
 
 draftGrid.on('dblclick', function(data){
-    console.log(data);
     if(data.hasOwnProperty('rowKey')) {
         let row = data.rowKey;
         let postId = draftGrid.getRow(row)['id'];
-        console.log(postId);
-
         location.href = "/admin/writer?post_id="+postId;
     }
 });
@@ -103,6 +100,7 @@ var contentGrid = new Grid({
             title: 'post-name',
             name: 'post_name'
         },
+
         {
             title: 'visibility',
             name: 'visibility',
@@ -149,20 +147,22 @@ contentGrid.use('Net', {
 });
 
 contentGrid.on('dblclick', function(data){
-    console.log(data);
     if(data.hasOwnProperty('rowKey')) {
         var row = data.rowKey;
         var postId = contentGrid.getRow(row)['id'];
-        console.log(postId);
         location.href = "/admin/writer?post_id="+postId;
     }
 });
 
 let vm_draft = new Vue({
-    el: '#vue-draft-button-section',
+    el: '#vue-draft-section',
+    data:{q:''},
     methods: {
+        searchDraft: function(event){
+            net = draftGrid.getAddOn('Net');
+            net.readData(1, {'q':this.q}, true);
+        },
         deleteDraft: function (event) {
-            console.log(event);
             let willDeletePostIDList = [];
             let rows = draftGrid.getCheckedRows();
             for (let i in rows){
@@ -174,10 +174,14 @@ let vm_draft = new Vue({
 });
 
 let vm_posts = new Vue({
-    el: '#vue-posts-button-section',
+    el: '#vue-posts-section',
+    data:{q:''},
     methods: {
+        searchPosts: function(event){
+            net = contentGrid.getAddOn('Net');
+            net.readData(1, {'q':this.q}, true);
+        },
         deletePosts:function (event) {
-            console.log(event);
             let willDeletePostIDList = [];
             let rows = contentGrid.getCheckedRows();
             for (let i in rows){
@@ -199,12 +203,10 @@ function deletePosts(postIdList) {
 
     axios.all(delFunctionList)
         .then(axios.spread(function (acct, perms) {
-            // Both requests are now complete
-            console.log(acct);
             showNotification('primart', 'Delete Complete');
             location.href="/admin/contents";
         })).catch(function (err) {
-         showNotification('warning', 'Delete Error');
+        showNotification('warning', 'Delete Error');
     });
 }
 

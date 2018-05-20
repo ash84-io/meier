@@ -3,6 +3,11 @@
 {% block css_section %}
     <link href="{{ url_for('static', filename='lib/tui-pagination/dist/tui-pagination.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='lib/tui-grid/dist/tui-grid.min.css') }}" rel="stylesheet" />
+    <style>
+        .search {
+            margin-bottom: 10px;
+        }
+    </style>
 {% endblock css_section %}
 
 {% block content_section %}
@@ -12,9 +17,12 @@
                 <div class="card-header">
                     <h4 class="card-title">Draft<span id="draft-count"></span></h4>
                 </div>
-                <div class="card-body" >
-                    <div class="btn-group float-right" id="vue-draft-button-section" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary" v-on:click="deleteDraft" id="draft-delete">삭제</button>
+                <div class="card-body">
+                    <div  id="vue-draft-section" >
+                        <div class="btn-group float-right" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary" v-on:click="deleteDraft" id="draft-delete">삭제</button>
+                        </div>
+                        <input type="text" value="" class="form-control search"  v-on:keyup.enter="searchDraft"  v-model="q" placeholder="Search...">
                     </div>
                     <div id="draft-grid"></div>
                 </div>
@@ -25,9 +33,13 @@
                 <div class="card-header">
                     <h4 class="card-title">Posts<span id="posts-count"></span></h4>
                 </div>
-                <div class="card-body">
-                    <div class="btn-group float-right"  id="vue-posts-button-section" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary"  v-on:click="deletePosts" id="posts-delete">삭제</button>
+                <div class="card-body" >
+                    <div id="vue-posts-section">
+                        <div class="btn-group float-right"   role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary"  v-on:click="deletePosts" id="posts-delete">삭제</button>
+                        </div>
+
+                        <input type="text" value="" class="form-control search" v-on:keyup.enter="searchPosts" v-model="q" placeholder="Search...">
                     </div>
                     <div id="content-grid"></div>
                 </div>
