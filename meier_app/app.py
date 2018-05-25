@@ -30,7 +30,8 @@ def create_app(config_obj='config.ProductionConfig'):
     configure_jinja(app)
     configure_filter(app)
     configure_error_handlers(app)
-    configure_dynamic_page(app)
+    if not app.testing:
+        configure_dynamic_page(app)
     return app
 
 
@@ -45,7 +46,6 @@ def configure_app(app, config_obj='config.ProductionConfig'):
     app.config.from_object(config_obj)
 
 
-
 def configure_extensions(app):
     db.init_app(app)
     with app.app_context():
@@ -57,7 +57,6 @@ def configure_extensions(app):
 
     @login_manager.user_loader
     def load_user(token):
-        # logger.debug('load_user:{}'.format(token))
         from meier_app.models import User
         return User.get_from_token(token)
 
