@@ -1,3 +1,4 @@
+import pytest
 from mixer.backend.flask import mixer
 
 from meier_app.extensions import db
@@ -7,6 +8,7 @@ from meier_app.tests.base import app as test_app
 
 
 class TestUserModels(BaseTestCase):
+
     def test_insert_user(self):
         with test_app.app_context():
             ran_user = mixer.blend(User)

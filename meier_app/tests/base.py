@@ -11,7 +11,7 @@ app = create_app('meier_app.config.TestingConfig')
 
 class BaseTestCase(unittest.TestCase):
 
-    def setUp(self):
+    def setUp(self): 
         mixer.init_app(app)
         app.config['TESTING'] = True
         self.client = app.test_client()
