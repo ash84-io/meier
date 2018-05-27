@@ -12,3 +12,4 @@ beautifulsoup4==4.6.0
 PyJWT==1.6.4
 mixer==6.0.1
 blinker==1.4
+PyMySQL=0.7.11
