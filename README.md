@@ -1,4 +1,4 @@
-# Meier
+# Meier [![Build Status](https://travis-ci.org/meier-project/meier.svg?branch=master)](https://travis-ci.org/meier-project/meier)
 
 Blog
 
