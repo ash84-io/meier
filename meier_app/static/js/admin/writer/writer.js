@@ -63,8 +63,10 @@ let vm = new Vue({
         }, 100),
         toggleExpand:function(){
             if(this.isExpand === false){
-                $("#admin-sidebar").css('display','none');
                 $("#admin-main-panel").css('width', '100%');
+                setTimeout(function(){
+                    $("#admin-sidebar").css('display','none'); }, 280);
+
                 $("#admin-mk-writer").css('width', '100%');
                 $("#admin-mk-preview").css('display', 'none');
 
@@ -72,8 +74,8 @@ let vm = new Vue({
             }else{
                 $("#admin-sidebar").css('display','block');
                 $("#admin-main-panel").css('width', '');
-                $("#admin-mk-writer").css('width', '');
                 $("#admin-mk-preview").css('display', 'block');
+                $("#admin-mk-writer").css('width', '');
 
                 this.isExpand = false;
             }
