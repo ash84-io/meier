@@ -62,11 +62,16 @@ let vm = new Vue({
             if(this.isExpand === false){
                 $("#admin-sidebar").css('display','none');
                 $("#admin-main-panel").css('width', '100%');
+                $("#admin-mk-writer").css('width', '100%');
+                $("#admin-mk-preview").css('display', 'none');
 
                 this.isExpand = true;
             }else{
                 $("#admin-sidebar").css('display','block');
                 $("#admin-main-panel").css('width', '');
+                $("#admin-mk-writer").css('width', '');
+                $("#admin-mk-preview").css('display', 'block');
+
                 this.isExpand = false;
             }
         },

@@ -115,8 +115,8 @@
 
                     <!-- EDITOR -->
                     <div id="editor">
-                        <textarea :value="content" @input="update"></textarea>
-                        <div style="overflow: scroll" v-html="compiledMarkdown" v-model="content"></div>
+                        <textarea :value="content" @input="update" id="admin-mk-writer"></textarea>
+                        <div style="overflow: scroll" v-html="compiledMarkdown" v-model="content" id="admin-mk-preview"></div>
                     </div>
                     <!-- //EDITOR -->
                 </div>
