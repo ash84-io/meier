@@ -37,7 +37,7 @@
 {% block content_section %}
     <div class="row">
         <div class="col-md-12" id="vue-section">
-            <div class="card">
+            <div class="card" @keyup.ctrl.83="save">
                 <div class="card-header">
                     <h4 class="card-title"> </h4>
                     <button class="btn btn-sm btn-primary btn-simple" style="float:right;" v-if="!isExpand" v-on:click="toggleExpand">expand</button>
