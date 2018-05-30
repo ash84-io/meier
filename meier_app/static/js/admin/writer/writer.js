@@ -10,7 +10,7 @@ let vm = new Vue({
         content: '### title',
         tags:'',
         postPageURL:'',
-        status:'1',
+        status:'0',
         visibility : '0',
         featured_image:'',
         isExpand:false

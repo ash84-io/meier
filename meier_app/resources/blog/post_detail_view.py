@@ -42,6 +42,7 @@ def get_page_view(page_name):
                            tag_list=tag_list
                            )
 
+
 @post_detail_view.route('/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>', methods=['GET'])
 @post_detail_view.route('/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>/', methods=['GET'])
 def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
