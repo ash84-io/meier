@@ -10,7 +10,7 @@ let vm = new Vue({
         content: '### title',
         tags:'',
         postPageURL:'',
-        status:'1',
+        status:'0',
         visibility : '0',
         featured_image:'',
         isExpand:false
@@ -55,18 +55,28 @@ let vm = new Vue({
         }
     },
     methods: {
+        test: function(){
+          console.log("tesT");
+        },
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
         toggleExpand:function(){
             if(this.isExpand === false){
-                $("#admin-sidebar").css('display','none');
                 $("#admin-main-panel").css('width', '100%');
+                setTimeout(function(){
+                    $("#admin-sidebar").css('display','none'); }, 280);
+
+                $("#admin-mk-writer").css('width', '100%');
+                $("#admin-mk-preview").css('display', 'none');
 
                 this.isExpand = true;
             }else{
                 $("#admin-sidebar").css('display','block');
                 $("#admin-main-panel").css('width', '');
+                $("#admin-mk-preview").css('display', 'block');
+                $("#admin-mk-writer").css('width', '');
+
                 this.isExpand = false;
             }
         },

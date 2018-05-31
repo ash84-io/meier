@@ -4,13 +4,13 @@ from mixer.backend.flask import mixer
 from meier_app.extensions import db
 from meier_app.models.user import User
 from meier_app.tests.base import BaseTestCase
-from meier_app.tests.base import app as test_app
+from meier_app.tests.base import app as mock_app
 
 
 class TestUserModels(BaseTestCase):
 
     def test_insert_user(self):
-        with test_app.app_context():
+        with mock_app.app_context():
             ran_user = mixer.blend(User)
             spec_user = mixer.blend(User,
                                     email='test@test.co.kr',
@@ -25,7 +25,7 @@ class TestUserModels(BaseTestCase):
             assert User.query.count() == 2
 
     def test_update_user(self):
-        with test_app.app_context():
+        with mock_app.app_context():
             spec_user = mixer.blend(User,
                                     email='test@test.co.kr',
                                     password='123',
@@ -43,7 +43,7 @@ class TestUserModels(BaseTestCase):
             assert user1.email == 'sh84.ahn@gmail.com'
 
     def test_delete_user(self):
-        with test_app.app_context():
+        with mock_app.app_context():
             spec_user = mixer.blend(User,
                                     email='test@test.co.kr',
                                     password='123',
@@ -60,7 +60,7 @@ class TestUserModels(BaseTestCase):
 
     def test_unique_email(self):
         from sqlalchemy import exc
-        with test_app.app_context():
+        with mock_app.app_context():
             try:
                 spec_user = mixer.blend(User,
                                         email='test@test.co.kr')
