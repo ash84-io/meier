@@ -21,3 +21,15 @@ class BaseTestCase(unittest.TestCase):
     def tearDown(self):
         db.session.remove()
         db.drop_all(app=app)
+
+
+class BaseModelTestCase(BaseTestCase):
+
+    def test_insert(self):
+        raise NotImplementedError()
+
+    def test_update(self):
+        raise NotImplementedError()
+
+    def test_delete(self):
+        raise NotImplementedError()
