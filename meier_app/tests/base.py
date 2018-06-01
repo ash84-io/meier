@@ -25,6 +25,9 @@ class BaseTestCase(unittest.TestCase):
 
 class BaseModelTestCase(BaseTestCase):
 
+    def setUp(self):
+        super(BaseModelTestCase).setUp()
+
     def test_insert(self):
         raise NotImplementedError()
 

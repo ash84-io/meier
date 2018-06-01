@@ -8,7 +8,7 @@ from meier_app.tests.base import app as mock_app
 class TestSettingsModels(BaseModelTestCase):
 
     def setUp(self):
-        super(TestSettingsModels).__init__()
+        super(TestSettingsModels).setUp()
         with mock_app.app_context():
             ran_setting = mixer.blend(Settings)
 

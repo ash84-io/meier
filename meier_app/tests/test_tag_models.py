@@ -9,6 +9,9 @@ from meier_app.tests.base import app as mock_app
 
 class TestTagModels(BaseModelTestCase):
 
+    def setUp(self):
+        super(TestTagModels).setUp()
+
     def test_insert(self):
         with mock_app.app_context():
             ran_tag = mixer.blend(Tag)
