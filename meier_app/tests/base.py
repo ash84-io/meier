@@ -25,14 +25,11 @@ class BaseTestCase(unittest.TestCase):
 
 class BaseModelTestCase(BaseTestCase):
 
-    def setUp(self):
-        super(BaseModelTestCase).setUp()
-
     def test_insert(self):
-        raise NotImplementedError()
+        pass
 
     def test_update(self):
-        raise NotImplementedError()
+        pass
 
     def test_delete(self):
-        raise NotImplementedError()
+        pass

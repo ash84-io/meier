@@ -7,13 +7,9 @@ from meier_app.tests.base import app as mock_app
 
 class TestSettingsModels(BaseModelTestCase):
 
-    def setUp(self):
-        super(TestSettingsModels).setUp()
-        with mock_app.app_context():
-            ran_setting = mixer.blend(Settings)
-
     def test_insert(self):
         with mock_app.app_context():
+            ran_setting = mixer.blend(Settings)
             spec_setting = mixer.blend(Settings,
                                        blog_title='test',
                                        blog_desc='test',
@@ -30,6 +26,7 @@ class TestSettingsModels(BaseModelTestCase):
 
     def test_update(self):
         with mock_app.app_context():
+            ran_setting = mixer.blend(Settings)
             s = Settings.query.scalar()
             s.blog_title = "blog"
             s.blog_desc = "blog"
@@ -41,6 +38,7 @@ class TestSettingsModels(BaseModelTestCase):
 
     def test_delete(self):
         with mock_app.app_context():
+            ran_setting = mixer.blend(Settings)
             s = Settings.query.scalar()
             db.session.delete(s)
             db.session.commit()

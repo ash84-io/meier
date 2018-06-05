@@ -9,9 +9,6 @@ from meier_app.tests.base import app as mock_app
 
 class TestTagModels(BaseModelTestCase):
 
-    def setUp(self):
-        super(TestTagModels).setUp()
-
     def test_insert(self):
         with mock_app.app_context():
             ran_tag = mixer.blend(Tag)
@@ -23,7 +20,7 @@ class TestTagModels(BaseModelTestCase):
             spec_tag = mixer.blend(Tag, tag='test')
             spec_tag.tag = "test123"
             db.session.commit()
-            t = Tag.query.salar()
+            t = Tag.query.scalar()
             assert t.tag == "test123"
 
     def test_delete(self):

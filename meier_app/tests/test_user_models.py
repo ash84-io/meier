@@ -9,9 +9,6 @@ from meier_app.tests.base import app as mock_app
 
 class TestUserModels(BaseModelTestCase):
 
-    def setUp(self):
-        super(TestUserModels).setUp()
-
     def test_insert(self):
         with mock_app.app_context():
             ran_user = mixer.blend(User)
