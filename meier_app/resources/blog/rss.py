@@ -25,8 +25,9 @@ def get_rss():
     post_paging_result = Post.query.filter(Post.status == PostStatus.PUBLISH.value) \
         .filter(Post.is_page == False) \
         .filter(Post.visibility == PostVisibility.PUBLIC.value) \
-        .order_by(desc(Post.in_date)).limit(15)
+        .order_by(Post.in_date).limit(15)
 
+    # ASC TO DESC
     for post in post_paging_result:
         tag_id_list = [post_tag.tag_id for post_tag in PostTag.query.filter(PostTag.post_id == post.id).all()]
         tag_list = [tag.tag for tag in Tag.query.filter(Tag.id.in_(tag_id_list)).all()]
