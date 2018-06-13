@@ -25,7 +25,7 @@ def get_rss():
     post_paging_result = Post.query.filter(Post.status == PostStatus.PUBLISH.value) \
         .filter(Post.is_page == False) \
         .filter(Post.visibility == PostVisibility.PUBLIC.value) \
-        .order_by(desc(Post.in_date)).limit(15)
+        .order_by(desc(Post.in_date)).limit(15).all()
 
     post_paging_result = reversed(post_paging_result)
     for post in post_paging_result:
