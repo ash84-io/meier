@@ -18,7 +18,7 @@ def get_page_view(page_name):
 
     post = Post.query \
         .filter(Post.post_name == page_name) \
-        .filter(Post.is_page == True) \
+        .filter(Post.is_page.is_(True)) \
         .filter(Post.visibility == int(PostVisibility.PUBLIC.value)) \
         .filter(Post.status == int(PostStatus.PUBLISH.value)).scalar()
 

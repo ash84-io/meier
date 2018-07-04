@@ -39,7 +39,7 @@ def get_rss():
                           'label': tag,
                           }])
         fe.title(post.title)
-        fe.description(description='<![CDATA[ ' + post.html[:200] + ' ]]>')
+        fe.description(description='<![CDATA[ {} ]]>'.format(post.html[:200]))
         fe.content(content=post.html, type='CDATA')
         fe.link(href=settings.domain + "/" + post.post_name, rel='alternate')
         fe.pubdate(str(post.in_date.astimezone(timezone.utc)))

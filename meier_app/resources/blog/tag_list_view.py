@@ -25,7 +25,7 @@ def get_tag_list_view(tag: str):
         post_tag_list = PostTag.query.filter(PostTag.tag_id == tag.id).all()
         post_id_list = [post_tag.post_id for post_tag in post_tag_list]
         post_paging_result = Post.query.filter(Post.status == PostStatus.PUBLISH.value) \
-            .filter(Post.is_page == False) \
+            .filter(Post.is_page.is_(False)) \
             .filter(Post.id.in_(post_id_list)) \
             .filter(Post.visibility == PostVisibility.PUBLIC.value) \
             .order_by(desc(Post.in_date)).paginate(page, settings.post_per_page, error_out=False)

@@ -1,6 +1,6 @@
 /*!
  * tui-code-snippet.js
- * @version 1.2.9
+ * @version 1.4.0
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -89,18 +89,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	extend(util, __webpack_require__(6));
 	extend(util, __webpack_require__(7));
 	extend(util, __webpack_require__(8));
+	extend(util, __webpack_require__(9));
 
-	util.browser = __webpack_require__(9);
-	util.popup = __webpack_require__(10);
-	util.formatDate = __webpack_require__(11);
-	util.defineClass = __webpack_require__(12);
-	util.defineModule = __webpack_require__(13);
-	util.defineNamespace = __webpack_require__(14);
-	util.CustomEvents = __webpack_require__(15);
-	util.Enum = __webpack_require__(16);
-	util.ExMap = __webpack_require__(17);
-	util.HashMap = __webpack_require__(19);
-	util.Map = __webpack_require__(18);
+	util.browser = __webpack_require__(10);
+	util.popup = __webpack_require__(11);
+	util.formatDate = __webpack_require__(12);
+	util.defineClass = __webpack_require__(13);
+	util.defineModule = __webpack_require__(14);
+	util.defineNamespace = __webpack_require__(15);
+	util.CustomEvents = __webpack_require__(16);
+	util.Enum = __webpack_require__(17);
+	util.ExMap = __webpack_require__(18);
+	util.HashMap = __webpack_require__(20);
+	util.Map = __webpack_require__(19);
 
 	module.exports = util;
 
@@ -923,7 +924,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {function} iteratee Callback function
 	 * @param {Object} [context] Context(this) of callback function
 	 * @memberof tui.util
-	  * //-- #1. Get Module --//
+	 * @example
+	 * //-- #1. Get Module --//
 	 * var util = require('tui-code-snippet'); // node, commonjs
 	 * var util = tui.util; // distribution file
 	 *
@@ -998,6 +1000,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {function} iteratee Callback function
 	 * @param {Object} [context] Context(this) of callback function
 	 * @memberof tui.util
+	 * @example
 	 * //-- #1. Get Module --//
 	 * var util = require('tui-code-snippet'); // node, commonjs
 	 * var util = tui.util; // distribution file
@@ -1038,6 +1041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} [context] Context(this) of callback function
 	 * @returns {Array} A new array composed of returned values from callback function
 	 * @memberof tui.util
+	 * @example
 	 * //-- #1. Get Module --//
 	 * var util = require('tui-code-snippet'); // node, commonjs
 	 * var util = tui.util; // distribution file
@@ -1662,6 +1666,96 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * @fileoverview This module has some functions for handling object as collection.
+	 * @author NHN Ent.
+	 *         FE Development Lab <dl_javascript@nhnent.com>
+	 */
+	'use strict';
+
+	var object = __webpack_require__(1);
+	var collection = __webpack_require__(4);
+	var type = __webpack_require__(2);
+
+	/**
+	 * Send hostname on DOMContentLoaded.
+	 * To prevent hostname set tui.usageStatistics to false.
+	 * @param {string} applicationId - application id to send
+	 * @ignore
+	 */
+	function sendHostname(applicationId) {
+	    var url = 'https://www.google-analytics.com/collect';
+	    var hostname = location.hostname;
+	    var hitType = 'event';
+	    var trackingId = 'UA-115377265-9';
+
+	    // skip only if the flag is defined and is set to false explicitly
+	    if (!type.isUndefined(window.tui) && window.tui.usageStatistics === false) {
+	        return;
+	    }
+
+	    setTimeout(function() {
+	        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+	            imagePing(url, {
+	                v: 1,
+	                t: hitType,
+	                tid: trackingId,
+	                cid: hostname,
+	                dp: hostname,
+	                dh: applicationId
+	            });
+	        }
+	    }, 1000);
+	}
+
+	/**
+	 * Request image ping.
+	 * @param {String} url url for ping request
+	 * @param {Object} trackingInfo infos for make query string
+	 * @returns {HTMLElement}
+	 * @memberof tui.util
+	 * @example
+	 * //-- #1. Get Module --//
+	 * var util = require('tui-code-snippet'); // node, commonjs
+	 * var util = tui.util; // distribution file
+	 *
+	 * //-- #2. Use property --//
+	 * util.imagePing('https://www.google-analytics.com/collect', {
+	 *     v: 1,
+	 *     t: 'event',
+	 *     tid: 'trackingid',
+	 *     cid: 'cid',
+	 *     dp: 'dp',
+	 *     dh: 'dh'
+	 * });
+	 */
+	function imagePing(url, trackingInfo) {
+	    var queryString = collection.map(object.keys(trackingInfo), function(key, index) {
+	        var startWith = index === 0 ? '' : '&';
+
+	        return startWith + key + '=' + trackingInfo[key];
+	    }).join('');
+	    var trackingElement = document.createElement('img');
+
+	    trackingElement.src = url + '?' + queryString;
+
+	    trackingElement.style.display = 'none';
+	    document.body.appendChild(trackingElement);
+	    document.body.removeChild(trackingElement);
+
+	    return trackingElement;
+	}
+
+	module.exports = {
+	    imagePing: imagePing,
+	    sendHostname: sendHostname
+	};
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 	/**
@@ -1770,7 +1864,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -1784,7 +1878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var collection = __webpack_require__(4);
 	var type = __webpack_require__(2);
 	var func = __webpack_require__(5);
-	var browser = __webpack_require__(9);
+	var browser = __webpack_require__(10);
 	var object = __webpack_require__(1);
 
 	var popupId = 0;
@@ -2094,7 +2188,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -2332,7 +2426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -2418,7 +2512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -2430,7 +2524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var defineNamespace = __webpack_require__(14);
+	var defineNamespace = __webpack_require__(15);
 	var type = __webpack_require__(2);
 
 	var INITIALIZATION_METHOD_NAME = 'initialize';
@@ -2474,7 +2568,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -2537,7 +2631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -3132,7 +3226,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -3304,7 +3398,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -3317,7 +3411,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var collection = __webpack_require__(4);
-	var Map = __webpack_require__(18);
+	var Map = __webpack_require__(19);
 
 	// Caching tui.util for performance enhancing
 	var mapAPIsForRead = ['get', 'has', 'forEach', 'keys', 'values', 'entries'];
@@ -3420,7 +3514,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	
@@ -3436,7 +3530,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var collection = __webpack_require__(4);
 	var type = __webpack_require__(2);
 	var array = __webpack_require__(3);
-	var browser = __webpack_require__(9);
+	var browser = __webpack_require__(10);
 	var func = __webpack_require__(5);
 
 	/**
@@ -3815,7 +3909,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
