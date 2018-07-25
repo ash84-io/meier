@@ -7,11 +7,13 @@ from meier_app.models.post import Post, PostVisibility, PostStatus
 from meier_app.models.settings import Settings
 from meier_app.models.user import User
 from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier_app.extensions import cache
 
 post_list_view = Blueprint('post_list_view', __name__, url_prefix='/',)
 
 
 @post_list_view.route('/', methods=['GET'])
+@cache.cached(timeout=300)
 def get_post_list_view():
     author = User.query.first()
     page = int(request.args.get('page', 1))

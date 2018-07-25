@@ -3,16 +3,15 @@ from flask import Blueprint
 from flask import request
 from flask_login import login_required
 from sqlalchemy import desc
-
 from sqlalchemy import or_
+
 from meier_app.commons.logger import logger
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
+from meier_app.extensions import db
 from meier_app.models.post import Post, PostStatus
 from meier_app.models.post_tag import PostTag
 from meier_app.models.tag import Tag
 from meier_app.resources.admin import base
-from meier_app.extensions import db
-
 
 admin_contents_api = Blueprint('admin_contents_api', __name__, url_prefix='/admin/contents/api')
 

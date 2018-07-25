@@ -8,6 +8,7 @@ from meier_app.models.settings import Settings
 from meier_app.models.tag import Tag
 from meier_app.models.user import User
 from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier_app.extensions import cache
 
 post_detail_view = Blueprint('post_detail_view', __name__, url_prefix='')
 
@@ -45,6 +46,7 @@ def get_page_view(page_name):
 
 @post_detail_view.route('/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>', methods=['GET'])
 @post_detail_view.route('/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>/', methods=['GET'])
+@cache.cached(timeout=300)
 def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
     settings = Settings.query.first()
     author = User.query.first()

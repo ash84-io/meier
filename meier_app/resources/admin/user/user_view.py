@@ -7,12 +7,13 @@ from flask_login import logout_user, login_required, current_user
 
 from meier_app.commons.logger import logger
 from meier_app.models.settings import Settings
-from meier_app.models.user import User
+from meier_app.extensions import cache
 
 admin_user_view = Blueprint('admin_user_view', __name__, url_prefix='/admin/user')
 
 
 @admin_user_view.route('/', methods=['GET'])
+@cache.cached(timeout=86400)
 @login_required
 def get_user_view():
     settings = Settings.query.first()
@@ -23,6 +24,7 @@ def get_user_view():
 
 
 @admin_user_view.route('/login', methods=['GET'])
+@cache.cached(timeout=86400)
 def login_view():
     return render_template("/admin/login.j2")
 
@@ -33,5 +35,4 @@ def logout_view():
         logout_user()
         return render_template("/admin/login.j2")
     except BaseException:
-        # TODO : TEST
         logger.exception(traceback.format_exc())

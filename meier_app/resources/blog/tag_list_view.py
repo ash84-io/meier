@@ -9,12 +9,14 @@ from meier_app.models.user import User
 from meier_app.models.tag import Tag
 from meier_app.models.post_tag import PostTag
 from meier_app.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier_app.extensions import cache
 
 tag_list_view = Blueprint('tag_list_view', __name__, url_prefix='/tag',)
 
 
 @tag_list_view.route('/<string:tag>', methods=['GET'])
 @tag_list_view.route('/<string:tag>/', methods=['GET'])
+@cache.cached(timeout=300)
 def get_tag_list_view(tag: str):
     author = User.query.first()
     page = int(request.args.get('page', 1))

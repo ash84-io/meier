@@ -6,7 +6,7 @@ sys.path.append(ROOT_DIR)
 
 from flask import Flask
 from flask import render_template
-from meier_app.extensions import db, login_manager
+from meier_app.extensions import db, login_manager, cache
 from flask.sessions import SessionInterface
 from beaker.middleware import SessionMiddleware
 
@@ -54,6 +54,9 @@ def configure_extensions(app):
     # flask-login
     login_manager.login_view = "/admin/user/login"
     login_manager.init_app(app)
+
+    # flask-cache
+    cache.init_app(app)
 
     @login_manager.user_loader
     def load_user(token):

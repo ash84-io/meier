@@ -5,11 +5,13 @@ from flask_login import login_required, current_user
 
 from meier_app.commons.logger import logger
 from meier_app.models.settings import Settings
+from meier_app.extensions import cache
 
 admin_contents_view = Blueprint('admin_contents_view', __name__, url_prefix='/admin/contents')
 
 
 @admin_contents_view.route('/', methods=['GET'])
+@cache.cached(timeout=86400)
 @login_required
 def get_contents_view():
 

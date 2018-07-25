@@ -1,14 +1,16 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint
 from flask import render_template
+from flask_login import login_required, current_user
+
+from meier_app.extensions import cache
+from meier_app.models.settings import Settings
 
 admin_settings_view = Blueprint('admin_settings_view', __name__, url_prefix='/admin/settings')
 
-from meier_app.models.settings import Settings
-from flask_login import login_required, current_user
-
 
 @admin_settings_view.route('/', methods=['GET'])
+@cache.cached(timeout=86400)
 @login_required
 def get_settings_view():
     settings = Settings.query.first()
