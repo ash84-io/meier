@@ -49,7 +49,7 @@ let vm = new Vue({
     },
     computed: {
         compiledMarkdown: function () {
-            let converted_html = marked(this.content , {sanitize: false, gfm:true, tables:true, pedantic:true});
+            let converted_html = marked(this.content, {sanitize: false, gfm:true, tables:true, pedantic:true, langPrefix:''});
             mark_to_html = converted_html;
             return converted_html;
         }
