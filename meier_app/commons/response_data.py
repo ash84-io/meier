@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 from enum import Enum
 
+from flask import jsonify
+
 
 class HttpStatusCode(Enum):
 
@@ -18,8 +20,8 @@ class ResponseBase(object):
 
 class ResponseData(ResponseBase):
 
-    def __init__(self, code, data=None, **kwargs):
-        self.meta = Meta(code=code)
+    def __init__(self, code=HttpStatusCode.SUCCESS, data=None, **kwargs):
+        self.meta = ResponseMeta(code=code)
         self.data = data
         self.dummy_data = kwargs if kwargs else {}
 
@@ -32,12 +34,11 @@ class ResponseData(ResponseBase):
 
     @property
     def json(self):
-        from flask import jsonify
         http_status_code = int(str(self.meta.code)[:3])
         return jsonify(self.to_dict()), http_status_code
 
 
-class Meta(object):
+class ResponseMeta(object):
     code = None
     message = None
 

@@ -25,7 +25,7 @@ class TestJwtToken(BaseTestCase):
         token = create_token(token_info=none_token)
         token_dict = parse_token(token)
 
-        assert token_dict['email'] == None
-        assert token_dict['user_name'] == None
-        assert token_dict['blog_title'] == None
-        assert token_dict['profile_image'] == None
+        assert token_dict['email'] is None
+        assert token_dict['user_name'] is None
+        assert token_dict['blog_title'] is None
+        assert token_dict['profile_image'] is None
