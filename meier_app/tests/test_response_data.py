@@ -19,7 +19,7 @@ class TestResponseData(BaseTestCase):
         pass
 
     def test_response_data_to_json(self):
-        pass
+         response = ResponseData().json
 
     def test_response_meta(self):
         meta = ResponseMeta()
