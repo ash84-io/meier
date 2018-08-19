@@ -25,4 +25,4 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/meier_test'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/meier'
