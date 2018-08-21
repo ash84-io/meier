@@ -6,7 +6,7 @@ sys.path.append(ROOT_DIR)
 
 from flask import Flask
 from flask import render_template
-from meier_app.extensions import db, login_manager, cache
+from meier_app.extensions import db, login_manager, cache, sentry
 from flask.sessions import SessionInterface
 from beaker.middleware import SessionMiddleware
 
@@ -47,6 +47,13 @@ def configure_app(app, config_obj='config.ProductionConfig'):
 
 
 def configure_extensions(app):
+
+    # sentry
+    if app.config.get('SENTRY_DSN', None):
+        sentry.init_app(app=app,
+                        dsn=app.config['SENTRY_DSN'])
+
+    # flask-sqlalchemy
     db.init_app(app)
     with app.app_context():
         db.create_all()
@@ -69,7 +76,7 @@ def configure_extensions(app):
         'session.cookie_expires': True,
         'session.httponly': True,
         'session.secure': True,
-        'session.timeout': 43200,
+        'session.timeout': 3600,
         'session.sa.pool_recycle': 250
     }
     app.wsgi_app = SessionMiddleware(app.wsgi_app, session_opts)
@@ -129,12 +136,8 @@ def configure_dynamic_page(app):
     from meier_app.resources.blog.post_detail_view import get_page_view
     with app.app_context():
         from meier_app.models.post import Post
-        all_page = Post.query.filter(Post.is_page == True).all()
+        all_page = Post.query.filter(Post.is_page.is_(True)).all()
         for page in all_page:
             app.add_url_rule(rule='/page/<string:page_name>', endpoint=page.post_name, view_func=get_page_view)
 
-
-if __name__ == '__main__':
-    app = create_app(config_obj='config.DevelopmentConfig')
-    app.run(host='0.0.0.0', port=7878)
 

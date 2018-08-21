@@ -104,4 +104,4 @@ def save_post():
             db.session.add(post_tag)
             db.session.commit()
             logger.debug(post_tag.id)
-    return ResponseData(code=HttpStatusCode.SUCCESS, data={'id' : post.id}).json
+    return ResponseData(code=HttpStatusCode.SUCCESS, data={'id': post.id}).json

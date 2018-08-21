@@ -43,5 +43,3 @@ def set_settings_blog_info():
 
 
 
-
-

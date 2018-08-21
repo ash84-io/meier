@@ -39,7 +39,7 @@ def get_post_list_view():
                            total_pages=post_paging_result.pages,
                            post_list=post_list,
                            has_next=post_paging_result.has_next,
-                           next="?page={}".format(page+1),
+                           next=f"?page={page+1}",
                            has_prev=post_paging_result.has_prev,
-                           prev="?page={}".format(page-1)
+                           prev=f"?page={page-1}"
                            )

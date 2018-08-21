@@ -16,6 +16,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/meier'
+    SENTRY_DSN = ''
 
 
 class DevelopmentConfig(Config):

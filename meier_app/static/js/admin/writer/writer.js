@@ -56,7 +56,6 @@ let vm = new Vue({
     },
     methods: {
         test: function(){
-          console.log("tesT");
         },
         update: _.debounce(function (e) {
             this.content = e.target.value

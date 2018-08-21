@@ -7,20 +7,15 @@ self-hosted blog platform
 - Backend
     - python3.6
     - flask
+    - gunicorn
 
 - Frontend
     - material-kit
     - [axios](https://github.com/axios/axios)
     - vue.js
 
-### Production Server Start
+### Run
 
-```
-gunicorn --workers 4 --threads 4 --daemon meier:app -b 0.0.0.0:8080
-```
-
-### Dev Server Start
-
-```
-gunicorn --workers 6 --reload meier_dev:app -b 0.0.0.0:8080
+```shell
+gunicorn meier:app -c config.ini
 ```

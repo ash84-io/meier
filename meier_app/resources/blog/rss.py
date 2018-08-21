@@ -23,7 +23,7 @@ def get_rss():
     fg.link(href=settings.domain, rel='alternate')
     fg.description(description=settings.blog_desc)
     post_paging_result = Post.query.filter(Post.status == PostStatus.PUBLISH.value) \
-        .filter(Post.is_page == False) \
+        .filter(Post.is_page.is_(False)) \
         .filter(Post.visibility == PostVisibility.PUBLIC.value) \
         .order_by(desc(Post.in_date)).limit(15).all()
 

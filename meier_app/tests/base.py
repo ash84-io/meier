@@ -9,7 +9,7 @@ from meier_app.extensions import db
 app = create_app('meier_app.config.TestingConfig')
 
 
-class BaseTestCase(unittest.TestCase):
+class BaseAppTestCase(unittest.TestCase):
 
     def setUp(self): 
         mixer.init_app(app)
@@ -23,7 +23,7 @@ class BaseTestCase(unittest.TestCase):
         db.drop_all(app=app)
 
 
-class BaseModelTestCase(BaseTestCase):
+class BaseModelTestCase(unittest.TestCase):
 
     def test_insert(self):
         pass
