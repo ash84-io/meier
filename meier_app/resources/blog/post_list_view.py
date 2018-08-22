@@ -13,7 +13,6 @@ post_list_view = Blueprint('post_list_view', __name__, url_prefix='/',)
 
 
 @post_list_view.route('/', methods=['GET'])
-@cache.cached(timeout=300)
 def get_post_list_view():
     author = User.query.first()
     page = int(request.args.get('page', 1))
@@ -22,7 +21,6 @@ def get_post_list_view():
         .filter(Post.is_page.is_(False)) \
         .filter(Post.visibility == PostVisibility.PUBLIC.value) \
         .order_by(desc(Post.in_date)).paginate(page, settings.post_per_page, error_out=False)
-
     post_list = [post.for_detail for post in post_paging_result.items]
     first_post = post_list[0]
     ogp_meta_tag = OpenGraphMetaTagGenerator(site_name=settings.blog_title,
