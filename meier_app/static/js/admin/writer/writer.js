@@ -1,3 +1,10 @@
+
+if (!String.prototype.splice) {
+    String.prototype.splice = function(start, delCount, newSubStr) {
+        return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
+    };
+}
+
 let mark_to_html=null;
 
 Vue.component('input-tag', InputTag);
@@ -23,7 +30,6 @@ let vm = new Vue({
         if(parsedQs.length === 2){
             postId = parseInt(parsedQs[1]);
         }
-        console.log(postId);
         if(postId){
             let self = this;
             axios({
@@ -55,8 +61,6 @@ let vm = new Vue({
         }
     },
     methods: {
-        test: function(){
-        },
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
@@ -130,36 +134,84 @@ let vm = new Vue({
 
         },
         bold:function () {
-            this.content += ' ** **';
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            if(pos.start === pos.end) {
+                this.content = this.content.splice(pos.start, 0, "** **");
+            } else {
+                this.content = this.content.splice(pos.start, 0, "**");
+                this.content = this.content.splice(pos.end+2, 0, "**");
+            }
         },
         gist:function () {
-            this.content += "<script src='GIST_URL'></script>";
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            this.content = this.content.splice(pos.start, 0, "<script src='GIST_URL'></script>");
         },
         italic:function () {
-            this.content += ' * *';
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            if(pos.start === pos.end) {
+                this.content = this.content.splice(pos.start, 0, "* *");
+            } else {
+                this.content = this.content.splice(pos.start, 0, "*");
+                this.content = this.content.splice(pos.end+1, 0, "*");
+            }
+
         },
         table:function () {
             let tableMarkdown='\nFirst Header | Second Header\n' +
                 '------------ | -------------\n' +
                 'Content from cell 1 | Content from cell 2\n' +
-                'Content in the first column | Content in the second column'
+                'Content in the first column | Content in the second column';
 
-            this.content +=tableMarkdown;
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            this.content = this.content.splice(pos.start, 0, tableMarkdown);
         },
         image:function () {
-            this.content += " ![Alt text](http://path/to/img.jpg)";
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            this.content = this.content.splice(pos.start, 0, " ![Alt text](http://path/to/img.jpg)");
         },
         file_code:function(){
             this.content += "\n```python\n```";
         },
         code:function () {
-            this.content += " `code`";
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            if(pos.start === pos.end) {
+                this.content = this.content.splice(pos.start, 0, " `code`");
+            } else {
+                this.content = this.content.splice(pos.start, 0, "`");
+                this.content = this.content.splice(pos.end+1, 0, "`");
+            }
         },
         link:function () {
-            this.content += " [Title](link)";
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            this.content = this.content.splice(pos.start, 0, "[Title](link)");
         },
         quote:function () {
             this.content += "\n> ";
+        },
+        get_cursor_pos: function(input) {
+            if ("selectionStart" in input) {
+                return {
+                    start: input.selectionStart,
+                    end: input.selectionEnd
+                };
+            }
+            else if (input.createTextRange) {
+                var sel = document.selection.createRange();
+                if (sel.parentElement() === input) {
+                    var rng = input.createTextRange();
+                    rng.moveToBookmark(sel.getBookmark());
+                    for (var len = 0; rng.compareEndPoints("EndToStart", rng) > 0; rng.moveEnd("character", -1)) {
+                        len++;
+                    }
+                    rng.setEndPoint("StartToStart", input.createTextRange());
+                    for (var pos = { start: 0, end: len }; rng.compareEndPoints("EndToStart", rng) > 0; rng.moveEnd("character", -1)) {
+                        pos.start++;
+                        pos.end++;
+                    }
+                    return pos;
+                }
+            }
+            return -1;
         }
     }
 });
