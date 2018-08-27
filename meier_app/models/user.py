@@ -32,8 +32,8 @@ class User(db.Model, MixinBase, UserMixin):
     @property
     def for_user_info(self):
         return {
-            'email':self.email,
-            'user_name':self.user_name,
+            'email': self.email,
+            'user_name': self.user_name,
             'profile_image': self.profile_image,
             'user_desc': self.user_desc,
             'twitter_profile': self.twitter_profile,

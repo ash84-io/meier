@@ -25,3 +25,6 @@ class Settings(db.Model, MixinBase):
             'post_per_page': self.post_per_page,
             'domain': self.domain
         }
+
+    def __repr__(self):
+        return str(vars(self))
