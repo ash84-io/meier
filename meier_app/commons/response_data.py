@@ -11,6 +11,7 @@ class HttpStatusCode(Enum):
     INVALID_AUTHORIZATION = 40100
     NOT_FOUND = 40400
     INTERNAL_SERVER_ERROR = 50000
+    DUP_POST_NAME = 50001
 
 
 class ResponseBase(object):
