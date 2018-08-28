@@ -126,8 +126,8 @@ def configure_filter(app):
     @app.template_filter('clean')
     def clean_html(raw_html):
         from bs4 import BeautifulSoup
-        cleantext = BeautifulSoup(raw_html, "lxml").text
-        return cleantext
+        clean_text = BeautifulSoup(raw_html, "lxml").text
+        return clean_text
 
     app.jinja_env.filters['clean'] = clean_html
 

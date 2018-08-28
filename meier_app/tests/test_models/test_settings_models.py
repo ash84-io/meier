@@ -4,7 +4,7 @@ from meier_app.tests.conftest import session
 
 
 def test_insert(session):
-    ran_setting = mixer.blend(Settings)
+    mixer.blend(Settings)
     spec_setting = mixer.blend(Settings,
                                blog_title='test1',
                                blog_desc='test1',
@@ -20,14 +20,13 @@ def test_insert(session):
 
 
 def test_update(session):
-    ran_setting = mixer.blend(Settings)
+    mixer.blend(Settings)
 
     s = Settings.query.scalar()
     s.blog_title = "blog"
     s.blog_desc = "blog"
     s.post_per_page = 0
 
-    from meier_app.extensions import db
     session.commit()
     assert s.blog_title == 'blog'
     assert s.blog_desc == 'blog'
@@ -35,7 +34,7 @@ def test_update(session):
 
 
 def test_delete(session):
-    ran_setting = mixer.blend(Settings)
+    mixer.blend(Settings)
     s = Settings.query.scalar()
     session.delete(s)
     session.commit()

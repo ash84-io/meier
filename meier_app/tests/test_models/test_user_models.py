@@ -1,7 +1,4 @@
-import pytest
 from mixer.backend.flask import mixer
-
-from meier_app.extensions import db
 from meier_app.models.user import User
 from meier_app.tests.conftest import session
 
@@ -34,7 +31,7 @@ def test_update(session):
 
     user = User.query.scalar()
     user.email = "sh84.ahn@gmail.com"
-    db.session.commit()
+    session.commit()
     user1 = User.query.scalar()
     assert user1.email == 'sh84.ahn@gmail.com'
 
