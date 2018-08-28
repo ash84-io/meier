@@ -66,11 +66,17 @@ def update_post(post_id):
 @login_required
 @base.api_exception_handler
 def save_post():
+    from sqlalchemy import func
     req_data = AttrDict(request.get_json())
+
+    post_name_dup_count = db.session.query(func.count(Post.id)).filter_by(post_name = req_data.post_name.strip()).scalar()
+    if post_name_dup_count:
+        return ResponseData(code=HttpStatusCode.DUP_POST_NAME).json
+
     post = Post()
-    post.title = req_data.title
-    post.content = req_data.content
-    post.post_name = req_data.post_name
+    post.title = req_data.title.strip()
+    post.content = req_data.content.strip()
+    post.post_name = req_data.post_name.strip()
     post.html = req_data.html
     post.status = req_data.status
     post.visibility = req_data.visibility
