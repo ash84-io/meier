@@ -49,7 +49,9 @@ def test_insert(session):
         'modified_at': str,
         'link': str,
         'featured_image': str,
-        'is_page': bool
+        'is_page': bool,
+        'visibility': int,
+        'status': int
     }
 
     for k, v in p2.for_admin.items():
