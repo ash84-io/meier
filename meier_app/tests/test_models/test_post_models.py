@@ -12,8 +12,8 @@ def test_insert(session):
                      content="test",
                      html="test",
                      is_page=False,
-                     visibility=PostVisibility.PUBLIC,
-                     status=PostStatus.DRAFT,
+                     visibility=PostVisibility.PUBLIC.value,
+                     status=PostStatus.DRAFT.value,
                      featured_image="test"
                      )
 
@@ -21,8 +21,8 @@ def test_insert(session):
     assert p2.title == 'test'
     assert p2.content == 'test'
     assert p2.html == 'test'
-    assert p2.visibility == PostVisibility.PUBLIC
-    assert p2.status == PostStatus.DRAFT
+    assert p2.visibility == PostVisibility.PUBLIC.value
+    assert p2.status == PostStatus.DRAFT.value
     assert p2.featured_image == "test"
     assert Post.query.count() == 2
 
@@ -66,8 +66,8 @@ def test_update(session):
     p.title = 'blog'
     p.content = 'blog'
     p.html = 'blog'
-    p.visibility = PostVisibility.PRIVATE
-    p.status = PostStatus.PUBLISH
+    p.visibility = PostVisibility.PRIVATE.value
+    p.status = PostStatus.PUBLISH.value
     p.featured_image = "blog"
 
     session.commit()
@@ -75,8 +75,8 @@ def test_update(session):
     assert p.title == 'blog'
     assert p.content == 'blog'
     assert p.html == 'blog'
-    assert p.visibility == PostVisibility.PRIVATE
-    assert p.status == PostStatus.PUBLISH
+    assert p.visibility == PostVisibility.PRIVATE.value
+    assert p.status == PostStatus.PUBLISH.value
     assert p.featured_image == "blog"
  
 
