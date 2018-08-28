@@ -1,18 +1,17 @@
-# Meier [![Build Status](https://travis-ci.org/meier-project/meier.svg?branch=master)](https://travis-ci.org/meier-project/meier)
+# meier : Self-Hosted Blog Platform For Developer
 
-self-hosted blog platform
+[![Build Status](https://travis-ci.org/meier-project/meier.svg?branch=master)](https://travis-ci.org/meier-project/meier)
 
-### Tech
+### Install
 
-- Backend
-    - python3.6
-    - flask
-    - gunicorn
+```shell
+pip3 install -r ./requirements
+```
 
-- Frontend
-    - material-kit
-    - [axios](https://github.com/axios/axios)
-    - vue.js
+#### Requirements
+
+- Python3.6
+- Linus/Unix Server
 
 ### Run
 
