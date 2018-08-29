@@ -55,6 +55,7 @@ class User(db.Model, MixinBase, UserMixin):
                         user_name=token_info.get('user_name', None),
                         profile_image=token_info.get('profile_image', None)
                         )
+            user.token = token
             return user
         except Exception as e:
             logger.exception(e)
