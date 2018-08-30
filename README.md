@@ -20,3 +20,7 @@ pip3 install -r ./requirements
 ```shell
 gunicorn meier:app -c config.ini
 ```
+
+### Version
+
+- v0.1.0
