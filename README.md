@@ -1,6 +1,8 @@
-# meier : Self-Hosted Blog Platform For Developer
+# meier
+### self-hosted blog platform
 
 [![Build Status](https://travis-ci.org/meier-project/meier.svg?branch=master)](https://travis-ci.org/meier-project/meier)
+[![https://img.shields.io/github/contributors/meier-project/meier.svg](https://github.com/meier-project/meier/graphs/contributors)
 
 ### Install
 
