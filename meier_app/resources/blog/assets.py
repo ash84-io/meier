@@ -9,28 +9,24 @@ assets = Blueprint('assets', __name__, url_prefix='/assets')
 
 
 @assets.route('/css/<string:file_name>', methods=['GET'])
-@cache.cached(timeout=3600)
 def get_assets_css_file(file_name: str):
     settings = Settings.query.first()
     return response_assets(theme=settings.theme, static_folder='css', file_name=file_name)
 
 
 @assets.route('/js/<string:file_name>', methods=['GET'])
-@cache.cached(timeout=3600)
 def get_assets_js_file(file_name: str):
     settings = Settings.query.first()
     return response_assets(theme=settings.theme, static_folder='js', file_name=file_name)
 
 
 @assets.route('/img/<string:file_name>', methods=['GET'])
-@cache.cached(timeout=3600)
 def get_assets_img_file(file_name: str):
     settings = Settings.query.first()
     return response_assets(theme=settings.theme, static_folder='img', file_name=file_name)
 
 
 @assets.route('/font/<string:file_name>', methods=['GET'])
-@cache.cached(timeout=3600)
 def get_assets_font_file(file_name: str):
     settings = Settings.query.first()
     return response_assets(theme=settings.theme, static_folder='font', file_name=file_name)
