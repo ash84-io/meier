@@ -52,6 +52,15 @@ let vm = new Vue({
                 showNotification('warning', 'Load Error');
             });
         }
+
+        document.getElementById('admin-mk-writer').addEventListener('scroll', this.syncPreviewScroll);
+        document.getElementById('admin-mk-preview').addEventListener('scroll', this.syncWriterScroll);
+
+    },
+    beforeDestory: function(){
+        document.getElementById('admin-mk-writer').removeEventListener('scroll', this.syncPreviewScroll);
+        document.getElementById('admin-mk-preview').removeEventListener('scroll', this.syncWriterScroll);
+
     },
     computed: {
         compiledMarkdown: function () {
@@ -61,6 +70,16 @@ let vm = new Vue({
         }
     },
     methods: {
+        syncPreviewScroll: function(){
+            let mkPreview = document.getElementById('admin-mk-preview');
+            let mkWriter = document.getElementById('admin-mk-writer');
+            mkPreview.scrollTop = mkWriter.scrollTop;
+        },
+        syncWriterScroll: function(){
+            let mkPreview = document.getElementById('admin-mk-preview');
+            let mkWriter = document.getElementById('admin-mk-writer');
+            mkWriter.scrollTop = mkPreview.scrollTop;
+        },
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
