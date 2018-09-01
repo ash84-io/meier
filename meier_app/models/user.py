@@ -32,8 +32,8 @@ class User(db.Model, MixinBase, UserMixin):
     @property
     def for_user_info(self):
         return {
-            'email':self.email,
-            'user_name':self.user_name,
+            'email': self.email,
+            'user_name': self.user_name,
             'profile_image': self.profile_image,
             'user_desc': self.user_desc,
             'twitter_profile': self.twitter_profile,
@@ -55,6 +55,7 @@ class User(db.Model, MixinBase, UserMixin):
                         user_name=token_info.get('user_name', None),
                         profile_image=token_info.get('profile_image', None)
                         )
+            user.token = token
             return user
         except Exception as e:
             logger.exception(e)

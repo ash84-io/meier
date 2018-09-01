@@ -189,7 +189,8 @@ let vm = new Vue({
             this.content = this.content.splice(pos.start, 0, " ![Alt text](http://path/to/img.jpg)");
         },
         file_code:function(){
-            this.content += "\n```python\n```";
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            this.content = this.content.splice(pos.start, 0, "\n```python\n```");
         },
         code:function () {
             var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
@@ -205,7 +206,9 @@ let vm = new Vue({
             this.content = this.content.splice(pos.start, 0, "[Title](link)");
         },
         quote:function () {
-            this.content += "\n> ";
+            var pos = this.get_cursor_pos(document.getElementById('admin-mk-writer'));
+            this.content = this.content.splice(pos.start, 0, "\n> ");
+
         },
         get_cursor_pos: function(input) {
             if ("selectionStart" in input) {
