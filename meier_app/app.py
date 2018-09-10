@@ -74,9 +74,11 @@ def configure_extensions(app):
         'session.type': 'ext:database',
         'session.url': app.config['SQLALCHEMY_DATABASE_URI'],
         'session.cookie_expires': True,
+        'session.auto': True,
         'session.httponly': True,
         'session.secure': True,
         'session.timeout': 3600,
+        'session.key': 'meier_session',
         'session.sa.pool_recycle': 250
     }
     app.wsgi_app = SessionMiddleware(app.wsgi_app, session_opts)
