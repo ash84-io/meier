@@ -1,4 +1,5 @@
 import jwt
+from datetime import datetime, timedelta
 
 
 class TokenInfo(object):
@@ -8,6 +9,9 @@ class TokenInfo(object):
         self.user_name = user_name
         self.blog_title = blog_title
         self.profile_image = profile_image
+        self.iss = 'MEIER'
+        self.aud = 'MEIER'
+        self.iat = datetime.utcnow() - timedelta(hours=1),
 
     def to_dict(self) -> dict:
         return vars(self)
@@ -19,5 +23,5 @@ def create_token(token_info: TokenInfo) -> str:
 
 
 def parse_token(token: str):
-    return jwt.decode(token, 'meire_ppp', algorithm='HS256')
+    return jwt.decode(token, 'meire_ppp', algorithm='HS256', subject="MEIER", audience='MEIER')
 

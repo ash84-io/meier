@@ -6,7 +6,9 @@ sys.path.append(ROOT_DIR)
 
 from flask import Flask
 from flask import render_template
+from flask import request
 from meier_app.extensions import db, login_manager, cache, sentry
+from meier_app.commons.logger import logger
 from flask.sessions import SessionInterface
 from beaker.middleware import SessionMiddleware
 
@@ -68,7 +70,9 @@ def configure_extensions(app):
     @login_manager.user_loader
     def load_user(token):
         from meier_app.models import User
-        return User.get_from_token(token)
+        loaded_user = User.get_from_token(token)
+        logger.debug('[{}]{} : token :{} user:{}').format(request.method, request.url, token, loaded_user)
+        return loaded_user
 
     session_opts = {
         'session.type': 'ext:database',
