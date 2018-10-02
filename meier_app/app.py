@@ -71,7 +71,7 @@ def configure_extensions(app):
     def load_user(token):
         from meier_app.models import User
         loaded_user = User.get_from_token(token)
-        logger.debug('[{}]{} : token :{} user:{}').format(request.method, request.url, token, loaded_user)
+        logger.debug('[{}]{} : token :{} user:{}'.format(request.method, request.url, token, loaded_user))
         return loaded_user
 
     session_opts = {
