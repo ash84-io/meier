@@ -11,7 +11,7 @@ class TokenInfo(object):
         self.profile_image = profile_image
         self.iss = 'MEIER'
         self.aud = 'MEIER'
-        self.iat = datetime.utcnow() - timedelta(hours=1),
+        self.exp = datetime.utcnow() + timedelta(hours=3)
 
     def to_dict(self) -> dict:
         return vars(self)
