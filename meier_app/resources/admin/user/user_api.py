@@ -62,8 +62,11 @@ def login_api():
                 if url_parsed.query:
                     parsed_qs = parse_qs(url_parsed.query)
                     next = parsed_qs.get('next', ['/admin/contents'])[0]
+            logger.debug("LOGIN_SUCCESS NEXT:{}".format(next))
             return ResponseData(code=HttpStatusCode.SUCCESS, data={'next': next}).json
         else:
+            logger.debug("INVALID_AUTHORIZATION2")
             return ResponseData(code=HttpStatusCode.INVALID_AUTHORIZATION).json
     else:
+        logger.debug("INVALID_AUTHORIZATION1")
         return ResponseData(code=HttpStatusCode.INVALID_AUTHORIZATION).json
