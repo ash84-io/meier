@@ -112,7 +112,6 @@ let vm = new Vue({
                 visibility:parseInt(this.visibility),
                 featured_image:this.featured_image
             };
-            console.log(data);
             if(!data.post_name){
                 alert('required post or page URL');
             }
@@ -141,6 +140,7 @@ let vm = new Vue({
                         showNotification('primary', 'Save Changed');
                         let payload = res.data;
                         this.postId = payload.id;
+                        location.href = "/admin/contents";
                     })
                     .catch(function (err) {
                         showNotification('danger', 'Save Error');
