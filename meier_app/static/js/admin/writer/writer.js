@@ -7,8 +7,6 @@ if (!String.prototype.splice) {
 
 let mark_to_html=null;
 
-Vue.component('input-tag', InputTag);
-
 let vm = new Vue({
     el: '#vue-section',
     data: {
