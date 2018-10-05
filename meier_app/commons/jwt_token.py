@@ -18,10 +18,16 @@ class TokenInfo(object):
 
 
 def create_token(token_info: TokenInfo) -> str:
-    if isinstance(token_info, TokenInfo):
-        return jwt.encode(token_info.to_dict(), 'meire_ppp', algorithm='HS256')
+    try:
+        if isinstance(token_info, TokenInfo):
+            return jwt.encode(token_info.to_dict(), 'meire_ppp', algorithm='HS256')
+    except Exception as e:
+        raise e
 
 
 def parse_token(token: str):
-    return jwt.decode(token, 'meire_ppp', algorithm='HS256', subject="MEIER", audience='MEIER')
+    try:
+        return jwt.decode(token, 'meire_ppp', algorithm='HS256', subject="MEIER", audience='MEIER')
+    except Exception as e:
+        raise e
 

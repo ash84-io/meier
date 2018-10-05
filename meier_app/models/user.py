@@ -48,6 +48,7 @@ class User(db.Model, MixinBase, UserMixin):
         from meier_app.commons.logger import logger
         from attrdict import AttrDict
         try:
+            logger.debug('token : {}'.format(token))
             token_info = AttrDict(parse_token(token))
             logger.debug('token_info : {}'.format(token_info))
             user = User(email=token_info.get('email', None),
