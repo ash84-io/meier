@@ -29,6 +29,7 @@ class User(db.Model, MixinBase, UserMixin):
     def get_id(self):
         return self.token
 
+
     @property
     def for_user_info(self):
         return {
@@ -43,14 +44,13 @@ class User(db.Model, MixinBase, UserMixin):
 
     @staticmethod
     def get_from_token(token):
-
         from meier_app.commons.jwt_token import parse_token
         from meier_app.commons.logger import logger
         from attrdict import AttrDict
-
-        #logger.debug('get_from_token : {}'.format(token))
         try:
+            logger.debug('token : {}'.format(token))
             token_info = AttrDict(parse_token(token))
+            logger.debug('token_info : {}'.format(token_info))
             user = User(email=token_info.get('email', None),
                         user_name=token_info.get('user_name', None),
                         profile_image=token_info.get('profile_image', None)

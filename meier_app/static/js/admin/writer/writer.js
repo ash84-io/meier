@@ -7,8 +7,6 @@ if (!String.prototype.splice) {
 
 let mark_to_html=null;
 
-Vue.component('input-tag', InputTag);
-
 let vm = new Vue({
     el: '#vue-section',
     data: {
@@ -52,6 +50,15 @@ let vm = new Vue({
                 showNotification('warning', 'Load Error');
             });
         }
+
+        document.getElementById('admin-mk-writer').addEventListener('scroll', this.syncPreviewScroll);
+        document.getElementById('admin-mk-preview').addEventListener('scroll', this.syncWriterScroll);
+
+    },
+    beforeDestory: function(){
+        document.getElementById('admin-mk-writer').removeEventListener('scroll', this.syncPreviewScroll);
+        document.getElementById('admin-mk-preview').removeEventListener('scroll', this.syncWriterScroll);
+
     },
     computed: {
         compiledMarkdown: function () {
@@ -61,6 +68,16 @@ let vm = new Vue({
         }
     },
     methods: {
+        syncPreviewScroll: function(){
+            let mkPreview = document.getElementById('admin-mk-preview');
+            let mkWriter = document.getElementById('admin-mk-writer');
+            mkPreview.scrollTop = mkWriter.scrollTop;
+        },
+        syncWriterScroll: function(){
+            let mkPreview = document.getElementById('admin-mk-preview');
+            let mkWriter = document.getElementById('admin-mk-writer');
+            mkWriter.scrollTop = mkPreview.scrollTop;
+        },
         update: _.debounce(function (e) {
             this.content = e.target.value
         }, 100),
@@ -95,7 +112,6 @@ let vm = new Vue({
                 visibility:parseInt(this.visibility),
                 featured_image:this.featured_image
             };
-            console.log(data);
             if(!data.post_name){
                 alert('required post or page URL');
             }
@@ -124,6 +140,7 @@ let vm = new Vue({
                         showNotification('primary', 'Save Changed');
                         let payload = res.data;
                         this.postId = payload.id;
+                        location.href = "/admin/contents";
                     })
                     .catch(function (err) {
                         showNotification('danger', 'Save Error');
