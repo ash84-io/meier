@@ -1,13 +1,12 @@
 # -*- coding:utf-8 -*-
 from autorepr import autotext
-from flask_login import UserMixin
 from sqlalchemy import Column, String
 
 from meier_app.extensions import db
 from meier_app.models.base import MixinBase
 
 
-class User(db.Model, MixinBase, UserMixin):
+class User(db.Model, MixinBase):
     __tablename__ = 'user'
     __table_args__ = {'extend_existing': True, "mysql_engine": "InnoDB"}
 
@@ -25,10 +24,6 @@ class User(db.Model, MixinBase, UserMixin):
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
-
-    def get_id(self):
-        return self.token
-
 
     @property
     def for_user_info(self):

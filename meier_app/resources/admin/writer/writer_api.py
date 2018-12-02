@@ -2,7 +2,6 @@
 import traceback
 from flask import Blueprint, request
 from attrdict import AttrDict
-from flask_login import login_required
 
 from datetime import datetime
 from meier_app.commons.logger import logger
@@ -14,12 +13,14 @@ from meier_app.models.settings import Settings
 from meier_app.extensions import db
 from meier_app.resources.admin import base
 from meier_app.commons.response_data import ResponseData, HttpStatusCode
+from flask_jwt_extended import (jwt_required, get_jwt_identity)
+
 
 admin_writer_api = Blueprint('admin_writer_api', __name__, url_prefix='/admin/writer/api')
 
 
 @admin_writer_api.route('/post/<int:post_id>', methods=['DELETE'])
-@login_required
+@jwt_required
 @base.api_exception_handler
 def delete_post(post_id):
     Post.query(Post.id == post_id).delete()
@@ -28,7 +29,7 @@ def delete_post(post_id):
 
 
 @admin_writer_api.route('/post/<int:post_id>', methods=['PUT'])
-@login_required
+@jwt_required
 @base.api_exception_handler
 def update_post(post_id):
     req_data = AttrDict(request.get_json())
@@ -63,7 +64,7 @@ def update_post(post_id):
 
 
 @admin_writer_api.route('/post', methods=['POST'])
-@login_required
+@jwt_required
 @base.api_exception_handler
 def save_post():
     from sqlalchemy import func

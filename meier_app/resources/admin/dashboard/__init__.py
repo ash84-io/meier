@@ -10,7 +10,6 @@ admin_dashboard_view = Blueprint('admin_dashboard_view', __name__, url_prefix='/
 
 @admin_dashboard_view.route('/', methods=['GET'])
 @cache.cached(timeout=86400)
-@login_required
 def get_dashboard_view():
     settings = Settings.query.first()
     return render_template("/admin/dashboard.j2",

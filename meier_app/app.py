@@ -6,22 +6,9 @@ sys.path.append(ROOT_DIR)
 
 from flask import Flask
 from flask import render_template
-from flask import request
-from meier_app.extensions import db, login_manager, cache, sentry
-from meier_app.commons.logger import logger
-from flask.sessions import SessionInterface
-from beaker.middleware import SessionMiddleware
+from meier_app.extensions import db, cache, sentry, jwt
 
 __all__ = ['create_app']
-
-
-class BeakerSessionInterface(SessionInterface):
-    def open_session(self, app, request):
-        session = request.environ['beaker.session']
-        return session
-
-    def save_session(self, app, session, response):
-        session.save()
 
 
 def create_app(config_obj='config.ProductionConfig'):
@@ -60,35 +47,13 @@ def configure_extensions(app):
     with app.app_context():
         db.create_all()
 
-    # flask-login
-    login_manager.login_view = "/admin/user/login"
-    login_manager.init_app(app)
-
     # flask-cache
     cache.init_app(app)
 
-    @login_manager.user_loader
-    def load_user(token):
-        from meier_app.models import User
-        loaded_user = User.get_from_token(token)
-        logger.debug('[{}]{} : token :{} user:{}'.format(request.method, request.url, token, loaded_user))
-        return loaded_user
+    # flask-jwt-extended
+    jwt.init_app(app)
 
-    session_opts = {
-        'session.type': 'ext:database',
-        'session.url': app.config['SQLALCHEMY_DATABASE_URI'],
-        'session.cookie_expires': True,
-        'session.auto': True,
-        'session.httponly': True,
-        'session.secure': True,
-        'session.timeout': 3600,
-        'session.key': 'meier_session',
-        'session.sa.pool_recycle': 250
-    }
-    app.wsgi_app = SessionMiddleware(app.wsgi_app, session_opts)
-    app.session_interface = BeakerSessionInterface()
-
-
+ 
 def configure_error_handlers(app):
     @app.errorhandler(401)
     def unauthorized(error):
