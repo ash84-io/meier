@@ -21,9 +21,11 @@ class ResponseBase(object):
 
 class ResponseData(ResponseBase):
 
-    def __init__(self, code=HttpStatusCode.SUCCESS, data=None, **kwargs):
+    def __init__(self, code=HttpStatusCode.SUCCESS, data=None, headers=None, cookies=None, **kwargs):
         self.meta = ResponseMeta(code=code)
         self.data = data
+        self.headers = headers
+        self.cookies = cookies
         self.dummy_data = kwargs if kwargs else {}
 
     def to_dict(self):
@@ -36,7 +38,16 @@ class ResponseData(ResponseBase):
     @property
     def json(self):
         http_status_code = int(str(self.meta.code)[:3])
-        return jsonify(self.to_dict()), http_status_code
+        resp = jsonify(self.to_dict())
+        if self.headers:
+            resp.headers = self.headers
+            resp.status_code = http_status_code
+
+        if self.cookies:
+            for k, v in self.cookies.items():
+                resp.set_cookie(k, value=v, path='/')
+
+        return resp, http_status_code
 
 
 class ResponseMeta(object):
