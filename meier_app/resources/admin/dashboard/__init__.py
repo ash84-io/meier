@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint
 from flask import render_template
-from flask_login import login_required
 from meier_app.models.settings import Settings
 from meier_app.extensions import cache
 
