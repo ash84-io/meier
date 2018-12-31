@@ -7,8 +7,8 @@ from meier_app.models.base import MixinBase
 
 
 class Settings(db.Model, MixinBase):
-    __tablename__ = 'settings'
-    __table_args__ = {'extend_existing': True, "mysql_engine": "InnoDB"}
+    __tablename__ = "settings"
+    __table_args__ = {"extend_existing": True, "mysql_engine": "InnoDB"}
 
     blog_title = Column(String(255), nullable=False)
     blog_desc = Column(String(255), nullable=False)
@@ -19,11 +19,11 @@ class Settings(db.Model, MixinBase):
     @property
     def for_dict(self):
         return {
-            'blog_title': self.blog_title,
-            'blog_desc': self.blog_desc,
-            'theme': self.theme,
-            'post_per_page': self.post_per_page,
-            'domain': self.domain
+            "blog_title": self.blog_title,
+            "blog_desc": self.blog_desc,
+            "theme": self.theme,
+            "post_per_page": self.post_per_page,
+            "domain": self.domain,
         }
 
     def __repr__(self):
