@@ -12,7 +12,3 @@ class PostTag(db.Model, MixinBase):
 
     tag_id = Column(Integer, nullable=False, index=True)
     post_id = Column(Integer, nullable=False, index=True)
-
-    def __init__(self, post_id, tag_id):
-        self.post_id = post_id
-        self.tag_id = tag_id

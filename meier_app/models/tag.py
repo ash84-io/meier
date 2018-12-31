@@ -12,9 +12,6 @@ class Tag(db.Model, MixinBase):
 
     tag = Column(String(255), nullable=False, index=True)
 
-    def __init__(self, tag):
-        self.tag = tag
-
     @property
     def for_admin(self):
         return self.tag
