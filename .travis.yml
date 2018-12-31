@@ -9,5 +9,7 @@ before_install:
 install: pip install -r ./requirements
 script:
   - pytest -s --cov=meier_app/
+after_success:
+  - codecov
 notifications:
   slack: ash84:XLALpV0b20grjYRBYJ9ooVaE

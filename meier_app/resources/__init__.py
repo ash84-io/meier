@@ -1,6 +1,12 @@
 # -*- coding:utf-8 -*-
 from .admin import admin_contents_api
-from .admin import admin_dashboard_view, admin_settings_view, admin_writer_view, admin_user_view, admin_contents_view
+from .admin import (
+    admin_dashboard_view,
+    admin_settings_view,
+    admin_writer_view,
+    admin_user_view,
+    admin_contents_view,
+)
 from .admin import admin_index_view
 from .admin import admin_settings_api
 from .admin import admin_user_api
@@ -26,5 +32,5 @@ resource_blueprints = [
     admin_user_view,
     admin_user_api,
     admin_contents_api,
-    admin_contents_view
+    admin_contents_view,
 ]

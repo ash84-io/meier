@@ -5,19 +5,13 @@ from meier_app.models.post_tag import PostTag
 
 def test_insert(session):
     mixer.blend(PostTag)
-    mixer.blend(PostTag,
-                post_id=1,
-                tag_id=2
-                )
+    mixer.blend(PostTag, post_id=1, tag_id=2)
     session.commit()
     assert PostTag.query.count() == 2
 
 
 def test_update(session):
-    p1 = mixer.blend(PostTag,
-                     post_id=1,
-                     tag_id=2
-                     )
+    p1 = mixer.blend(PostTag, post_id=1, tag_id=2)
     assert p1.post_id == 1
     assert p1.tag_id == 2
 
@@ -30,13 +24,7 @@ def test_update(session):
 
 
 def test_delete(session):
-    p1 = mixer.blend(PostTag,
-                     post_id=1,
-                     tag_id=2
-                     )
+    p1 = mixer.blend(PostTag, post_id=1, tag_id=2)
     session.delete(p1)
     session.commit()
     assert PostTag.query.count() == 0
-
-
-
