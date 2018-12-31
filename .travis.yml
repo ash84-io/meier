@@ -8,7 +8,7 @@ before_install:
   - mysql -e 'CREATE DATABASE meier;'
 install: pip install -r ./requirements
 script:
-  - pytest -s --cov=meier_app/
+  - pytest -s --cov=codecov
 after_success:
   - codecov
 notifications:
