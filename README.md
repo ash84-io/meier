@@ -12,7 +12,7 @@ pip3 install -r ./requirements
 
 #### Requirements
 
-- Python3.6
+- Python3.7
 - Linus/Unix Server
 
 ### Run
@@ -23,4 +23,4 @@ gunicorn meier:app -c config.ini
 
 ### Version
 
-- v0.1.0
+- v1.0.0
