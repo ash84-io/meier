@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from flask import Flask, render_template
 
+from meier.config import Config
 from meier.extensions import cache, db, sentry
 from meier.resources.admin.contents.contents_api import admin_contents_api
 from meier.resources.admin.contents.contents_view import admin_contents_view
@@ -18,13 +19,17 @@ from meier.resources.blog.post_list_view import post_list_view
 from meier.resources.blog.rss import rss
 from meier.resources.blog.tag_list_view import tag_list_view
 
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
+
 __all__ = ["create_app"]
 
 
-def create_app(config_obj="config.ProductionConfig") -> Flask:
+def create_app(config: Config) -> Flask:
     app = Flask(__name__, static_url_path="", static_folder="static")
-    configure_app(app, config_obj)
-    configure_extensions(app)
+    configure_app(app, config)
+    configure_extensions(app, config)
     configure_blueprints(app)
     configure_jinja(app)
     configure_filter(app)
@@ -56,17 +61,31 @@ def configure_blueprints(app) -> None:
         app.register_blueprint(blueprint)
 
 
-def configure_app(app, config_obj="config.ProductionConfig") -> None:
-    app.config.from_object(config_obj)
+def configure_app(app, config: Config) -> None:
+    app.config.from_object(config)
 
 
-def configure_extensions(app):
+def configure_extensions(app, config: Config) -> None:
 
     # sentry
     if app.config.get("SENTRY_DSN", None):
-        sentry.init_app(app=app, dsn=app.config["SENTRY_DSN"])
+        sentry.init_app(app=app, dsn=app.config.s)
+
+        sentry_sdk.init(
+            dsn=config.sentry_dsn,
+            integrations=[FlaskIntegration()]
+        )
 
     # flask-sqlalchemy
+    app.config[
+        "SQLALCHEMY_DATABASE_URI"
+    ] = f"mysql+pymysql://{config.db_user}:{config.db_password}@{config.db_host}/{config.db_name}"
+
+    app.config["SQLALCHEMY_MAX_OVERFLOW"] = -1
+    app.config["SQLALCHEMY_ECHO"] = False
+    app.config["SQLALCHEMY_POOL_RECYCLE"] = 20
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+
     db.init_app(app)
     with app.app_context():
         db.create_all()
@@ -75,7 +94,7 @@ def configure_extensions(app):
     cache.init_app(app)
 
 
-def configure_error_handlers(app):
+def configure_error_handlers(app) -> None:
     @app.errorhandler(401)
     def unauthorized():
         return render_template("/errors/error.html", status_code=401), 401
@@ -93,7 +112,7 @@ def configure_error_handlers(app):
         return render_template("/errors/error.html", status_code=500), 500
 
 
-def configure_jinja(app):
+def configure_jinja(app) -> None:
     app.jinja_env.trim_blocks = True
     app.jinja_env.lstrip_blocks = True
 
