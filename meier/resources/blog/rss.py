@@ -44,8 +44,10 @@ def get_rss():
         ]
         fe = fg.add_entry()
         fe.author({"name": author.user_name, "email": author.email})
-        for tag in tag_list:
-            fe.category([{"term": tag, "scheme": None, "label": tag}])
+        categories = [
+            {"term": tag, "scheme": None, "label": tag} for tag in tag_list
+        ]
+        fe.category(categories)
         fe.title(post.title)
         fe.description(description="<![CDATA[ {} ]]>".format(post.html[:200]))
         fe.content(content=post.html, type="CDATA")

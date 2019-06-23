@@ -25,7 +25,6 @@ def api_exception_handler(func):
     @wraps(func)
     def decorate(*args, **kwargs):
         try:
-            logger.debug(request)
             result = func(*args, **kwargs)
         except BaseException:
             logger.exception(traceback.format_exc())

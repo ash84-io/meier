@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import IntEnum
 
 from sqlalchemy import Boolean, Column, Integer, String, Text
 
@@ -6,12 +6,12 @@ from meier.extensions import db
 from meier.models.base import MixinBase
 
 
-class PostVisibility(Enum):
+class PostVisibility(IntEnum):
     PRIVATE = 0
     PUBLIC = 1
 
 
-class PostStatus(Enum):
+class PostStatus(IntEnum):
     DRAFT = 0
     PUBLISH = 1
 

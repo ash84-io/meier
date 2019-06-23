@@ -19,7 +19,6 @@ admin_contents_api = Blueprint(
 @login_required_api
 @base.api_exception_handler
 def get_contents_posts_api():
-    logger.debug(request.args)
     q = request.args.get("q", None)
     page = int(request.args.get("page", 1))
     per_page = int(request.args.get("perPage", 10))
@@ -63,7 +62,6 @@ def _get_post_list_by_status(
 @login_required_api
 @base.api_exception_handler
 def get_contents_draft_api():
-    logger.debug(request.args)
     q = request.args.get("q", None)
     page = int(request.args.get("page", 1))
     per_page = int(request.args.get("perPage", 10))
@@ -92,7 +90,7 @@ def get_contents_draft_api():
 @login_required_api
 @base.api_exception_handler
 def delete_contents_posts_api(post_id):
-    logger.debug(post_id)
+
     Post.query.filter(Post.id == post_id).delete()
     PostTag.query.filter(PostTag.post_id == post_id).delete()
     db.session.commit()
@@ -103,7 +101,6 @@ def delete_contents_posts_api(post_id):
 @login_required_api
 @base.api_exception_handler
 def get_contents_post_detail_api(post_id):
-    logger.debug(request.args)
     post = Post.query.filter(Post.id == int(post_id)).scalar()
     tag_id_list = [
         pt.tag_id

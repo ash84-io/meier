@@ -5,13 +5,13 @@ init:
 	pipenv install --dev
 
 check:
-	isort --recursive --check-only meier tests meier.py
-	black -l 79 --check meier tests meier.py
+	isort --recursive --check-only meier meier.py
+	black -l 79 --check meier meier.py
 	pylint meier meier.py
 
 format:
-	isort -rc -y meier tests meier.py
-	black -l 79 meier tests meier.py
+	isort -rc -y meier meier.py
+	black -l 79 meier meier.py
 
 test: format
 	python -m meier -vv

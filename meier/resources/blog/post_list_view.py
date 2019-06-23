@@ -9,7 +9,7 @@ from meier.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 post_list_view = Blueprint("post_list_view", __name__, url_prefix="/")
 
 
-@post_list_view.route("/", methods=["GET"])
+@post_list_view.route("", methods=["GET"])
 def get_post_list_view():
     author = User.query.first()
     page = int(request.args.get("page", 1))
@@ -32,7 +32,7 @@ def get_post_list_view():
     )
 
     return render_template(
-        "/themes/" + settings.theme + "/post_list.html",
+        f"/themes/{settings.theme}/post_list.html",
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,

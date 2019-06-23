@@ -1,7 +1,7 @@
 import jwt
 
 
-class TokenInfo(object):
+class TokenInfo:
     def __init__(
         self, email: str, user_name: str, blog_title: str, profile_image=None
     ) -> None:

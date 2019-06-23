@@ -33,8 +33,6 @@ def user_info_api():
 @login_required_api
 @base.api_exception_handler
 def update_user_info_api():
-    logger.debug(request.headers)
-    logger.debug(request.get_json())
     User.query.filter(User.email == g.current_user.email).update(
         request.get_json()
     )
@@ -45,9 +43,7 @@ def update_user_info_api():
 @admin_user_api.route("/login", methods=["POST"])
 @base.api_exception_handler
 def login_api():
-    logger.debug(request.referrer)
     req_data = AttrDict(request.get_json())
-    logger.debug(req_data)
     settings = Settings.query.first()
     if req_data.email and req_data.password:
         user = (
@@ -73,7 +69,6 @@ def login_api():
                     redirect_url = parsed_qs.get("next", ["/admin/contents"])[
                         0
                     ]
-            logger.debug("LOGIN_SUCCESS NEXT:{}".format(redirect_url))
             res = ResponseData(
                 code=HttpStatusCode.SUCCESS,
                 data={"next": redirect_url},

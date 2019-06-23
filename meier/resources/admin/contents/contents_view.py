@@ -1,6 +1,5 @@
 from flask import Blueprint, g, render_template
 
-from meier.commons.logger import logger
 from meier.extensions import cache
 from meier.models.settings import Settings
 from meier.resources.admin.base import login_required_view

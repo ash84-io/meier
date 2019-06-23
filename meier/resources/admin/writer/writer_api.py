@@ -61,7 +61,6 @@ def update_post(post_id):
             if not post_tag:
                 post_tag = PostTag(post_id=post.id, tag_id=tag_id)
                 db.session.add(post_tag)
-                logger.debug(post_tag.id)
         db.session.commit()
     return ResponseData(code=HttpStatusCode.SUCCESS).json
 

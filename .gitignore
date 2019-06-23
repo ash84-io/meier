@@ -153,3 +153,21 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+
+\.idea/encodings\.xml
+
+\.idea/markdown-navigator\.xml
+
+\.idea/markdown-navigator/profiles_settings\.xml
+
+\.idea/meier\.iml
+
+\.idea/misc\.xml
+
+\.idea/modules\.xml
+
+\.idea/vcs\.xml
+
+\.pyre/client\.lock
+
+\.pyre/pyre\.stderr

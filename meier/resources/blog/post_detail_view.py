@@ -40,7 +40,7 @@ def get_page_view(page_name):
     )
 
     return render_template(
-        "/themes/" + settings.theme + "/post_detail.html",
+        f"/themes/{settings.theme}/post_detail.html",
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,
