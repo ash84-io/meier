@@ -1,0 +1,21 @@
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Set default charset
+[*.{js,py}]
+charset = utf-8
+
+# Python settings with isort
+[*.py]
+indent_style = space
+indent_size = 4
+line_length = 79
+multi_line_output = 3
+not_skip = __init__.py
+include_trailing_comma = true
+known_standard_library = dataclasses
