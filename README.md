@@ -3,22 +3,19 @@
 
 [![Build Status](https://travis-ci.org/meier-project/meier.svg?branch=master)](https://travis-ci.org/meier-project/meier)
 
-
-### Install
-
-```shell
-pip3 install -r ./requirements
+### ENV(.env)
 ```
-
-#### Requirements
-
-- Python3.7
-- Linus/Unix Server
+DB_HOST=localhost:3306
+DB_NAME=meier
+DB_USER=
+DB_PASSWORD=
+SENTRY_DSN=
+```
 
 ### Run
 
 ```shell
-gunicorn meier:app -c config.ini
+docker run -p 80:2368 --env-file .env meier:1.0.0 
 ```
 
 ### Version
