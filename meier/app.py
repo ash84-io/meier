@@ -1,5 +1,7 @@
+import sentry_sdk
 from bs4 import BeautifulSoup
 from flask import Flask, render_template
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from meier.config import Config
 from meier.extensions import cache, db, sentry
@@ -18,10 +20,6 @@ from meier.resources.blog.post_detail_view import post_detail_view
 from meier.resources.blog.post_list_view import post_list_view
 from meier.resources.blog.rss import rss
 from meier.resources.blog.tag_list_view import tag_list_view
-
-import sentry_sdk
-from sentry_sdk.integrations.flask import FlaskIntegration
-
 
 __all__ = ["create_app"]
 
@@ -72,8 +70,7 @@ def configure_extensions(app, config: Config) -> None:
         sentry.init_app(app=app, dsn=app.config.s)
 
         sentry_sdk.init(
-            dsn=config.sentry_dsn,
-            integrations=[FlaskIntegration()]
+            dsn=config.sentry_dsn, integrations=[FlaskIntegration()]
         )
 
     # flask-sqlalchemy
