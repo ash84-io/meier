@@ -5,24 +5,17 @@ init:
 	pipenv install --dev
 
 check:
-	isort --recursive --check-only meier meier.py
-	black -l 79 --check meier meier.py
-	pylint meier meier.py
+	isort --recursive --check-only meier wsgi.py
+	black -l 79 --check meier wsgi.py
+	pylint meier wsgi.py
 
 format:
-	isort -rc -y meier meier.py
-	black -l 79 meier meier.py
+	isort -rc -y meier wsgi.py
+	black -l 79 meier wsgi.py
 
 test: format
 	python -m meier -vv
 
-coverage:
-	python -m meier --cov meier --cov-report term --cov-report xml
-
-htmlcov:
-	python -m meier --cov meier --cov-report html
-	rm -rf /tmp/htmlcov && mv htmlcov /tmp/
-	open /tmp/htmlcov/index.html
 
 requirements:
 	pipenv lock -r > requirements.txt
