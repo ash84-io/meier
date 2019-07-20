@@ -1,1 +1,0 @@
-gunicorn meier:app -c config.ini
