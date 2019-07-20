@@ -39,6 +39,5 @@ def get_assets_font_file(file_name: str):
 
 def response_assets(theme, static_folder, file_name):
     return send_from_directory(
-        "templates/themes/{}/assets/{}/".format(theme, static_folder),
-        file_name,
+        f"templates/themes/{theme}/assets/{static_folder}/", file_name
     )
