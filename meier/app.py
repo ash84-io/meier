@@ -3,8 +3,9 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template
 from sentry_sdk.integrations.flask import FlaskIntegration
 
+from meier import __version__
 from meier.config import Config
-from meier.extensions import cache, db, sentry
+from meier.extensions import cache, db
 from meier.resources.admin.contents.contents_api import admin_contents_api
 from meier.resources.admin.contents.contents_view import admin_contents_view
 from meier.resources.admin.dashboard.dashborad_view import admin_dashboard_view
@@ -63,25 +64,22 @@ def configure_app(app, config: Config) -> None:
     app.config.from_object(config)
 
 
-def configure_extensions(app, config: Config) -> None:
+def configure_extensions(app, c: Config) -> None:
 
     # sentry
-    if app.config.get("SENTRY_DSN", None):
-        sentry.init_app(app=app, dsn=app.config.s)
-
+    if c.sentry_dsn:
         sentry_sdk.init(
-            dsn=config.sentry_dsn, integrations=[FlaskIntegration()]
+            dsn=c.sentry_dsn,
+            integrations=[FlaskIntegration()],
+            debug=c.debug,
+            release=__version__,
         )
 
     # flask-sqlalchemy
+    connection_string = f"{c.db_user}:{c.db_password}@{c.db_host}/{c.db_name}"
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = f"mysql+pymysql://{config.db_user}:{config.db_password}@{config.db_host}/{config.db_name}"
-
-    app.config["SQLALCHEMY_MAX_OVERFLOW"] = -1
-    app.config["SQLALCHEMY_ECHO"] = False
-    app.config["SQLALCHEMY_POOL_RECYCLE"] = 20
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+    ] = f"mysql+pymysql://{connection_string}"
 
     db.init_app(app)
     with app.app_context():
@@ -117,7 +115,6 @@ def configure_jinja(app) -> None:
 def configure_filter(app) -> None:
     @app.template_filter("clean")
     def clean_html(raw_html):
-
         clean_text = BeautifulSoup(raw_html, "lxml").text
         return clean_text
 

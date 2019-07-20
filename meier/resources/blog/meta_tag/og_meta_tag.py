@@ -6,7 +6,7 @@ class OpenGraphMetaTagGenerator(object):
         description="",
         url="",
         image="",
-        type="website",
+        type_="website",
     ):
         self.site_name = site_name if site_name else ""
         self.title = title if title else ""
@@ -17,7 +17,7 @@ class OpenGraphMetaTagGenerator(object):
 
         self.url = url if url else ""
         self.image = image if image else ""
-        self.type = type if type else "website"
+        self.types = type_ if type_ else "website"
 
     def __call__(self):
         template = '<meta property="og:{}" content="{}"/>'

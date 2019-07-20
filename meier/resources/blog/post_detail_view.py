@@ -103,7 +103,7 @@ def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
         )
 
         return render_template(
-            "/themes/" + settings.theme + "/post_detail.html",
+            f"/themes/{settings.theme}/post_detail.html",
             author=author,
             ogp_meta_tag=ogp_meta_tag(),
             settings=settings,
