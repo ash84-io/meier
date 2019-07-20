@@ -52,9 +52,6 @@ def get_page_view(page_name):
 
 
 @post_detail_view.route(
-    "/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>", methods=["GET"]
-)
-@post_detail_view.route(
     "/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>/", methods=["GET"]
 )
 @cache.cached(timeout=300)

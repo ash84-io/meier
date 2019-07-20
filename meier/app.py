@@ -35,6 +35,7 @@ def create_app(config: Config) -> Flask:
     configure_error_handlers(app)
     if not app.testing:
         configure_dynamic_page(app)
+    app.url_map.strict_slashes = False
     return app
 
 
