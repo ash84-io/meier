@@ -14,7 +14,7 @@ format:
 	black -l 79 meier wsgi.py
 
 test: format
-	python -m meier -vv
+	python -m pytest
 
 
 requirements:

@@ -1,13 +1,7 @@
-FROM python:3.7.3-alpine3.9
+FROM python:3.7.3-slim-stretch
 RUN pip install -U pip
 
-RUN apk update && apk add --no-cache --upgrade \
-    build-base \
-    gcc \
-    libxml2-dev \
-    g++ \
-    python-dev \
-    libxslt-dev
+RUN apt-get update && apt-get install -y build-essential gcc
 
 WORKDIR /wheels
 COPY requirements.txt .
