@@ -1,15 +1,19 @@
 sudo: false
 language: python
 python:
-  - "3.7"
-services:
-  - mysql
-before_install:
-  - mysql -e 'CREATE DATABASE meier;'
+  - 3.7
+
+cache:
+  - pip
+
 install: pip install -r ./requirements.txt
+
 script:
-  - pytest -s --cov=meier/
+  - make test
+  - make check
+
 after_success:
   - codecov
+
 notifications:
   slack: ash84:XLALpV0b20grjYRBYJ9ooVaE
