@@ -93,27 +93,27 @@ def configure_extensions(app, c: Config) -> None:
 
 def configure_error_handlers(app) -> None:
     @app.errorhandler(BadRequest)
-    def handle_bad_request(e):
+    def handle_bad_request(_):
         abort(400)
 
     @app.errorhandler(NotFound)
-    def handler_not_found(e):
+    def handler_not_found(_):
         abort(404)
 
     @app.errorhandler(401)
-    def unauthorized(e):
+    def unauthorized(_):
         return render_template("/errors/error.html", status_code=401), 401
 
     @app.errorhandler(403)
-    def forbidden(e):
+    def forbidden(_):
         return render_template("/errors/error..html", status_code=403), 403
 
     @app.errorhandler(404)
-    def page_not_found(e):
+    def page_not_found(_):
         return render_template("/errors/error.html", status_code=404), 404
 
     @app.errorhandler(500)
-    def internal_server_error(e):
+    def internal_server_error(_):
         return render_template("/errors/error.html", status_code=500), 500
 
 
