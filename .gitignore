@@ -171,3 +171,6 @@ venv.bak/
 \.pyre/client\.lock
 
 \.pyre/pyre\.stderr
+
+start.sh
+

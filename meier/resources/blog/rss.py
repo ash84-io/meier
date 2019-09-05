@@ -10,10 +10,11 @@ from meier.models.settings import Settings
 from meier.models.tag import Tag
 from meier.models.user import User
 
-rss = Blueprint("rss", __name__, url_prefix="/rss")
+rss = Blueprint("rss", __name__, url_prefix="")
 
 
-@rss.route("", methods=["GET"])
+@rss.route("/rss/", methods=["GET"])
+@rss.route("/rss", methods=["GET"])
 def get_rss():
     settings = Settings.query.first()
     author = User.query.first()
