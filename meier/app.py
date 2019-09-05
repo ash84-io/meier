@@ -97,7 +97,7 @@ def configure_error_handlers(app) -> None:
         abort(400)
 
     @app.errorhandler(NotFound)
-    def handle_bad_request(e):
+    def handler_not_found(e):
         abort(404)
 
     @app.errorhandler(401)
