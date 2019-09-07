@@ -48,7 +48,7 @@ def _get_post_list_by_status(
     status: PostStatus = None, page=1, per_page=10, q=None
 ):
     qs = Post.query
-    if status:
+    if status is None:
         qs = qs.filter(Post.status == status.value)
     if q:
         q_str = "%{}%".format(q)
