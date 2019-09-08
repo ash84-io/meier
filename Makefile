@@ -16,6 +16,12 @@ format:
 test: format
 	python -m pytest
 
+dev-build:
+	docker build --tag meier:dev .
+
+dev-run:
+	docker run -p 2368:2368 -v ~/workspace/themes:/app/meier/templates/themes --env-file .env meier:dev
+
 
 requirements:
 	pipenv lock -r > requirements.txt
