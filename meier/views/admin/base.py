@@ -16,11 +16,11 @@ class UnauthorizedException(Exception):
 
 
 def api_exception_handler(func):
-    """
+    '''
     각종 예외에 대한 처리
     :param func: VIEW/API 메소드
     :return: HTTP RESPONSE
-    """
+    '''
 
     @wraps(func)
     def decorate(*args, **kwargs):
@@ -39,12 +39,12 @@ def login_required_view(func):
     @wraps(func)
     def decorate(*args, **kwargs):
         try:
-            token = request.cookies.get("token", None)
+            token = request.cookies.get('token', None)
             g.current_user = _get_current_usr_from_token(token)
             result = func(*args, **kwargs)
         except UnauthorizedException as e:
             logger.exception(e)
-            return redirect("/admin/user/login", code=302)
+            return redirect('/admin/user/login', code=302)
         return result
 
     return decorate
@@ -54,7 +54,7 @@ def login_required_api(func):
     @wraps(func)
     def decorate(*args, **kwargs):
         try:
-            token = request.cookies.get("token", None)
+            token = request.cookies.get('token', None)
             g.current_user = _get_current_usr_from_token(token)
             result = func(*args, **kwargs)
         except UnauthorizedException as e:

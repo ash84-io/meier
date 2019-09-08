@@ -10,15 +10,15 @@ from meier.extensions import db
 from meier.models.post import Post
 from meier.models.post_tag import PostTag
 from meier.models.tag import Tag
-from meier.resources.admin import base
-from meier.resources.admin.base import login_required_api
+from meier.views.admin import base
+from meier.views.admin.base import login_required_api
 
 admin_writer_api = Blueprint(
-    "admin_writer_api", __name__, url_prefix="/admin/writer/api"
+    'admin_writer_api', __name__, url_prefix='/admin/writer/api'
 )
 
 
-@admin_writer_api.route("/post/<int:post_id>", methods=["DELETE"])
+@admin_writer_api.route('/post/<int:post_id>', methods=['DELETE'])
 @login_required_api
 @base.api_exception_handler
 def delete_post(post_id):
@@ -27,7 +27,7 @@ def delete_post(post_id):
     return ResponseData(code=HttpStatusCode.SUCCESS).json
 
 
-@admin_writer_api.route("/post/<int:post_id>", methods=["PUT"])
+@admin_writer_api.route('/post/<int:post_id>', methods=['PUT'])
 @login_required_api
 @base.api_exception_handler
 def update_post(post_id):
@@ -39,7 +39,7 @@ def update_post(post_id):
         post.mo_date = datetime.now()
 
         tags_id = []
-        tags = req_data.tags.strip().split(",")
+        tags = req_data.tags.strip().split(',')
 
         for tag in tags:
             tag = str(tag).strip()
@@ -65,7 +65,7 @@ def update_post(post_id):
     return ResponseData(code=HttpStatusCode.SUCCESS).json
 
 
-@admin_writer_api.route("/post", methods=["POST"])
+@admin_writer_api.route('/post', methods=['POST'])
 @login_required_api
 @base.api_exception_handler
 def save_post():
@@ -93,7 +93,7 @@ def save_post():
     db.session.commit()
 
     tags_id = []
-    tags = req_data.tags.strip().split(",")
+    tags = req_data.tags.strip().split(',')
     for tag in tags:
         tag = str(tag).strip()
         tag_instance = Tag.query.filter(Tag.tag == tag).scalar()
@@ -117,4 +117,4 @@ def save_post():
             post_tag = PostTag(post_id=post.id, tag_id=tag_id)
             db.session.add(post_tag)
             db.session.commit()
-    return ResponseData(code=HttpStatusCode.SUCCESS, data={"id": post.id}).json
+    return ResponseData(code=HttpStatusCode.SUCCESS, data={'id': post.id}).json

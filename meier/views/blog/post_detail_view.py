@@ -6,9 +6,9 @@ from meier.models.post_tag import PostTag
 from meier.models.settings import Settings
 from meier.models.tag import Tag
 from meier.models.user import User
-from meier.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier.views.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
-post_detail_view = Blueprint("post_detail_view", __name__, url_prefix="")
+post_detail_view = Blueprint('post_detail_view', __name__, url_prefix='')
 
 
 def get_page_view(page_name):
@@ -33,14 +33,14 @@ def get_page_view(page_name):
 
     ogp_meta_tag = OpenGraphMetaTagGenerator(
         site_name=settings.blog_title,
-        title=post.for_detail.get("title", None),
-        description=post.for_detail.get("content", None)[:300],
-        url=post.for_detail.get("link", None),
-        image=post.for_detail.get("featured_image", None),
+        title=post.for_detail.get('title', None),
+        description=post.for_detail.get('content', None)[:300],
+        url=post.for_detail.get('link', None),
+        image=post.for_detail.get('featured_image', None),
     )
 
     return render_template(
-        f"/themes/{settings.theme}/post_detail.html",
+        f'/themes/{settings.theme}/post_detail.html',
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,
@@ -52,7 +52,7 @@ def get_page_view(page_name):
 
 
 @post_detail_view.route(
-    "/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>/", methods=["GET"]
+    '/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>/', methods=['GET']
 )
 @cache.cached(timeout=300)
 def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
@@ -93,14 +93,14 @@ def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
 
         ogp_meta_tag = OpenGraphMetaTagGenerator(
             site_name=settings.blog_title,
-            title=post.for_detail.get("title", None),
-            description=post.for_detail.get("content", None)[:300],
-            url=post.for_detail.get("link", None),
-            image=post.for_detail.get("featured_image", None),
+            title=post.for_detail.get('title', None),
+            description=post.for_detail.get('content', None)[:300],
+            url=post.for_detail.get('link', None),
+            image=post.for_detail.get('featured_image', None),
         )
 
         return render_template(
-            f"/themes/{settings.theme}/post_detail.html",
+            f'/themes/{settings.theme}/post_detail.html',
             author=author,
             ogp_meta_tag=ogp_meta_tag(),
             settings=settings,

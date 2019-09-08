@@ -6,16 +6,16 @@ from meier.models.post_tag import PostTag
 from meier.models.settings import Settings
 from meier.models.tag import Tag
 from meier.models.user import User
-from meier.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier.views.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
-tag_list_view = Blueprint("tag_list_view", __name__, url_prefix="/tag")
+tag_list_view = Blueprint('tag_list_view', __name__, url_prefix='/tag')
 
 
-@tag_list_view.route("/<string:tag>", methods=["GET"])
-@tag_list_view.route("/<string:tag>/", methods=["GET"])
+@tag_list_view.route('/<string:tag>', methods=['GET'])
+@tag_list_view.route('/<string:tag>/', methods=['GET'])
 def get_tag_list_view(tag: str):
     author = User.query.first()
-    page = int(request.args.get("page", 1))
+    page = int(request.args.get('page', 1))
     settings = Settings.query.first()
 
     tag = Tag.query.filter(Tag.tag == tag).scalar()
@@ -34,8 +34,8 @@ def get_tag_list_view(tag: str):
         post_list = [post.for_detail for post in post_paging_result.items]
         has_next = post_paging_result.has_next
         has_prev = post_paging_result.has_prev
-        next = "?page={}".format(page + 1)
-        prev = "?page={}".format(page - 1)
+        next = '?page={}'.format(page + 1)
+        prev = '?page={}'.format(page - 1)
         total_pages = post_paging_result.pages
     else:
         post_list = []
@@ -52,7 +52,7 @@ def get_tag_list_view(tag: str):
         image=None,
     )
     return render_template(
-        "/themes/" + settings.theme + "/post_list.html",
+        f'/themes/{settings.theme}/post_list.html',
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,

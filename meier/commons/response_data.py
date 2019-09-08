@@ -15,7 +15,7 @@ class HttpStatusCode(Enum):
 
 class ResponseBase(object):
     def to_dict(self):
-        raise NotImplementedError("Need Implementation")
+        raise NotImplementedError('Need Implementation')
 
 
 class ResponseData(ResponseBase):
@@ -29,8 +29,8 @@ class ResponseData(ResponseBase):
 
     def to_dict(self):
         result = dict()
-        result["meta"] = self.meta.__dict__
-        result["data"] = self.data if self.data is not None else []
+        result['meta'] = self.meta.__dict__
+        result['data'] = self.data if self.data is not None else []
         result.update(self.dummy_data)
         return result
 
