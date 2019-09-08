@@ -1,7 +1,7 @@
 # meier
 > self-hosted blog platform
 
-![Meier Version: 1.0.1](https://badgen.net/badge/version/1.0.1/orange)
+![Meier Version: 1.0.4](https://badgen.net/badge/version/1.0.4/orange)
 [![Build Status](https://travis-ci.org/meier-project/meier.svg?branch=develop)](https://travis-ci.org/meier-project/meier)
 [![Python Version: 3.7](https://badgen.net/badge/python/3.7/blue)](https://docs.python.org/3.7/)
 [![Code Style: Black](https://badgen.net/badge/code%20style/black/black)](https://github.com/ambv/black)
