@@ -9,8 +9,8 @@ from meier.commons.response_data import HttpStatusCode, ResponseData
 from meier.extensions import db
 from meier.models.settings import Settings
 from meier.models.user import User
-from meier.resources.admin import base
-from meier.resources.admin.base import login_required_api
+from meier.views.admin import base
+from meier.views.admin.base import login_required_api
 
 admin_user_api = Blueprint(
     "admin_user_api", __name__, url_prefix="/admin/user/api"
@@ -19,7 +19,7 @@ admin_user_api = Blueprint(
 
 @admin_user_api.route("/user_info", methods=["GET"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def user_info_api():
     user = User.query.filter(User.email == g.current_user.email).scalar()
     if not user:
@@ -31,7 +31,7 @@ def user_info_api():
 
 @admin_user_api.route("/user_info", methods=["PUT"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def update_user_info_api():
     User.query.filter(User.email == g.current_user.email).update(
         request.get_json()
@@ -41,7 +41,7 @@ def update_user_info_api():
 
 
 @admin_user_api.route("/login", methods=["POST"])
-@base.api_exception_handler
+@base.exc_handler
 def login_api():
     req_data = AttrDict(request.get_json())
     settings = Settings.query.first()

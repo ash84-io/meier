@@ -4,8 +4,8 @@ from flask import Blueprint, request
 from meier.commons.response_data import HttpStatusCode, ResponseData
 from meier.extensions import cache, db
 from meier.models.settings import Settings
-from meier.resources.admin import base
-from meier.resources.admin.base import login_required_api
+from meier.views.admin import base
+from meier.views.admin.base import login_required_api
 
 admin_settings_api = Blueprint(
     "admin_settings_api", __name__, url_prefix="/admin/settings/api"
@@ -15,7 +15,7 @@ admin_settings_api = Blueprint(
 @admin_settings_api.route("/blog_info", methods=["GET"])
 @cache.cached(timeout=3600)
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def get_settings_blog_info():
     settings = Settings.query.first()
     return ResponseData(
@@ -25,7 +25,7 @@ def get_settings_blog_info():
 
 @admin_settings_api.route("/blog_info", methods=["POST"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def set_settings_blog_info():
     req_data = AttrDict(request.get_json())
     settings = Settings.query.first()

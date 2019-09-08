@@ -6,7 +6,7 @@ from meier.models.post_tag import PostTag
 from meier.models.settings import Settings
 from meier.models.tag import Tag
 from meier.models.user import User
-from meier.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier.views.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
 tag_list_view = Blueprint("tag_list_view", __name__, url_prefix="/tag")
 
@@ -52,7 +52,7 @@ def get_tag_list_view(tag: str):
         image=None,
     )
     return render_template(
-        "/themes/" + settings.theme + "/post_list.html",
+        f"/themes/{settings.theme}/post_list.html",
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,

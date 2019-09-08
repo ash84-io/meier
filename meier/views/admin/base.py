@@ -1,4 +1,3 @@
-import traceback
 from functools import wraps
 
 from attrdict import AttrDict
@@ -15,19 +14,13 @@ class UnauthorizedException(Exception):
     pass
 
 
-def api_exception_handler(func):
-    """
-    각종 예외에 대한 처리
-    :param func: VIEW/API 메소드
-    :return: HTTP RESPONSE
-    """
-
+def exc_handler(func):
     @wraps(func)
     def decorate(*args, **kwargs):
         try:
             result = func(*args, **kwargs)
-        except BaseException:
-            logger.exception(traceback.format_exc())
+        except Exception as e:
+            logger.exception(e)
             db.session.rollback()
             return ResponseData(code=HttpStatusCode.INTERNAL_SERVER_ERROR).json
         return result
@@ -66,13 +59,11 @@ def login_required_api(func):
 
 
 def _get_current_usr_from_token(token: str):
-    if token:
-        parsed_token = AttrDict(parse_token(token))
-        current_user = User.query.filter(
-            User.email == parsed_token.email
-        ).scalar()
-        if not current_user:
-            raise UnauthorizedException()
-        return current_user
-    else:
-        raise UnauthorizedException()
+    if not token:
+        raise UnauthorizedException
+
+    parsed_token = AttrDict(parse_token(token))
+    current_user = User.query.filter(User.email == parsed_token.email).scalar()
+    if not current_user:
+        raise UnauthorizedException
+    return current_user

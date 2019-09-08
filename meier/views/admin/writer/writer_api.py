@@ -10,8 +10,8 @@ from meier.extensions import db
 from meier.models.post import Post
 from meier.models.post_tag import PostTag
 from meier.models.tag import Tag
-from meier.resources.admin import base
-from meier.resources.admin.base import login_required_api
+from meier.views.admin import base
+from meier.views.admin.base import login_required_api
 
 admin_writer_api = Blueprint(
     "admin_writer_api", __name__, url_prefix="/admin/writer/api"
@@ -20,7 +20,7 @@ admin_writer_api = Blueprint(
 
 @admin_writer_api.route("/post/<int:post_id>", methods=["DELETE"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def delete_post(post_id):
     Post.query(Post.id == post_id).delete()
     db.session.commit()
@@ -29,7 +29,7 @@ def delete_post(post_id):
 
 @admin_writer_api.route("/post/<int:post_id>", methods=["PUT"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def update_post(post_id):
     req_data = AttrDict(request.get_json())
     post = Post.query.filter(Post.id == post_id).scalar()
@@ -67,7 +67,7 @@ def update_post(post_id):
 
 @admin_writer_api.route("/post", methods=["POST"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def save_post():
 
     req_data = AttrDict(request.get_json())

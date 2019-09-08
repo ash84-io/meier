@@ -4,7 +4,7 @@ from sqlalchemy import desc
 from meier.models.post import Post, PostStatus, PostVisibility
 from meier.models.settings import Settings
 from meier.models.user import User
-from meier.resources.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
+from meier.views.blog.meta_tag.og_meta_tag import OpenGraphMetaTagGenerator
 
 post_list_view = Blueprint("post_list_view", __name__, url_prefix="/")
 

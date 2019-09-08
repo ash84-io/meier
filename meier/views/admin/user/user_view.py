@@ -5,7 +5,7 @@ from flask import Blueprint, g, make_response, render_template
 from meier.commons.logger import logger
 from meier.extensions import cache
 from meier.models.settings import Settings
-from meier.resources.admin.base import login_required_api
+from meier.views.admin.base import login_required_api
 
 admin_user_view = Blueprint(
     "admin_user_view", __name__, url_prefix="/admin/user"
