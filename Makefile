@@ -23,6 +23,16 @@ dev-run:
 	docker run -p 2368:2368 -v ~/workspace/themes:/app/meier/templates/themes --env-file .env meier:dev
 
 
+build:
+	@read -p "Enter Docker User:" DOCKER_USER; \
+	read -p "Enter Docker Tag:" DOCKER_TAG; \
+	docker build --tag $$DOCKER_USER/meier:$$DOCKER_TAG .
+
+push:
+	@read -p "Enter Docker User:" DOCKER_USER; \
+	read -p "Enter Docker Tag:" DOCKER_TAG; \
+	docker push $$DOCKER_USER/meier:$$DOCKER_TAG
+
 requirements:
 	pipenv lock -r > requirements.txt
 	pipenv lock -dr > requirements-dev.tx
