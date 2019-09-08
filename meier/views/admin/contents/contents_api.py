@@ -1,14 +1,13 @@
 from flask import Blueprint, request
 from sqlalchemy import desc, or_
 
-from meier.commons.logger import logger
 from meier.commons.response_data import HttpStatusCode, ResponseData
 from meier.extensions import db
 from meier.models.post import Post, PostStatus
 from meier.models.post_tag import PostTag
 from meier.models.tag import Tag
-from meier.resources.admin import base
-from meier.resources.admin.base import login_required_api
+from meier.views.admin import base
+from meier.views.admin.base import login_required_api
 
 admin_contents_api = Blueprint(
     "admin_contents_api", __name__, url_prefix="/admin/contents/api"
@@ -17,7 +16,7 @@ admin_contents_api = Blueprint(
 
 @admin_contents_api.route("/posts", methods=["GET"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def get_contents_posts_api():
     q = request.args.get("q", None)
     page = int(request.args.get("page", 1))
@@ -48,10 +47,10 @@ def _get_post_list_by_status(
     status: PostStatus = None, page=1, per_page=10, q=None
 ):
     qs = Post.query
-    if status is None:
+    if status is not None:
         qs = qs.filter(Post.status == status.value)
     if q:
-        q_str = "%{}%".format(q)
+        q_str = f"%{q}%"
         qs = qs.filter(or_(Post.title.like(q_str), Post.post_name.like(q_str)))
     return qs.order_by(desc(Post.in_date)).paginate(
         page, per_page, error_out=False
@@ -60,7 +59,7 @@ def _get_post_list_by_status(
 
 @admin_contents_api.route("/draft", methods=["GET"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def get_contents_draft_api():
     q = request.args.get("q", None)
     page = int(request.args.get("page", 1))
@@ -88,7 +87,7 @@ def get_contents_draft_api():
 
 @admin_contents_api.route("/posts/<int:post_id>", methods=["DELETE"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def delete_contents_posts_api(post_id):
 
     Post.query.filter(Post.id == post_id).delete()
@@ -99,7 +98,7 @@ def delete_contents_posts_api(post_id):
 
 @admin_contents_api.route("/posts/<int:post_id>", methods=["GET"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def get_contents_post_detail_api(post_id):
     post = Post.query.filter(Post.id == int(post_id)).scalar()
     tag_id_list = [

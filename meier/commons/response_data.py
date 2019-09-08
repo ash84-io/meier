@@ -15,7 +15,7 @@ class HttpStatusCode(Enum):
 
 class ResponseBase(object):
     def to_dict(self):
-        raise NotImplementedError("Need Implementation")
+        raise NotImplementedError
 
 
 class ResponseData(ResponseBase):

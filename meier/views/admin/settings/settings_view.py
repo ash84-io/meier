@@ -2,7 +2,7 @@ from flask import Blueprint, g, render_template
 
 from meier.extensions import cache
 from meier.models.settings import Settings
-from meier.resources.admin.base import login_required_view
+from meier.views.admin.base import login_required_view
 
 admin_settings_view = Blueprint(
     "admin_settings_view", __name__, url_prefix="/admin/settings"

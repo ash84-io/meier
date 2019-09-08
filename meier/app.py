@@ -7,21 +7,21 @@ from werkzeug.exceptions import BadRequest, NotFound
 from meier import __version__
 from meier.config import Config
 from meier.extensions import cache, db
-from meier.resources.admin.contents.contents_api import admin_contents_api
-from meier.resources.admin.contents.contents_view import admin_contents_view
-from meier.resources.admin.dashboard.dashborad_view import admin_dashboard_view
-from meier.resources.admin.index.index_view import admin_index_view
-from meier.resources.admin.settings.settings_api import admin_settings_api
-from meier.resources.admin.settings.settings_view import admin_settings_view
-from meier.resources.admin.user.user_api import admin_user_api
-from meier.resources.admin.user.user_view import admin_user_view
-from meier.resources.admin.writer.writer_api import admin_writer_api
-from meier.resources.admin.writer.writer_view import admin_writer_view
-from meier.resources.blog.assets import assets
-from meier.resources.blog.post_detail_view import post_detail_view
-from meier.resources.blog.post_list_view import post_list_view
-from meier.resources.blog.rss import rss
-from meier.resources.blog.tag_list_view import tag_list_view
+from meier.views.admin.contents.contents_api import admin_contents_api
+from meier.views.admin.contents.contents_view import admin_contents_view
+from meier.views.admin.dashboard.dashborad_view import admin_dashboard_view
+from meier.views.admin.index.index_view import admin_index_view
+from meier.views.admin.settings.settings_api import admin_settings_api
+from meier.views.admin.settings.settings_view import admin_settings_view
+from meier.views.admin.user.user_api import admin_user_api
+from meier.views.admin.user.user_view import admin_user_view
+from meier.views.admin.writer.writer_api import admin_writer_api
+from meier.views.admin.writer.writer_view import admin_writer_view
+from meier.views.blog.assets import assets
+from meier.views.blog.post_detail_view import post_detail_view
+from meier.views.blog.post_list_view import post_list_view
+from meier.views.blog.rss import rss
+from meier.views.blog.tag_list_view import tag_list_view
 
 __all__ = ["create_app"]
 
@@ -132,7 +132,7 @@ def configure_filter(app) -> None:
 
 
 def configure_dynamic_page(app) -> None:
-    from meier.resources.blog.post_detail_view import get_page_view
+    from meier.views.blog.post_detail_view import get_page_view
 
     with app.app_context():
         from meier.models.post import Post
