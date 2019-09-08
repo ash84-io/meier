@@ -13,25 +13,25 @@ from meier.views.admin import base
 from meier.views.admin.base import login_required_api
 
 admin_user_api = Blueprint(
-    'admin_user_api', __name__, url_prefix='/admin/user/api'
+    "admin_user_api", __name__, url_prefix="/admin/user/api"
 )
 
 
-@admin_user_api.route('/user_info', methods=['GET'])
+@admin_user_api.route("/user_info", methods=["GET"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def user_info_api():
     user = User.query.filter(User.email == g.current_user.email).scalar()
     if not user:
-        raise Exception('user_info is none.')
+        raise Exception("user_info is none.")
     return ResponseData(
         code=HttpStatusCode.SUCCESS, data=user.for_user_info
     ).json
 
 
-@admin_user_api.route('/user_info', methods=['PUT'])
+@admin_user_api.route("/user_info", methods=["PUT"])
 @login_required_api
-@base.api_exception_handler
+@base.exc_handler
 def update_user_info_api():
     User.query.filter(User.email == g.current_user.email).update(
         request.get_json()
@@ -40,8 +40,8 @@ def update_user_info_api():
     return ResponseData(code=HttpStatusCode.SUCCESS).json
 
 
-@admin_user_api.route('/login', methods=['POST'])
-@base.api_exception_handler
+@admin_user_api.route("/login", methods=["POST"])
+@base.exc_handler
 def login_api():
     req_data = AttrDict(request.get_json())
     settings = Settings.query.first()
@@ -61,18 +61,18 @@ def login_api():
                 )
             )
 
-            redirect_url = '/admin/contents'
+            redirect_url = "/admin/contents"
             if request.referrer:
                 url_parsed = urlparse(url=request.referrer)
                 if url_parsed.query:
                     parsed_qs = parse_qs(url_parsed.query)
-                    redirect_url = parsed_qs.get('next', ['/admin/contents'])[
+                    redirect_url = parsed_qs.get("next", ["/admin/contents"])[
                         0
                     ]
             res = ResponseData(
                 code=HttpStatusCode.SUCCESS,
-                data={'next': redirect_url},
-                cookies={'token': token.decode('utf-8')},
+                data={"next": redirect_url},
+                cookies={"token": token.decode("utf-8")},
             ).json
             return res
         else:

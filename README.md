@@ -11,9 +11,9 @@
 ```
 DB_HOST=localhost:3306
 DB_NAME=meier
-DB_USER=
-DB_PASSWORD=
-SENTRY_DSN=
+DB_USER=root
+DB_PASSWORD=root
+SENTRY_DSN=http://setnry-dsn
 ```
 
 ### Run
