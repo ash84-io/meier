@@ -20,7 +20,7 @@ jobs:
         docker build --tag ash84/meier:$tag .
 
   publish:
-    needs: build
+    needs: [build]
     - name: Docker Push
       uses: opspresso/action-docker@master
       run: |
