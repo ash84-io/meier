@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  build:
+  build-publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -18,11 +18,6 @@ jobs:
       run: |
         tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
         docker build --tag ash84/meier:$tag .
-
-  publish:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
     - name: Docker Push
       uses: opspresso/action-docker@master
       env:
@@ -30,8 +25,3 @@ jobs:
         PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         IMAGE_NAME: "ash84/meier"
         TAG_NAME: $tag
-
-
-
-
-
