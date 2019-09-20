@@ -14,13 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
     - name: Docker Build
       run: |
         tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
         docker build --tag ash84/meier:$tag .
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Publish
+      run: |
+        tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
+        docker login -u ${{secrets.DOCKER_HUB_USER_NAME}} -p ${{secrets.DOCKER_HUB_USER_PASSWORD}}
+        docker push ash84/meier:$tag
+
+
+
 
 
