@@ -21,6 +21,7 @@ jobs:
 
   publish:
     needs: [build]
+    runs-on: ubuntu-latest
     - name: Docker Push
       uses: opspresso/action-docker@master
       run: |
