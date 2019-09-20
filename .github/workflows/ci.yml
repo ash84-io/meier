@@ -5,7 +5,10 @@ on: [push]
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+
+    container:
+      image: python:3.7.3-slim-stretch
+      options: --cpus 1
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python 3.7
