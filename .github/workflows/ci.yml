@@ -25,6 +25,7 @@ jobs:
         make check
 
   coverage:
+    steps:
     - name: MEASURE COVERAGE
       run: |
         make coverage
