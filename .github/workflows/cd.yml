@@ -1,0 +1,20 @@
+name: CD
+
+on: [push]
+  branches:
+    - master
+  tags:
+    - 1.*
+    - 2.*
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Docker Build
+      run: |
+        docker build ash84/meier:{tag} .
+
+
