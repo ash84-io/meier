@@ -21,13 +21,15 @@ jobs:
 
   publish:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Docker Publish
+    - name: Docker Push
+      uses: opspresso/action-docker@master
       run: |
         tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
-        echo '${{secrets.DOCKER_HUB_USER_PASSWORD}}' | docker login -u ${{secrets.DOCKER_HUB_USER_NAME}} --password-stdin
-        docker push ash84/meier:$tag
+      env:
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        IMAGE_NAME: "ash84/meier"
+        TAG_NAME: $tag
 
 
 
