@@ -1,21 +1,19 @@
-name: Python application
+name: CI
 
 on: [push]
 
 jobs:
+
   build:
-
     runs-on: ubuntu-latest
-
+    container:
+      image: python:3.7.3-slim-stretch
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        apt-get update && apt-get install -y gcc make  build-essential
+        pip install -U pip
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
     - name: TEST
@@ -25,6 +23,18 @@ jobs:
       run: |
         make check
 
+  coverage:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.7.3-slim-stretch
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: |
+        apt-get update && apt-get install -y gcc make  build-essential
+        pip install -U pip
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
     - name: MEASURE COVERAGE
       run: |
         make coverage

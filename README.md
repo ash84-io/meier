@@ -6,6 +6,7 @@
 [![Python Version: 3.7](https://badgen.net/badge/python/3.7/blue)](https://docs.python.org/3.7/)
 [![Code Style: Black](https://badgen.net/badge/code%20style/black/black)](https://github.com/ambv/black)
 [![codecov](https://codecov.io/gh/meier-project/meier/branch/develop/graph/badge.svg)](https://codecov.io/gh/meier-project/meier)
+[![GITHUB-ACTION-CI](https://github.com/meier-project/meier/workflows/CI/badge.svg)
 
 ### ENV(.env)
 ```
