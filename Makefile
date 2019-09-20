@@ -9,6 +9,8 @@ check:
 	black -l 79 --check meier wsgi.py
 	pylint meier wsgi.py
 
+coverage:
+    python -m pytest --cov meier --cov-report term --cov-report term-missing
 format:
 	isort -rc -y meier wsgi.py
 	black -l 79 meier wsgi.py
