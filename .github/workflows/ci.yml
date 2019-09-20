@@ -23,7 +23,8 @@ jobs:
     - name: CHECK
       run: |
         make check
-   coverage:
+
+  coverage:
     - name: MEASURE COVERAGE
       run: |
         make coverage
