@@ -20,6 +20,7 @@ jobs:
       run: echo "$GITHUB_CONTEXT"
     - name: Docker Build
       run: |
-        docker build --tag ash84/meier:${{ github.ref }} .
+        tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
+        docker build --tag ash84/meier:$tag .
 
 
