@@ -26,7 +26,7 @@ jobs:
     - name: Docker Publish
       run: |
         tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
-        docker login -u ${{secrets.DOCKER_HUB_USER_NAME}} -p ${{secrets.DOCKER_HUB_USER_PASSWORD}}
+        echo '${{secrets.DOCKER_HUB_USER_PASSWORD}}' | docker login -u ${{secrets.DOCKER_HUB_USER_NAME}} --password-stdin
         docker push ash84/meier:$tag
 
 
