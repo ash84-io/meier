@@ -20,11 +20,10 @@ jobs:
         pip install -r requirements-dev.txt
     - name: TEST
       run: |
-        python -m pytest
+        make test
     - name: CHECK
       run: |
-        isort --recursive --check-only meier wsgi.py
-        black -l 79 --check meier wsgi.py 
+        make check
     - name: COVERAGE
       run: |
         codecov
