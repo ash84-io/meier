@@ -25,8 +25,6 @@ jobs:
     steps:
     - name: Docker Push
       uses: opspresso/action-docker@master
-      run: |
-        tag=$(cut -d"/" -f3<<<"${{ github.ref }}")
       env:
         USERNAME: ${{ secrets.DOCKER_USERNAME }}
         PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
