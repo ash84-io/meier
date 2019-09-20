@@ -10,7 +10,7 @@ check:
 	pylint meier wsgi.py
 
 coverage:
-	python -m pytest --cov meier --cov-report term --cov-report term-missing
+	python -m pytest --cov meier --cov-report term --cov-report=xml
 
 format:
 	isort -rc -y meier wsgi.py
