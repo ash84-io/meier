@@ -24,8 +24,7 @@ jobs:
     - name: CHECK
       run: |
         isort --recursive --check-only meier wsgi.py
-        black -l 79 --check meier wsgi.py
-        pylint meier wsgi.py
+        black -l 79 --check meier wsgi.py 
    - name: COVERAGE
       run: |
         codecov
