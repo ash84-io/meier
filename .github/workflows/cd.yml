@@ -16,6 +16,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Docker Build
       run: |
-        docker build ash84/meier:{tag} .
+        docker build --tags ash84/meier:{tag} .
 
 
