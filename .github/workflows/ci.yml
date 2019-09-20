@@ -20,11 +20,18 @@ jobs:
         pip install -r requirements-dev.txt
     - name: TEST
       run: |
-        python -m pytest
+        make test
     - name: CHECK
       run: |
-        isort --recursive --check-only meier wsgi.py
-        black -l 79 --check meier wsgi.py 
-    - name: COVERAGE
+        make check
+
+    - name: MEASURE COVERAGE
       run: |
-        codecov
+        make coverage
+    - name: UPLOAD COVERAGE
+      uses: codecov/codecov-action@v1.0.2
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
