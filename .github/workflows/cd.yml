@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Publish to Registry
-        uses: AhnSeongHyun/Publish-Docker-Github-Action@master
+        uses: AhnSeongHyun/action-tag-docker-build-push@master
         with:
-          name: ash84/meier
+          repo_name: ash84/meier
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 #
