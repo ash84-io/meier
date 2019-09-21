@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: TEST
-          run: |
-            BRANCH=$(echo ${GITHUB_REF} | sed -e "s/refs\/heads\///g" | sed -e "s/\//-/g")
-            echo ${GITHUB_REF}
-            echo $BRANCH
+        run: |
+          BRANCH=$(echo ${GITHUB_REF} | sed -e "s/refs\/heads\///g" | sed -e "s/\//-/g")
+          echo ${GITHUB_REF}
+          echo $BRANCH
 
 #      - name: Publish to Registry
 #        uses: elgohr/Publish-Docker-Github-Action@master
