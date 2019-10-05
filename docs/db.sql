@@ -1,3 +1,5 @@
+CREATE DATABASE `meier` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
 CREATE TABLE `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `in_date` datetime DEFAULT NULL,
