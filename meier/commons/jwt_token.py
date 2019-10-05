@@ -1,4 +1,7 @@
 import jwt
+from jwt.exceptions import DecodeError
+
+from meier.exc import TokenCreateError, TokenParseError
 
 
 class TokenInfo:
@@ -18,12 +21,12 @@ class TokenInfo:
 
 def create_token(token_info: TokenInfo) -> str:
     try:
-        if isinstance(token_info, TokenInfo):
-            return jwt.encode(
-                token_info.to_dict(), "meire_ppp", algorithm="HS256"
-            )
-    except Exception as e:
-        raise e
+        if not isinstance(token_info, TokenInfo):
+            raise TokenCreateError
+        return jwt.encode(token_info.to_dict(), "meire_ppp", algorithm="HS256")
+
+    except (ValueError, TypeError):
+        raise TokenCreateError
 
 
 def parse_token(token: str):
@@ -35,5 +38,5 @@ def parse_token(token: str):
             subject="MEIER",
             audience="MEIER",
         )
-    except Exception as e:
-        raise e
+    except DecodeError:
+        raise TokenParseError
