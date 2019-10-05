@@ -1,5 +1,7 @@
 CREATE DATABASE `meier` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
+use `meier`;
+
 CREATE TABLE `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `in_date` datetime DEFAULT NULL,
@@ -58,12 +60,6 @@ CREATE TABLE `tag` (
   KEY `ix_tag_mo_date` (`mo_date`),
   KEY `ix_tag_tag` (`tag`),
   KEY `ix_tag_in_date` (`in_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-CREATE TABLE `test` (
-  `idtest` int(11) NOT NULL,
-  `testcol` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idtest`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `user` (
