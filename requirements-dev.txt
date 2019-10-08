@@ -24,9 +24,9 @@ pluggy==0.13.0
 py==1.8.0
 pylint==2.4.2
 pyparsing==2.4.2
-pytest-cov==2.8.0
+pytest-cov==2.8.1
 pytest-sugar==0.9.2
-pytest==5.2.0
+pytest==5.2.1
 requests==2.22.0
 responses==0.10.6
 six==1.12.0
