@@ -1,3 +1,5 @@
+
+
 CREATE DATABASE `meier` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
 use `meier`;
@@ -80,3 +82,6 @@ CREATE TABLE `user` (
   KEY `ix_user_in_date` (`in_date`),
   KEY `ix_user_password` (`password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE USER 'user'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON meier.* TO 'user'@'%';
