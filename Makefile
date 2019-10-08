@@ -20,10 +20,10 @@ test: format
 	python -m pytest
 
 dev-build:
-	docker build --tag meier:dev .
+	docker-compose -f docker-compose-dev.yml build
 
 dev-run:
-	docker run -p 2368:2368 -v ~/workspace/themes:/app/meier/templates/themes --env-file .env meier:dev
+	docker-compose -f docker-compose-dev.yml up
 
 build:
 	@read -p "Enter Docker User:" DOCKER_USER; \

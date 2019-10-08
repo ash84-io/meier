@@ -18,7 +18,7 @@ jinja2==2.10.3
 lxml==4.4.1
 markupsafe==1.1.1
 pyjwt==1.6.4
-pymysql==0.7.11
+pymysql==0.9.3
 python-dateutil==2.8.0
 raven==6.7.0
 sentry-sdk==0.9.1
