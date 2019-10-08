@@ -15,7 +15,6 @@ WORKDIR /app
 COPY meier meier
 COPY config.ini config.ini
 COPY wsgi.py wsgi.py
-ENTRYPOINT ["gunicorn"]
-CMD ["wsgi:app", "-c" , "config.ini"]
-
+COPY .dev/wait-for-it.sh wait-for-it.sh
+RUN chmod 755 wait-for-it.sh
 

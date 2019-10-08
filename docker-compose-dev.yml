@@ -1,0 +1,43 @@
+version: "3.5"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - .dev/mysql_data:/var/lib/mysql
+      - .dev/sql:/docker-entrypoint-initdb.d
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+  app:
+    container_name: meier
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    environment:
+      - DEBUG=true
+      - DB_HOST=db:3306
+      - DB_NAME=meier
+      - DB_USER=user
+      - DB_PASSWORD=password
+    ports:
+      - 2368:2368
+    volumes:
+      - .dev/themes:/app/meier/templates/themes
+    links:
+      - db
+    depends_on:
+      - db
+    entrypoint: ./wait-for-it.sh db:3306 -t 60 -- gunicorn wsgi:app -c config.ini
+
+
+
