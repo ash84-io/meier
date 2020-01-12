@@ -79,7 +79,7 @@ def configure_extensions(app, c: Config) -> None:
         )
 
     # flask-sqlalchemy
-    connection_string = f"{c.db_user}:{c.db_password}@{c.db_host}/{c.db_name}?charset=utf8"
+    connection_string = f"{c.db_user}:{c.db_password}@{c.db_host}/{c.db_name}?charset=utf8mb4"
     app.config[
         "SQLALCHEMY_DATABASE_URI"
     ] = f"mysql+pymysql://{connection_string}"
