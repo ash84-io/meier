@@ -43,6 +43,7 @@ def get_rss():
         tag_list = [
             tag.tag for tag in Tag.query.filter(Tag.id.in_(tag_id_list)).all()
         ]
+        post_path = post.for_detail.get['link']
         fe = fg.add_entry()
         fe.author({"name": author.user_name, "email": author.email})
         categories = [
@@ -52,7 +53,7 @@ def get_rss():
         fe.title(post.title)
         fe.description(description="<![CDATA[ {} ]]>".format(post.html[:200]))
         fe.content(content=post.html, type="CDATA")
-        fe.link(href=settings.domain + "/" + post.post_name, rel="alternate")
+        fe.link(href=f"{settings.domain}/{post_path}", rel="alternate")
         fe.pubdate(str(post.in_date.astimezone(timezone.utc)))
         fe.id(post.post_name)
 
