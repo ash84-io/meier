@@ -11,7 +11,6 @@ admin_writer_view = Blueprint(
 
 @admin_writer_view.route("/", methods=["GET"])
 @login_required_view
-@cache.cached(timeout=3600)
 def get_new_writer_view():
     settings = Settings.query.first()
     return render_template(

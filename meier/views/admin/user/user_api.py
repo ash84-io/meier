@@ -4,7 +4,6 @@ from attrdict import AttrDict
 from flask import Blueprint, g, request
 
 from meier.commons.jwt_token import TokenInfo, create_token
-from meier.commons.logger import logger
 from meier.commons.response_data import HttpStatusCode, ResponseData
 from meier.extensions import db
 from meier.models.settings import Settings

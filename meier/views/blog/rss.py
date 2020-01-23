@@ -43,7 +43,7 @@ def get_rss():
         tag_list = [
             tag.tag for tag in Tag.query.filter(Tag.id.in_(tag_id_list)).all()
         ]
-        post_path = post.for_detail['link']
+        post_path = post.for_detail["link"]
         fe = fg.add_entry()
         fe.author({"name": author.user_name, "email": author.email})
         categories = [
