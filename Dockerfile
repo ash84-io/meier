@@ -1,4 +1,5 @@
-FROM python:3.7.3-slim-stretch
+FROM python:3.8.1-slim-buster
+
 RUN pip install -U pip
 
 RUN apt-get update && apt-get install -y build-essential gcc
