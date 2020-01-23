@@ -64,7 +64,7 @@ def configure_blueprints(app) -> None:
 
 def configure_app(app, config: Config) -> None:
     app.config.from_object(config)
-    app.config['MYSQL_DATABASE_CHARSET'] = 'utf8mb4'
+    app.config["MYSQL_DATABASE_CHARSET"] = "utf8mb4"
 
 
 def configure_extensions(app, c: Config) -> None:
@@ -79,11 +79,13 @@ def configure_extensions(app, c: Config) -> None:
         )
 
     # flask-sqlalchemy
-    connection_string = f"{c.db_user}:{c.db_password}@{c.db_host}/{c.db_name}?charset=utf8mb4"
+    connection_string = (
+        f"{c.db_user}:{c.db_password}@{c.db_host}/{c.db_name}?charset=utf8mb4"
+    )
     app.config[
         "SQLALCHEMY_DATABASE_URI"
     ] = f"mysql+pymysql://{connection_string}"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)
     with app.app_context():
         db.create_all()

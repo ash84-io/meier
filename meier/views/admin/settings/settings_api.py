@@ -2,7 +2,7 @@ from attrdict import AttrDict
 from flask import Blueprint, request
 
 from meier.commons.response_data import HttpStatusCode, ResponseData
-from meier.extensions import cache, db
+from meier.extensions import db
 from meier.models.settings import Settings
 from meier.views.admin import base
 from meier.views.admin.base import login_required_api
@@ -13,7 +13,6 @@ admin_settings_api = Blueprint(
 
 
 @admin_settings_api.route("/blog_info", methods=["GET"])
-@cache.cached(timeout=3600)
 @login_required_api
 @base.exc_handler
 def get_settings_blog_info():

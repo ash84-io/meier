@@ -1,6 +1,5 @@
 from flask import Blueprint, g, render_template
 
-from meier.extensions import cache
 from meier.models.settings import Settings
 from meier.views.admin.base import login_required_view
 
@@ -10,7 +9,6 @@ admin_settings_view = Blueprint(
 
 
 @admin_settings_view.route("/", methods=["GET"])
-@cache.cached(timeout=86400)
 @login_required_view
 def get_settings_view():
     settings = Settings.query.first()
