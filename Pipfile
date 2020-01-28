@@ -16,7 +16,7 @@ bs4 = "*"
 
 [packages]
 sqlalchemy = "==1.3.8"
-feedgen = "==0.6.1"
+feedgen = "==0.9.0"
 flask = "==1.1.1"
 raven = "==6.7.0"
 attrdict = "==2.0.0"
