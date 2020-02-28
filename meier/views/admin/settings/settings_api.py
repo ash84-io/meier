@@ -28,17 +28,26 @@ def get_settings_blog_info():
 def set_settings_blog_info():
     req_data = AttrDict(request.get_json())
     settings = Settings.query.first()
+
+    blog_title = req_data.get("blog_title", "")
+    blog_desc = req_data.get("blog_desc", "")
+    post_per_page = req_data.get("post_per_page", 10)
+    theme = req_data.get("theme", "basic")
+    domain = req_data.get("domain", "")
+
     if settings:
-        settings.blog_title = req_data.get("blog_title", "")
-        settings.blog_desc = req_data.get("blog_desc", "")
-        settings.post_per_page = req_data.get("post_per_page", 10)
-        settings.theme = req_data.get("theme", "basic")
+        settings.blog_title = blog_title
+        settings.blog_desc = blog_desc
+        settings.post_per_page = post_per_page
+        settings.theme = theme
+        settings.domain = domain
     else:
         settings = Settings(
-            blog_title=req_data.get("blog_title", ""),
-            blog_desc=req_data.get("blog_desc", ""),
-            post_per_page=req_data.get("post_per_page", 10),
-            theme=req_data.get("theme", "basic"),
+            blog_title=blog_title,
+            blog_desc=blog_desc,
+            domain=domain,
+            theme=theme,
+            post_per_page=post_per_page,
         )
         db.session.add(settings)
     db.session.commit()
