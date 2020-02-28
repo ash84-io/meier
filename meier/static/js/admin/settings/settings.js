@@ -5,7 +5,8 @@ var vm = new Vue({
         blog_title: "",
         blog_desc: "",
         post_per_page: "",
-        theme: ""
+        theme: "",
+        domain: ""
     },
     mounted: function () {
         let self = this;
@@ -18,6 +19,7 @@ var vm = new Vue({
             self.theme = res.data.data.theme;
             self.blog_desc = res.data.data.blog_desc;
             self.post_per_page = res.data.data.post_per_page;
+            self.domain = res.data.data.domain;
             showNotification('primary', 'Load Complete');
         }).catch(function (err) {
             showNotification('warning', 'Load Error');
@@ -29,8 +31,9 @@ var vm = new Vue({
             data = {
                 blog_title: this.blog_title,
                 blog_desc: this.blog_desc,
-                post_per_page: this.blog_title,
-                theme: this.theme
+                post_per_page: this.post_per_page,
+                theme: this.theme,
+                domain: this.domain
             };
 
             if(!data.blog_title){
