@@ -4,6 +4,7 @@
 [![Code Style: Black](https://badgen.net/badge/code%20style/black/black)](https://github.com/ambv/black)
 [![codecov](https://codecov.io/gh/meier-project/meier/branch/develop/graph/badge.svg)](https://codecov.io/gh/meier-project/meier)
 ![GITHUB-ACTION-CI](https://github.com/meier-project/meier/workflows/CI/badge.svg)
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/ash84-io/ash84-io)
 
 ### ENV(.env)
 ```
