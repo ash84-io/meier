@@ -31,7 +31,7 @@ var vm = new Vue({
             data = {
                 blog_title: this.blog_title,
                 blog_desc: this.blog_desc,
-                post_per_page: this.blog_title,
+                post_per_page: this.post_per_page,
                 theme: this.theme,
                 domain: this.domain
             };
