@@ -54,7 +54,7 @@ class ResponseData(ResponseBase):
         if self.cookies:
             res = jsonify(self.to_dict())
             for c in self.cookies:
-                res.set_cookie(c.key, c.value, c.expired_at)
+                res.set_cookie(c.key, c.value, expires=c.expired_at)
             return res
         else:
             return jsonify(self.to_dict()), http_status_code
