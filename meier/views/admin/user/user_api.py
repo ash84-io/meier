@@ -1,15 +1,20 @@
+from datetime import datetime, timedelta
 from urllib.parse import parse_qs, urlparse
 
+import pytz
 from attrdict import AttrDict
 from flask import Blueprint, g, request
 
 from meier.commons.jwt_token import TokenInfo, create_token
-from meier.commons.response_data import HttpStatusCode, ResponseData
+from meier.commons.response_data import Cookie, HttpStatusCode, ResponseData
 from meier.extensions import db
 from meier.models.settings import Settings
 from meier.models.user import User
 from meier.views.admin import base
 from meier.views.admin.base import login_required_api
+
+KST = pytz.timezone("Asia/Seoul")
+
 
 admin_user_api = Blueprint(
     "admin_user_api", __name__, url_prefix="/admin/user/api"
@@ -68,10 +73,11 @@ def login_api():
                     redirect_url = parsed_qs.get("next", ["/admin/contents"])[
                         0
                     ]
+            expired_at = datetime.now(tz=KST) + timedelta(minutes=30)
             res = ResponseData(
                 code=HttpStatusCode.SUCCESS,
                 data={"next": redirect_url},
-                cookies={"token": token.decode("utf-8")},
+                cookies=[Cookie("token", token.decode("utf-8"), expired_at)],
             ).json
             return res
         else:

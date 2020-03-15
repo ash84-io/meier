@@ -1,4 +1,7 @@
+from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
+from typing import List, Optional
 
 from flask import jsonify
 
@@ -18,9 +21,20 @@ class ResponseBase(object):
         raise NotImplementedError
 
 
+@dataclass(frozen=True)
+class Cookie:
+    key: str
+    value: str
+    expired_at: datetime
+
+
 class ResponseData(ResponseBase):
     def __init__(
-        self, code=HttpStatusCode.SUCCESS, data=None, cookies=None, **kwargs
+        self,
+        code=HttpStatusCode.SUCCESS,
+        data=None,
+        cookies: Optional[List[Cookie]] = None,
+        **kwargs
     ):
         self.meta = ResponseMeta(code=code)
         self.data = data
@@ -39,8 +53,8 @@ class ResponseData(ResponseBase):
         http_status_code = int(str(self.meta.code)[:3])
         if self.cookies:
             res = jsonify(self.to_dict())
-            for k, v in self.cookies.items():
-                res.set_cookie(k, v)
+            for c in self.cookies:
+                res.set_cookie(c.key, c.value, c.expired_at)
             return res
         else:
             return jsonify(self.to_dict()), http_status_code
