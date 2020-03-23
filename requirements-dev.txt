@@ -1,4 +1,4 @@
--i https://pypi.org/simple
+-i https://pypi.org/simple/
 appdirs==1.4.3
 astroid==2.3.3
 attrs==19.3.0
@@ -9,9 +9,8 @@ certifi==2019.11.28
 chardet==3.0.4
 click==7.1.1
 codecov==2.0.16
-coverage==5.0.3
+coverage==5.0.4
 idna==2.9
-importlib-metadata==1.5.0 ; python_version < '3.8'
 isort==4.3.21
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
@@ -32,9 +31,8 @@ six==1.14.0
 soupsieve==2.0
 termcolor==1.1.0
 toml==0.10.0
-typed-ast==1.4.1 ; implementation_name == 'cpython' and python_version < '3.8'
+typed-ast==1.4.1
 typing-extensions==3.7.4.1
 urllib3==1.25.8
-wcwidth==0.1.8
+wcwidth==0.1.9
 wrapt==1.11.2
-zipp==3.1.0
