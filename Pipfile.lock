@@ -398,11 +398,11 @@
         },
         "codecov": {
             "hashes": [
-                "sha256:38b32934e759a29313382287f59986f25613708f60760c88d31e956399bbeffe",
-                "sha256:4cf93c30cc1ddb6d7414fce0a45816889499c3febc8bbbc24f1cd1936a804087"
+                "sha256:46ea90211df4991a449cf6d3bb56175292ce4136186976aa5d3ec738261b5209",
+                "sha256:8dbea7529b82877f9ba45174c60a2df40725152f49d7b5451c02c18aac8741a4"
             ],
             "index": "pypi",
-            "version": "==2.0.16"
+            "version": "==2.1.5"
         },
         "coverage": {
             "hashes": [
