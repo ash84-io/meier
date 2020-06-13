@@ -1,7 +1,7 @@
 -i https://pypi.org/simple/
 attrdict==2.0.1
 autorepr==0.3.0
-beautifulsoup4==4.8.2
+beautifulsoup4==4.9.1
 blinker==1.4
 certifi==2020.4.5.2
 click==7.1.2
