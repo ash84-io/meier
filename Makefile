@@ -7,7 +7,6 @@ init:
 check:
 	isort --recursive --check-only meier wsgi.py tests
 	black -l 79 --check meier wsgi.py tests
-	pylint meier wsgi.py tests
 
 coverage:
 	python -m pytest --cov meier --cov-report term-missing --cov-report=xml

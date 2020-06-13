@@ -5,7 +5,6 @@ verify_ssl = true
 
 [dev-packages]
 black = "==19.3b0"
-pylint = "*"
 mypy = "*"
 pytest-sugar = "*"
 pytest = "*"
