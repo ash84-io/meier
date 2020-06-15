@@ -1,4 +1,4 @@
--i https://pypi.org/simple
+-i https://pypi.org/simple/
 attrdict==2.0.1
 autorepr==0.3.0
 beautifulsoup4==4.9.1
