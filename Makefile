@@ -5,14 +5,12 @@ init:
 	pipenv install --dev
 
 check:
-	isort --recursive --check-only meier wsgi.py tests
 	black -l 79 --check meier wsgi.py tests
 
 coverage:
 	python -m pytest --cov meier --cov-report term-missing --cov-report=xml
 
 format:
-	isort -rc -y meier wsgi.py tests
 	black -l 79 meier wsgi.py tests
 
 test: format
