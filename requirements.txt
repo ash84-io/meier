@@ -1,4 +1,4 @@
--i https://pypi.org/simple
+-i https://pypi.org/simple/
 attrdict==2.0.1
 autorepr==0.3.0
 beautifulsoup4==4.9.2
@@ -15,18 +15,18 @@ greenlet==0.4.17 ; platform_python_implementation == 'CPython'
 gunicorn==20.0.4
 itsdangerous==1.1.0
 jinja2==2.11.2
-lxml==4.5.2
+lxml==4.6.1
 markupsafe==1.1.1
 pyjwt==1.7.1
 pymysql==0.10.1
 python-dateutil==2.8.1
 pytz==2020.1
 raven==6.10.0
-sentry-sdk==0.18.0
+sentry-sdk==0.19.1
 six==1.15.0
 soupsieve==2.0.1 ; python_version >= '3.0'
 sqlalchemy==1.3.19
-urllib3==1.25.10
+urllib3==1.25.11
 werkzeug==1.0.1
 zope.event==4.5.0
-zope.interface==5.1.1
+zope.interface==5.1.2
