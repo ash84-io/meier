@@ -74,7 +74,6 @@ def configure_extensions(app, c: Config) -> None:
         sentry_sdk.init(
             dsn=c.sentry_dsn,
             integrations=[FlaskIntegration()],
-            debug=c.debug,
             release=__version__,
         )
 
