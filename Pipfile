@@ -32,6 +32,7 @@ gevent = "*"
 sentry-sdk ="*"
 pip = "*"
 pytz = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.8"
