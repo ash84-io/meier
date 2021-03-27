@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: [3.9]
     container:
       image: python:3.7.3-slim-stretch
     steps:
@@ -25,26 +25,3 @@ jobs:
     - name: CHECK
       run: |
         make check
-
-  coverage:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3.7.3-slim-stretch
-    steps:
-    - uses: actions/checkout@v1
-    - name: Install dependencies
-      run: |
-        apt-get update && apt-get install -y gcc make  build-essential
-        pip install -U pip
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
-    - name: MEASURE COVERAGE
-      run: |
-        make coverage
-    - name: UPLOAD COVERAGE
-      uses: codecov/codecov-action@v1.0.2
-      with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-umbrella
