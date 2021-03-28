@@ -54,7 +54,7 @@ jobs:
       - name: Download task definition
         if: ${{ needs.build.result == 'success' }}
         run: |
-          aws ecs describe-task-definition --task-definition im-payhere-dev --query taskDefinition > task-definition.json
+          aws ecs describe-task-definition --task-definition ash84-io --query taskDefinition > task-definition.json
 
       - name: Set target image
         id: set-target-image
