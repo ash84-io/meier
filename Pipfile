@@ -33,6 +33,8 @@ sentry-sdk ="*"
 pip = "*"
 pytz = "*"
 boto3 = "*"
+jinja2 = "==3.0.3"
+lxml = "==4.6.5"
 
 [requires]
 python_version = "3.8"

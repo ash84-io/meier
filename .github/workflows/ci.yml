@@ -10,7 +10,7 @@ jobs:
       matrix:
         python-version: [3.9]
     container:
-      image: python:3.7.3-slim-stretch
+      image: python:3.9.2-slim-stretch
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
