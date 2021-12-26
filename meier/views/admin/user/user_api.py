@@ -74,10 +74,11 @@ def login_api():
                         0
                     ]
             expired_at = datetime.now(tz=KST) + timedelta(minutes=30)
+            print(token)
             res = ResponseData(
                 code=HttpStatusCode.SUCCESS,
                 data={"next": redirect_url},
-                cookies=[Cookie("token", token.decode("utf-8"), expired_at)],
+                cookies=[Cookie("token", token, expired_at)],
             ).json
             return res
         else:

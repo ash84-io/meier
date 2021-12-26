@@ -32,7 +32,7 @@ def get_post_list_view():
     )
 
     return render_template(
-        f"/themes/{settings.theme}/post_list.html",
+        f"themes/{settings.theme}/post_list.html",
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,
