@@ -14,7 +14,7 @@ format:
 	black -l 79 meier wsgi.py tests
 
 test: format
-	python -m pytest
+	pytest
 
 dev-build:
 	docker-compose -f docker-compose-dev.yml build
