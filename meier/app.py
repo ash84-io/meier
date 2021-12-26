@@ -6,7 +6,7 @@ from werkzeug.exceptions import BadRequest, NotFound
 
 from meier import __version__
 from meier.config import Config
-from meier.extensions import cache, db
+from meier.extensions import db
 from meier.views.admin.contents.contents_api import admin_contents_api
 from meier.views.admin.contents.contents_view import admin_contents_view
 from meier.views.admin.dashboard.dashborad_view import admin_dashboard_view
@@ -88,9 +88,6 @@ def configure_extensions(app, c: Config) -> None:
     db.init_app(app)
     with app.app_context():
         db.create_all()
-
-    # flask-cache
-    cache.init_app(app)
 
 
 def configure_error_handlers(app) -> None:

@@ -32,9 +32,9 @@ def create_token(token_info: TokenInfo) -> str:
 def parse_token(token: str):
     try:
         return jwt.decode(
-            token,
-            "meire_ppp",
-            algorithm="HS256",
+            jwt=token,
+            key="meire_ppp",
+            algorithms=["HS256"],
             subject="MEIER",
             audience="MEIER",
         )

@@ -1,6 +1,5 @@
 from flask import Blueprint, abort, render_template
 
-from meier.extensions import cache
 from meier.models.post import Post, PostStatus, PostVisibility
 from meier.models.post_tag import PostTag
 from meier.models.settings import Settings
@@ -40,7 +39,7 @@ def get_page_view(page_name):
     )
 
     return render_template(
-        f"/themes/{settings.theme}/post_detail.html",
+        f"themes/{settings.theme}/post_detail.html",
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,
@@ -54,7 +53,6 @@ def get_page_view(page_name):
 @post_detail_view.route(
     "/<int:yyyy>/<string:mm>/<string:dd>/<string:post_name>/", methods=["GET"]
 )
-@cache.cached(timeout=300)
 def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
     settings = Settings.query.first()
     author = User.query.first()
@@ -100,7 +98,7 @@ def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
         )
 
         return render_template(
-            f"/themes/{settings.theme}/post_detail.html",
+            f"themes/{settings.theme}/post_detail.html",
             author=author,
             ogp_meta_tag=ogp_meta_tag(),
             settings=settings,
