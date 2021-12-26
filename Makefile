@@ -16,21 +16,18 @@ format:
 test: format
 	pytest
 
-dev-build:
-	docker-compose -f docker-compose-dev.yml build
-
-dev-run:
-	docker-compose -f docker-compose-dev.yml up
+dev:
+	docker build --tag meier:dev . && docker run -p 2368:2368 --env-file .env meier:dev
 
 build:
-	@read -p "Enter Docker User:" DOCKER_USER; \
-	read -p "Enter Docker Tag:" DOCKER_TAG; \
-	docker build --tag $$DOCKER_USER/meier:$$DOCKER_TAG .
+	@read -p "Enter Docker User: " DOCKER_USER; \
+	read -p "Enter Docker Tag: " DOCKER_TAG; \
+	docker build -t $$DOCKER_USER/meier:$$DOCKER_TAG . && docker build -t $$DOCKER_USER/meier:latest .
 
 push:
-	@read -p "Enter Docker User:" DOCKER_USER; \
-	read -p "Enter Docker Tag:" DOCKER_TAG; \
-	docker push $$DOCKER_USER/meier:$$DOCKER_TAG
+	@read -p "Enter Docker User: " DOCKER_USER; \
+	read -p "Enter Docker Tag: " DOCKER_TAG; \
+	docker push $$DOCKER_USER/meier:$$DOCKER_TAG && docker push $$DOCKER_USER/meier:latest
 
 requirements:
 	pipenv lock -r > requirements.txt
