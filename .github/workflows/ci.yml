@@ -9,8 +9,6 @@ jobs:
     strategy:
       matrix:
         python-version: [3.9]
-    container:
-      image: python:3.9.2-slim-buster
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
