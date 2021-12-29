@@ -3,7 +3,8 @@ name: CD(prod-build)
 on:
   push:
     tags:
-      - *
+      - 2021.*
+      - 2022.*
 jobs:
   build:
     runs-on: ubuntu-latest
