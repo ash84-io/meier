@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% include '/themes/zen_tree/head.html' %}
+</head>
+<body class="font">
+    {% include '/themes/zen_tree/header.html' %}
+<div class="content">
+    <ul class="blog-posts">
+    {% for post in post_list %}
+        <li>
+            <span>{{ post.created_at }}</span>
+            <a href="{{ post.link }}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
