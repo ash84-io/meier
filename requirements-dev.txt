@@ -44,7 +44,7 @@ mypy==0.930
 packaging==21.3; python_version >= '3.6'
 pluggy==1.0.0; python_version >= '3.6'
 py==1.11.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
-pyjwt==2.3.0
+pyjwt==2.4.0
 pymysql==1.0.2
 pyparsing==3.0.6; python_version >= '3.6'
 pytest-cov==3.0.0
