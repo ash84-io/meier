@@ -7,7 +7,7 @@
 [![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/ash84-io/ash84-io)
 
 
-### 환경변수 
+### Environment Variables 
 ```
 DB_HOST=localhost:3306
 DB_NAME=meier
