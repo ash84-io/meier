@@ -1,4 +1,3 @@
-from attrdict import AttrDict
 from flask import Blueprint, request
 
 from meier.commons.response_data import HttpStatusCode, ResponseData
@@ -26,7 +25,7 @@ def get_settings_blog_info():
 @login_required_api
 @base.exc_handler
 def set_settings_blog_info():
-    req_data = AttrDict(request.get_json())
+    req_data = request.get_json()
     settings = Settings.query.first()
 
     blog_title = req_data.get("blog_title", "")

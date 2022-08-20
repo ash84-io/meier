@@ -1,6 +1,5 @@
 from functools import wraps
 
-from attrdict import AttrDict
 from flask import g, redirect, request
 
 from meier.commons.jwt_token import parse_token
@@ -48,7 +47,7 @@ def login_required_api(func):
     def decorate(*args, **kwargs):
         try:
             token = request.cookies.get("token", None)
-            g.current_user = _get_current_usr_from_token(token)
+            g.current_user = _get_current_user_from_token(token)
             result = func(*args, **kwargs)
         except UnauthorizedException as e:
             logger.exception(e)
@@ -58,12 +57,14 @@ def login_required_api(func):
     return decorate
 
 
-def _get_current_usr_from_token(token: str):
+def _get_current_user_from_token(token: str):
     if not token:
         raise UnauthorizedException
 
-    parsed_token = AttrDict(parse_token(token))
-    current_user = User.query.filter(User.email == parsed_token.email).scalar()
+    parsed_token = parse_token(token)
+    current_user = User.query.filter(
+        User.email == parsed_token["email"]
+    ).scalar()
     if not current_user:
         raise UnauthorizedException
     return current_user
