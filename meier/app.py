@@ -4,7 +4,8 @@ from flask import Flask, abort, render_template
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.exceptions import BadRequest, NotFound
 
-from meier import __version__
+
+from meier.views.blog.routes.page_view import get_page_view
 from meier.config import Config
 from meier.extensions import db
 from meier.views.admin.contents.contents_api import admin_contents_api
@@ -17,11 +18,11 @@ from meier.views.admin.user.user_api import admin_user_api
 from meier.views.admin.user.user_view import admin_user_view
 from meier.views.admin.writer.writer_api import admin_writer_api
 from meier.views.admin.writer.writer_view import admin_writer_view
-from meier.views.blog.assets import assets
-from meier.views.blog.post_detail_view import post_detail_view
-from meier.views.blog.post_list_view import post_list_view
-from meier.views.blog.rss import rss
-from meier.views.blog.tag_list_view import tag_list_view
+from meier.views.blog.routes.assets import assets
+from meier.views.blog.routes.post_detail_view import post_detail_view
+from meier.views.blog.routes.post_list_view import post_list_view
+from meier.views.blog.routes.rss import rss
+from meier.views.blog.routes.tag_list_view import tag_list_view
 
 __all__ = ["create_app"]
 
@@ -71,11 +72,7 @@ def configure_extensions(app, c: Config) -> None:
 
     # sentry
     if c.sentry_dsn:
-        sentry_sdk.init(
-            dsn=c.sentry_dsn,
-            integrations=[FlaskIntegration()],
-            release=__version__,
-        )
+        sentry_sdk.init(dsn=c.sentry_dsn, integrations=[FlaskIntegration()])
 
     # flask-sqlalchemy
     connection_string = (
@@ -131,7 +128,6 @@ def configure_filter(app) -> None:
 
 
 def configure_dynamic_page(app) -> None:
-    from meier.views.blog.post_detail_view import get_page_view
 
     with app.app_context():
         from meier.models.post import Post

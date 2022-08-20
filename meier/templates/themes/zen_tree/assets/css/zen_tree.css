@@ -16,6 +16,7 @@
 .content {
     font: var(--font-main);
     font-size: var(--font-scale);
+    text-align: justify;
 }
 
 .blog-posts{

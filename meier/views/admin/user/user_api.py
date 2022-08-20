@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 from urllib.parse import parse_qs, urlparse
 
 import pytz
-from attrdict import AttrDict
 from flask import Blueprint, g, request
 
 from meier.commons.jwt_token import TokenInfo, create_token
@@ -47,12 +46,15 @@ def update_user_info_api():
 @admin_user_api.route("/login", methods=["POST"])
 @base.exc_handler
 def login_api():
-    req_data = AttrDict(request.get_json())
     settings = Settings.query.first()
-    if req_data.email and req_data.password:
+    req_data = request.get_json()
+    email = req_data.get("email", None)
+    password = req_data.get("password", None)
+
+    if email and password:
         user = (
-            User.query.filter(User.email == req_data.email.strip())
-            .filter(User.password == req_data.password.strip())
+            User.query.filter(User.email == email.strip())
+            .filter(User.password == password.strip())
             .scalar()
         )
         if user:
@@ -74,7 +76,6 @@ def login_api():
                         0
                     ]
             expired_at = datetime.now(tz=KST) + timedelta(minutes=30)
-            print(token)
             res = ResponseData(
                 code=HttpStatusCode.SUCCESS,
                 data={"next": redirect_url},

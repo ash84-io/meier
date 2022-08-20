@@ -1,7 +1,7 @@
 import jwt
 from jwt.exceptions import DecodeError
 
-from meier.exc import TokenCreateError, TokenParseError
+from meier.exception import TokenCreateError, TokenParseError
 
 
 class TokenInfo:

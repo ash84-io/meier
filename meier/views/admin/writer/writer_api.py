@@ -1,10 +1,8 @@
 from datetime import datetime
 
-from attrdict import AttrDict
 from flask import Blueprint, request
 from sqlalchemy import func
 
-from meier.commons.logger import logger
 from meier.commons.response_data import HttpStatusCode, ResponseData
 from meier.extensions import db
 from meier.models.post import Post
@@ -31,7 +29,7 @@ def delete_post(post_id):
 @login_required_api
 @base.exc_handler
 def update_post(post_id):
-    req_data = AttrDict(request.get_json())
+    req_data = request.get_json()
     post = Post.query.filter(Post.id == post_id).scalar()
     if post:
         for k, v in req_data.items():
@@ -39,7 +37,7 @@ def update_post(post_id):
         post.mo_date = datetime.now()
 
         tags_id = []
-        tags = req_data.tags.strip().split(",")
+        tags = req_data["tags"].strip().split(",")
 
         for tag in tags:
             tag = str(tag).strip()
@@ -69,24 +67,22 @@ def update_post(post_id):
 @login_required_api
 @base.exc_handler
 def save_post():
-
-    req_data = AttrDict(request.get_json())
-
-    post_name_dup_count = (
+    req_data = request.get_json()
+    post_name_duplicated_count = (
         db.session.query(func.count(Post.id))
-        .filter_by(post_name=req_data.post_name.strip())
+        .filter_by(post_name=req_data["post_name"].strip())
         .scalar()
     )
-    if post_name_dup_count:
+    if post_name_duplicated_count:
         return ResponseData(code=HttpStatusCode.DUP_POST_NAME).json
 
     post = Post()
-    post.title = req_data.title.strip()
-    post.content = req_data.content.strip()
-    post.post_name = req_data.post_name.strip()
-    post.html = req_data.html
-    post.status = req_data.status
-    post.visibility = req_data.visibility
+    post.title = req_data["title"].strip()
+    post.content = req_data["content"].strip()
+    post.post_name = req_data["post_name"].strip()
+    post.html = req_data["html"]
+    post.status = req_data["status"]
+    post.visibility = req_data["visibility"]
     post.in_date = datetime.now()
     post.mo_date = datetime.now()
     db.session.add(post)

@@ -30,5 +30,5 @@ push:
 	docker push $$DOCKER_USER/meier:$$DOCKER_TAG && docker push $$DOCKER_USER/meier:latest
 
 requirements:
-	pipenv lock -r > requirements.txt
-	pipenv lock --dev -r > requirements-dev.txt
+	pipenv requirements > requirements.txt
+	pipenv requirements --dev > requirements-dev.txt
