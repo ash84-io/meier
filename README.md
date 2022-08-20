@@ -1,4 +1,4 @@
-# meier
+# 🛡meier
 > self-hosted blog platform 
 
 [![Code Style: Black](https://badgen.net/badge/code%20style/black/black)](https://github.com/ambv/black)
