@@ -39,5 +39,5 @@ jobs:
           --build-arg SENTRY_DSN=${{ secrets.SENTRY_DSN }} \
           -t $REPOSITORY:$IMAGE_TAG .
           docker push $REPOSITORY:$IMAGE_TAG
-          docker tag $REPOSITORY:latest
+          docker tag $REPOSITORY:$IMAGE_TAG $REPOSITORY:latest
           docker push $REPOSITORY:latest
