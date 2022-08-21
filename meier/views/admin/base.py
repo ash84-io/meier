@@ -32,7 +32,7 @@ def login_required_view(func):
     def decorate(*args, **kwargs):
         try:
             token = request.cookies.get("token", None)
-            g.current_user = _get_current_usr_from_token(token)
+            g.current_user = _get_current_user_from_token(token)
             result = func(*args, **kwargs)
         except UnauthorizedException as e:
             logger.exception(e)
