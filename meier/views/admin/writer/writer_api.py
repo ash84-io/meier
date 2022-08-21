@@ -89,7 +89,7 @@ def save_post():
     db.session.commit()
 
     tags_id = []
-    tags = req_data.tags.strip().split(",")
+    tags = req_data["tags"].strip().split(",")
     for tag in tags:
         tag = str(tag).strip()
         tag_instance = Tag.query.filter(Tag.tag == tag).scalar()
