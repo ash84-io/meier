@@ -36,10 +36,13 @@ let vm = new Vue({
                 responseType:'application/json'
             }).then(function (res) {
                 console.log(res);
-                let payload = res.data;
+                let payload =  JSON.parse(res.data);
+                console.log(payload.data);
+                console.log(payload.data.post.id);
                 self.postId = payload.data.post.id;
                 self.title = payload.data.post.title;
-                self.content = payload.data.post.raw_content;
+                let rawContent = payload.data.post.raw_content;
+                self.content =rawContent;
                 self.postPageURL = payload.data.post.post_name;
                 self.tags = payload.data.tags;
                 self.status = payload.data.post.status.toString();
@@ -47,6 +50,7 @@ let vm = new Vue({
                 self.featured_image = payload.data.post.featured_image;
                 showNotification('primary', 'Load Complete');
             }).catch(function (err) {
+                console.log(err);
                 showNotification('warning', 'Load Error');
             });
         }
