@@ -17,7 +17,7 @@ class OpenGraphMetaTagGenerator(object):
 
         self.url = url if url else ""
         self.image = image if image else ""
-        self.types = type_ if type_ else "website"
+        self.type = type_ if type_ else "website"
 
     def __call__(self):
         template = '<meta property="og:{}" content="{}"/>'
