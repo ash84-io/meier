@@ -6,7 +6,7 @@ from meier.models.post_tag import PostTag
 from meier.models.settings import Settings
 from meier.models.tag import Tag
 from meier.models.user import User
-from meier.views.blog.services.open_graph import OpenGraphMetaTagGenerator
+from meier.views.blog.services.opengraph import OpenGraphMetaTagGenerator
 
 tag_list_view = Blueprint("tag_list_view", __name__, url_prefix="/tag")
 
