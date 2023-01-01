@@ -4,7 +4,7 @@ from flask import Flask, abort, render_template
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.exceptions import BadRequest, NotFound
 
-
+from meier.views.blog.routes.ads_view import ads_view
 from meier.views.blog.routes.page_view import get_page_view
 from meier.config import Config
 from meier.extensions import db
@@ -58,6 +58,7 @@ def configure_blueprints(app) -> None:
         admin_user_view,
         admin_writer_api,
         admin_writer_view,
+        ads_view,
     ]
     for blueprint in blueprints:
         app.register_blueprint(blueprint)
