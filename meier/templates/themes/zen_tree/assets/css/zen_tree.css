@@ -2,19 +2,19 @@
     --width: 720px;
     --font-main: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;;
     --font-secondary: Verdana, sans-serif;
+    --font-code:"Fira Mono", "Fira Code", Courier, monospace;
     --font-scale: 1em;
     --background-color: #fff;
     --heading-color: #222;
     --text-color: #444;
     --link-color: #3273dc;
     --visited-color:  #8b6fcb;
-    --code-background-color: #f2f2f2;
     --code-color: #222;
     --blockquote-color: #222;
 }
 
 .content {
-    font: var(--font-main);
+    font-family: var(--font-main);
     font-size: var(--font-scale);
     text-align: justify;
 }
@@ -80,4 +80,11 @@ a:hover {
 
 img {
     max-width: 100%;
+}
+
+code {
+    font-family: var(--font-code);
+    font-size: 80%;
+    background-color: #c7fffb;
+    padding: 0.2em 0.4em;
 }
