@@ -6,6 +6,7 @@
 <body class="font">
     {% include '/themes/zen_tree/header.html' %}
 <div class="content">
+    <div class="notification">{{ notifications[0].content }}</div>
     <ul class="blog-posts">
     {% for post in post_list %}
         <li>

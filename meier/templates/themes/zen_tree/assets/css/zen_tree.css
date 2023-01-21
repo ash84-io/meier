@@ -25,6 +25,10 @@
 .content {
     line-height: 1.6;
 }
+.notification {
+    padding: 0.2em 0.9em;
+    border-left: 4px solid #1DA1F2;
+}
 
 
 body {
@@ -88,3 +92,4 @@ code {
     background-color: #c7fffb;
     padding: 0.2em 0.4em;
 }
+
