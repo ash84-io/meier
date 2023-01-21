@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from sqlalchemy import desc
 
+from meier.models.notification import Notification
 from meier.models.post import Post, PostStatus, PostVisibility
 from meier.models.post_tag import PostTag
 from meier.models.settings import Settings
@@ -51,11 +52,13 @@ def get_tag_list_view(tag: str):
         url=settings.domain,
         image=None,
     )
+    notifications = Notification.query.all()
     return render_template(
         f"/themes/{settings.theme}/post_list.html",
         author=author,
         ogp_meta_tag=ogp_meta_tag(),
         settings=settings,
+        notifications=notifications,
         total_pages=total_pages,
         post_list=post_list,
         has_next=has_next,
