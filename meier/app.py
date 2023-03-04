@@ -4,25 +4,26 @@ from flask import Flask, abort, render_template
 from sentry_sdk.integrations.flask import FlaskIntegration
 from werkzeug.exceptions import BadRequest, NotFound
 
-from meier.views.blog.routes.ads_view import ads_view
-from meier.views.blog.routes.page_view import get_page_view
+from meier.blog.presentation.view.ads_view import ads_view
+from meier.blog.presentation.view.page_view import get_page_view
 from meier.config import Config
 from meier.extensions import db
-from meier.views.admin.contents.contents_api import admin_contents_api
-from meier.views.admin.contents.contents_view import admin_contents_view
-from meier.views.admin.dashboard.dashborad_view import admin_dashboard_view
-from meier.views.admin.index.index_view import admin_index_view
-from meier.views.admin.settings.settings_api import admin_settings_api
-from meier.views.admin.settings.settings_view import admin_settings_view
-from meier.views.admin.user.user_api import admin_user_api
-from meier.views.admin.user.user_view import admin_user_view
-from meier.views.admin.writer.writer_api import admin_writer_api
-from meier.views.admin.writer.writer_view import admin_writer_view
-from meier.views.blog.routes.assets import assets
-from meier.views.blog.routes.post_detail_view import post_detail_view
-from meier.views.blog.routes.post_list_view import post_list_view
-from meier.views.blog.routes.rss import rss
-from meier.views.blog.routes.tag_list_view import tag_list_view
+from meier.admin.contents.contents_api import admin_contents_api
+from meier.admin.contents.contents_view import admin_contents_view
+from meier.admin.dashboard.dashborad_view import admin_dashboard_view
+from meier.admin.index.index_view import admin_index_view
+from meier.admin.settings.settings_api import admin_settings_api
+from meier.admin.settings.settings_view import admin_settings_view
+from meier.admin.user.user_api import admin_user_api
+from meier.admin.user.user_view import admin_user_view
+from meier.admin.writer.writer_api import admin_writer_api
+from meier.admin.writer.writer_view import admin_writer_view
+from meier.blog.presentation.view.assets import assets
+from meier.blog.presentation.view.post_detail_view import post_detail_view
+from meier.blog.presentation.view.post_list_view import post_list_view
+from meier.blog.presentation.view.rss_view import rss_view
+from meier.blog.presentation.view.tag_list_view import tag_list_view
+from meier.blog.presentation.api.post_api import post_api
 
 __all__ = ["create_app"]
 
@@ -42,12 +43,16 @@ def create_app(config: Config) -> Flask:
 
 
 def configure_blueprints(app) -> None:
-    blueprints = [
+    blog_view_blueprints = [
         assets,
         post_detail_view,
         post_list_view,
         tag_list_view,
-        rss,
+        rss_view,
+        ads_view,
+    ]
+
+    admin_blueprints = [
         admin_contents_api,
         admin_contents_view,
         admin_dashboard_view,
@@ -58,9 +63,13 @@ def configure_blueprints(app) -> None:
         admin_user_view,
         admin_writer_api,
         admin_writer_view,
-        ads_view,
     ]
-    for blueprint in blueprints:
+
+    blog_api_blueprints = [post_api]
+    total_blueprints = (
+        blog_view_blueprints + blog_api_blueprints + admin_blueprints
+    )
+    for blueprint in total_blueprints:
         app.register_blueprint(blueprint)
 
 

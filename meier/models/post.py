@@ -32,12 +32,9 @@ class Post(db.Model, MixinBase):
     featured_image = Column(Text, nullable=True, default=None)
 
     @property
-    def for_detail(self):
-        created_at = self.in_date.strftime(YYYY_MM_DD) if self.in_date else ""
-        modified_at = self.mo_date.strftime(YYYY_MM_DD) if self.in_date else ""
-        link = ""
+    def link(self):
         if self.post_name:
-            link = (
+            return (
                 "/{}/{}/{}/".format(
                     self.in_date.strftime("%Y"),
                     self.in_date.strftime("%m"),
@@ -45,6 +42,13 @@ class Post(db.Model, MixinBase):
                 )
                 + self.post_name
             )
+        return ""
+
+    @property
+    def for_detail(self):
+        created_at = self.in_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        modified_at = self.mo_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        link = self.link
         return {
             "title": self.title,
             "content": self.content,
