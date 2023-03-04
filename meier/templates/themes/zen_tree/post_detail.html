@@ -13,6 +13,9 @@
     <div style="text-align: right">
         <small>updated:{{ post.modified_at }}</small>
     </div>
+    <div style="text-align: right">
+        <a href="/admin/writer?post_id={{ post.id }}">edit</a>
+    </div>
 
     {% if post.featured_image %}
         <img src="{{ post.featured_image }}" alt="">

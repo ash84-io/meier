@@ -50,6 +50,7 @@ class Post(db.Model, MixinBase):
         modified_at = self.mo_date.strftime(YYYY_MM_DD) if self.in_date else ""
         link = self.link
         return {
+            "id": self.id,
             "title": self.title,
             "content": self.content,
             "html": self.html,
