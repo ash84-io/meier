@@ -17,4 +17,14 @@
     </ul>
 </div>
 </body>
+<script>
+    document.addEventListener('keydown', (event) => {
+        // key
+        if (event.ctrlKey && event.key === 'r') {
+            moveRandomPostURL();
+            return false;
+        }
+    });
+</script>
+
 </html>

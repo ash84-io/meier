@@ -4,10 +4,18 @@
     {% include '/themes/zen_tree/head.html' %}
 </head>
 <body class="font">
-    {% include '/themes/zen_tree/header.html' %}
+{% include '/themes/zen_tree/header.html' %}
 <div class="content">
     <h1>{{ post.title }}</h1>
-    {{ post.created_at }}
+    <div style="text-align: right">
+        <small>created:{{ post.created_at }}</small>
+    </div>
+    <div style="text-align: right">
+        <small>updated:{{ post.modified_at }}</small>
+    </div>
+    <div style="text-align: right">
+        <a href="/admin/writer?post_id={{ post.id }}">edit</a>
+    </div>
 
     {% if post.featured_image %}
         <img src="{{ post.featured_image }}" alt="">
@@ -30,6 +38,15 @@
             theme="github-light"
             crossorigin="anonymous"
             async>
+    </script>
+    <script>
+        document.addEventListener('keydown', (event) => {
+            // key
+            if (event.ctrlKey && event.key === 'r') {
+                moveRandomPostURL();
+                return false;
+            }
+        });
     </script>
 </div>
 </body>

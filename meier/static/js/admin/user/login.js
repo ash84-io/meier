@@ -7,8 +7,7 @@ vm = new Vue({
     },
     methods: {
         login: function (event) {
-            var data;
-            data = {
+            let data = {
                 email: this.email,
                 password: this.password
             };

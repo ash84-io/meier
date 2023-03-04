@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, Column, Integer, String, Text
 
 from meier.extensions import db
 from meier.models.base import MixinBase
+from meier.utils.time import YYYY_MM_DD
 
 
 class PostVisibility(IntEnum):
@@ -31,41 +32,45 @@ class Post(db.Model, MixinBase):
     featured_image = Column(Text, nullable=True, default=None)
 
     @property
+    def link(self):
+        if self.post_name:
+            return (
+                "/{}/{}/{}/".format(
+                    self.in_date.strftime("%Y"),
+                    self.in_date.strftime("%m"),
+                    self.in_date.strftime("%d"),
+                )
+                + self.post_name
+            )
+        return ""
+
+    @property
     def for_detail(self):
+        created_at = self.in_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        modified_at = self.mo_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        link = self.link
         return {
+            "id": self.id,
             "title": self.title,
             "content": self.content,
             "html": self.html,
-            "created_at": self.in_date.strftime("%Y-%m-%d")
-            if self.in_date
-            else "",
-            "modified_at": self.mo_date.strftime("%Y-%m-%d")
-            if self.mo_date
-            else "",
-            "link": "/{}/{}/{}/".format(
-                self.in_date.strftime("%Y"),
-                self.in_date.strftime("%m"),
-                self.in_date.strftime("%d"),
-            )
-            + self.post_name
-            if self.post_name
-            else "",
+            "created_at": created_at,
+            "modified_at": modified_at,
+            "link": link,
             "featured_image": self.featured_image,
             "is_page": self.is_page,
         }
 
     @property
     def for_admin(self):
+        created_at = self.in_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        modified_at = self.mo_date.strftime(YYYY_MM_DD) if self.in_date else ""
         return {
             "id": self.id,
             "title": self.title,
             "raw_content": self.content,
-            "created_at": self.in_date.strftime("%Y-%m-%d")
-            if self.in_date
-            else "",
-            "modified_at": self.mo_date.strftime("%Y-%m-%d")
-            if self.mo_date
-            else "",
+            "created_at": created_at,
+            "modified_at": modified_at,
             "post_name": self.post_name,
             "visibility": self.visibility,
             "status": self.status,
