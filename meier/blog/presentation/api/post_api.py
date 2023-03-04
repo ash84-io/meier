@@ -16,7 +16,8 @@ def get_random_post_url() -> str:
         .filter(Post.visibility == PostVisibility.PUBLIC.value)
     )
     random_posts = public_posts.all()
-    random_index = random.randint(0, len(random_posts)-1)
+    random_index = random.randint(0, len(random_posts) - 1)
     return ResponseData(
-        code=HttpStatusCode.SUCCESS, data={"url": random_posts[random_index].link}
+        code=HttpStatusCode.SUCCESS,
+        data={"url": random_posts[random_index].link},
     ).json
