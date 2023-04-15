@@ -19,7 +19,7 @@ def get_post_list_view():
         Post.query.filter(Post.status == PostStatus.PUBLISH.value)
         .filter(Post.is_page.is_(False))
         .filter(Post.visibility == PostVisibility.PUBLIC.value)
-        .order_by(desc(Post.in_date))
+        .order_by(desc(Post.mo_date))
         .paginate(page, settings.post_per_page, error_out=False)
     )
     post_list = [post.for_detail for post in post_paging_result.items]
