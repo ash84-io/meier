@@ -7,7 +7,6 @@ bs4==0.0.1
 certifi==2022.12.7; python_version >= '3.6'
 charset-normalizer==2.1.1; python_full_version >= '3.6.0'
 click==8.0.2
-codecov==2.1.12
 coverage==6.4.4; python_version >= '3.7'
 idna==3.3; python_version >= '3.5'
 iniconfig==1.1.1
