@@ -12,16 +12,19 @@ from meier.blog.services.opengraph import OpenGraphMetaTagGenerator
 
 post_list_view = Blueprint("post_list_view", __name__, url_prefix="/")
 post_list_sort_map = {
-    PostListSort.UPDATE_DATE_DESC:desc(Post.mo_date),
-    PostListSort.CREATE_DATE_DESC:desc(Post.in_date),
-    PostListSort.RANDOM:desc(Post.in_date),
+    PostListSort.UPDATE_DATE_DESC: desc(Post.mo_date),
+    PostListSort.CREATE_DATE_DESC: desc(Post.in_date),
+    PostListSort.RANDOM: desc(Post.in_date),
 }
+
 
 @post_list_view.route("", methods=["GET"])
 def get_post_list_view():
     author = User.query.first()
     page = int(request.args.get("page", 1))
-    sort = PostListSort(request.args.get("sort", PostListSort.CREATE_DATE_DESC.value))
+    sort = PostListSort(
+        request.args.get("sort", PostListSort.CREATE_DATE_DESC.value)
+    )
 
     order_by = post_list_sort_map[sort]
 
