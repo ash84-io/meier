@@ -34,14 +34,7 @@ class Post(db.Model, MixinBase):
     @property
     def link(self):
         if self.post_name:
-            return (
-                "/{}/{}/{}/".format(
-                    self.in_date.strftime("%Y"),
-                    self.in_date.strftime("%m"),
-                    self.in_date.strftime("%d"),
-                )
-                + self.post_name
-            )
+            return f'/{self.in_date.strftime("%Y")}/{self.in_date.strftime("%m")}/{self.in_date.strftime("%d")}/{self.post_name}'
         return ""
 
     @property

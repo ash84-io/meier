@@ -18,8 +18,7 @@ def get_tag_list_view(tag: str):
     page = int(request.args.get("page", 1))
     settings = Settings.query.first()
 
-    tag = Tag.query.filter(Tag.tag == tag).scalar()
-    if tag:
+    if tag := Tag.query.filter(Tag.tag == tag).scalar():
         post_tag_list = PostTag.query.filter(PostTag.tag_id == tag.id).all()
         post_id_list = [post_tag.post_id for post_tag in post_tag_list]
         post_paging_result = (
@@ -34,8 +33,8 @@ def get_tag_list_view(tag: str):
         post_list = [post.for_detail for post in post_paging_result.items]
         has_next = post_paging_result.has_next
         has_prev = post_paging_result.has_prev
-        next = "?page={}".format(page + 1)
-        prev = "?page={}".format(page - 1)
+        next = f"?page={page + 1}"
+        prev = f"?page={page - 1}"
         total_pages = post_paging_result.pages
     else:
         post_list = []
