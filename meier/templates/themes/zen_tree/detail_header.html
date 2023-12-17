@@ -1,7 +1,11 @@
 <header>
     <div>
-        <h1>  <a href="/">{{ settings.blog_title }}</a></h1>
+        <h1>
+            <a href="/">{{ settings.blog_title }}</a>
+        </h1>
+        <div style="color: #797575">
         {{ settings.blog_desc | safe }}
+        </div>
     </div>
     <nav>
         <p>
@@ -11,6 +15,8 @@
             <a href="/tag/essay">Essay</a>
             <a href="https://github.com/AhnSeongHyun">GitHub</a>
             <a href="https://twitter.com/sh84ahn">Twitter</a>
+            <a href="#" onClick="moveRandomPostURL();return false;">🎲</a>
+
         </p>
     </nav>
 </header>

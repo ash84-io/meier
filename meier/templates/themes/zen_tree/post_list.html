@@ -4,16 +4,8 @@
     {% include '/themes/zen_tree/head.html' %}
 </head>
 <body class="font">
-    {% include '/themes/zen_tree/header.html' %}
+    {% include '/themes/zen_tree/list_header.html' %}
 <div class="content">
-{#    <div class="notification">{{ notifications[0].content }}</div>#}
-{#    <div class="sort">#}
-{#        <a href="?sort=create_date_desc">created desc</a>#}
-{#        |#}
-{#        <a href="?sort=update_date_desc">updated desc</a>#}
-{#        |#}
-{#        <a href="?sort=random">🎲</a>#}
-{#    </div>#}
     <ul class="blog-posts">
     {% for post in post_list %}
         <li>
