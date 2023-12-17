@@ -25,11 +25,9 @@ def get_contents_posts_api():
     post_paging_result = _get_post_list_by_status(
         status=PostStatus.PUBLISH, page=page, per_page=per_page, q=q
     )
-    post_list = [
-        post.for_admin for i, post in enumerate(post_paging_result.items)
-    ]
+    post_list = [post.for_admin for post in post_paging_result.items]
 
-    is_result = True if post_paging_result.total > 0 else False
+    is_result = post_paging_result.total > 0
     return ResponseData(
         code=HttpStatusCode.SUCCESS,
         data={
@@ -68,10 +66,8 @@ def get_contents_draft_api():
     post_paging_result = _get_post_list_by_status(
         status=PostStatus.DRAFT, page=page, per_page=per_page, q=q
     )
-    post_list = [
-        post.for_admin for i, post in enumerate(post_paging_result.items)
-    ]
-    is_result = True if post_paging_result.total > 0 else False
+    post_list = [post.for_admin for post in post_paging_result.items]
+    is_result = post_paging_result.total > 0
     return ResponseData(
         code=HttpStatusCode.SUCCESS,
         data={

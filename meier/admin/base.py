@@ -62,9 +62,9 @@ def _get_current_user_from_token(token: str):
         raise UnauthorizedException
 
     parsed_token = parse_token(token)
-    current_user = User.query.filter(
+    if current_user := User.query.filter(
         User.email == parsed_token["email"]
-    ).scalar()
-    if not current_user:
+    ).scalar():
+        return current_user
+    else:
         raise UnauthorizedException
-    return current_user

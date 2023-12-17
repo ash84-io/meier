@@ -21,8 +21,5 @@ class OpenGraphMetaTagGenerator(object):
 
     def __call__(self):
         template = '<meta property="og:{}" content="{}"/>'
-        meta_html_list = []
-        for k, v in vars(self).items():
-            meta_html_list.append(template.format(k, v))
-
+        meta_html_list = [template.format(k, v) for k, v in vars(self).items()]
         return "\n".join(meta_html_list)

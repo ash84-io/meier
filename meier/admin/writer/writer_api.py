@@ -30,8 +30,7 @@ def delete_post(post_id):
 @base.exc_handler
 def update_post(post_id):
     req_data = request.get_json()
-    post = Post.query.filter(Post.id == post_id).scalar()
-    if post:
+    if post := Post.query.filter(Post.id == post_id).scalar():
         for k, v in req_data.items():
             setattr(post, k, v)
         post.mo_date = datetime.now()
@@ -46,10 +45,7 @@ def update_post(post_id):
                 tag_instance = Tag(tag=tag)
                 db.session.add(tag_instance)
                 db.session.flush()
-                tags_id.append(tag_instance.id)
-            else:
-                tags_id.append(tag_instance.id)
-
+            tags_id.append(tag_instance.id)
         for tag_id in tags_id:
             post_tag = (
                 PostTag.query.filter(PostTag.post_id == post.id)
@@ -68,12 +64,11 @@ def update_post(post_id):
 @base.exc_handler
 def save_post():
     req_data = request.get_json()
-    post_name_duplicated_count = (
+    if post_name_duplicated_count := (
         db.session.query(func.count(Post.id))
         .filter_by(post_name=req_data["post_name"].strip())
         .scalar()
-    )
-    if post_name_duplicated_count:
+    ):
         return ResponseData(code=HttpStatusCode.DUP_POST_NAME).json
 
     post = Post()
@@ -97,10 +92,7 @@ def save_post():
             tag_instance = Tag(tag=tag)
             db.session.add(tag_instance)
             db.session.flush()
-            tags_id.append(tag_instance.id)
-        else:
-            tags_id.append(tag_instance.id)
-
+        tags_id.append(tag_instance.id)
     db.session.commit()
 
     for tag_id in tags_id:

@@ -51,7 +51,7 @@ def get_rss():
         ]
         fe.category(categories)
         fe.title(post.title)
-        fe.description(description="<![CDATA[ {} ]]>".format(post.html[:200]))
+        fe.description(description=f"<![CDATA[ {post.html[:200]} ]]>")
         fe.content(content=post.html, type="CDATA")
         fe.link(href=f"{settings.domain}/{post_path}", rel="alternate")
         fe.pubdate(str(post.in_date.astimezone(timezone.utc)))

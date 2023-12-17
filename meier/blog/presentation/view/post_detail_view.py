@@ -17,14 +17,12 @@ def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
     settings = Settings.query.first()
     author = User.query.first()
 
-    post = (
+    if post := (
         Post.query.filter(Post.post_name == post_name)
         .filter(Post.visibility == PostVisibility.PUBLIC.value)
         .filter(Post.status == PostStatus.PUBLISH.value)
         .scalar()
-    )
-
-    if post:
+    ):
         prev_post = (
             Post.query.filter(Post.id < post.id)
             .filter(Post.visibility == PostVisibility.PUBLIC.value)

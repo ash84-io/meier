@@ -24,12 +24,12 @@ admin_user_api = Blueprint(
 @login_required_api
 @base.exc_handler
 def user_info_api():
-    user = User.query.filter(User.email == g.current_user.email).scalar()
-    if not user:
+    if user := User.query.filter(User.email == g.current_user.email).scalar():
+        return ResponseData(
+            code=HttpStatusCode.SUCCESS, data=user.for_user_info
+        ).json
+    else:
         raise Exception("user_info is none.")
-    return ResponseData(
-        code=HttpStatusCode.SUCCESS, data=user.for_user_info
-    ).json
 
 
 @admin_user_api.route("/user_info", methods=["PUT"])
@@ -51,38 +51,36 @@ def login_api():
     email = req_data.get("email", None)
     password = req_data.get("password", None)
 
-    if email and password:
-        user = (
+    if not email or not password:
+        return ResponseData(code=HttpStatusCode.INVALID_AUTHORIZATION).json
+    if not (
+        user := (
             User.query.filter(User.email == email.strip())
             .filter(User.password == password.strip())
             .scalar()
         )
-        if user:
-            token = create_token(
-                token_info=TokenInfo(
-                    user_name=user.user_name,
-                    email=user.email,
-                    profile_image=user.profile_image,
-                    blog_title=settings.blog_title if settings else None,
-                )
-            )
-
-            redirect_url = "/admin/contents"
-            if request.referrer:
-                url_parsed = urlparse(url=request.referrer)
-                if url_parsed.query:
-                    parsed_qs = parse_qs(url_parsed.query)
-                    redirect_url = parsed_qs.get("next", ["/admin/contents"])[
-                        0
-                    ]
-            expired_at = datetime.now(tz=KST) + timedelta(minutes=30)
-            res = ResponseData(
-                code=HttpStatusCode.SUCCESS,
-                data={"next": redirect_url},
-                cookies=[Cookie("token", token, expired_at)],
-            ).json
-            return res
-        else:
-            return ResponseData(code=HttpStatusCode.INVALID_AUTHORIZATION).json
-    else:
+    ):
         return ResponseData(code=HttpStatusCode.INVALID_AUTHORIZATION).json
+    token = create_token(
+        token_info=TokenInfo(
+            user_name=user.user_name,
+            email=user.email,
+            profile_image=user.profile_image,
+            blog_title=settings.blog_title if settings else None,
+        )
+    )
+
+    redirect_url = "/admin/contents"
+    if request.referrer:
+        url_parsed = urlparse(url=request.referrer)
+        if url_parsed.query:
+            parsed_qs = parse_qs(url_parsed.query)
+            redirect_url = parsed_qs.get("next", ["/admin/contents"])[
+                0
+            ]
+    expired_at = datetime.now(tz=KST) + timedelta(minutes=30)
+    return ResponseData(
+        code=HttpStatusCode.SUCCESS,
+        data={"next": redirect_url},
+        cookies=[Cookie("token", token, expired_at)],
+    ).json
