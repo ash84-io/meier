@@ -1,7 +1,7 @@
 <header>
     <div>
-        <h1>  <a href="/">🌳{{ settings.blog_title }}</a></h1>
-        {{ settings.blog_desc }}
+        <h1>  <a href="/">{{ settings.blog_title }}</a></h1>
+        {{ settings.blog_desc | safe }}
     </div>
     <nav>
         <p>
