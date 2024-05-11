@@ -16,9 +16,9 @@
     </div>
 
     {% if current_user %}
-    <div style="text-align: right">
-        <a href="/admin/writer?post_id={{ post.id }}">edit</a>
-    </div>
+        <div style="text-align: right">
+            <a href="/admin/writer?post_id={{ post.id }}">edit</a>
+        </div>
     {% endif %}
 
     <div class="pre-blog-post"></div>
@@ -37,20 +37,14 @@
             <a href="/tag/{{tag}}">#{{ tag }}</a>&nbsp;
         {% endfor %}
     </div>
+
     {%  if related_post %}
         <div>
-            <h3>Related Post 👇</h3>
+            <h3 class="related-post-title">Related Post 👇</h3>
             <li><a href="{{ related_post.link }}">{{ related_post.title }}</a></li>
         </div>
     {%  endif %}
 
-    <script src="https://utteranc.es/client.js"
-            repo="ash84-io/utterances-ash84"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
     <script>
         document.addEventListener('keydown', (event) => {
             // key
@@ -60,7 +54,6 @@
             }
         });
     </script>
-
 
     {% include '/themes/zen_tree/footer.html' %}
 </div>

@@ -77,6 +77,7 @@ def get_post_detail_view(yyyy: int, mm: str, dd: str, post_name: str):
         related_post_tag.post_id for related_post_tag in related_post_tags
     ]
 
+    related_post_ids = list(set(related_post_ids))
     try:
         related_post_ids.remove(post.id)
         related_post = (
