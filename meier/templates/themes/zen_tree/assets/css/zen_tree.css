@@ -27,6 +27,7 @@
     font-size: 1.2em;
 }
 
+
 .blog-post-title{
     margin-block-end: 0;
 }
@@ -38,6 +39,10 @@
 
 .content {
     line-height: 1.75;
+}
+
+.related-post-title{
+    margin-bottom: 2px;
 }
 .notification {
     padding: 0.2em 0.9em;
