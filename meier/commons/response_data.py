@@ -42,21 +42,22 @@ class ResponseData(ResponseBase):
         self.cookies = cookies
 
     def to_dict(self):
-        result = dict()
-        result["meta"] = self.meta.__dict__
-        result["data"] = self.data if self.data is not None else []
+        result = {
+            "meta": self.meta.__dict__,
+            "data": self.data if self.data is not None else [],
+        }
         result.update(self.dummy_data)
         return result
 
     @property
     def json(self):
-        http_status_code = int(str(self.meta.code)[:3])
         if self.cookies:
             res = jsonify(self.to_dict())
             for c in self.cookies:
                 res.set_cookie(c.key, c.value, expires=c.expired_at)
             return res
         else:
+            http_status_code = int(str(self.meta.code)[:3])
             return jsonify(self.to_dict()), http_status_code
 
 
