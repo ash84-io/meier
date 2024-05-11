@@ -6,16 +6,22 @@
 <body class="font">
 {% include '/themes/zen_tree/detail_header.html' %}
 <div class="content">
-    <h1>{{ post.title }}</h1>
-    <div style="text-align: right">
-        <small>created:{{ post.created_at }}</small>
+    <h1 class="blog-post-title">{{ post.title }}</h1>
+    <div class="blog-post-meta">
+        {% if post.created_at == post.modified_at %}
+            <small>  {{ post.created_at }}</small>
+        {% else %}
+            <small>  {{ post.created_at }}/{{ post.modified_at }}</small>
+        {% endif %}
     </div>
-    <div style="text-align: right">
-        <small>updated:{{ post.modified_at }}</small>
-    </div>
+
+    {% if current_user %}
     <div style="text-align: right">
         <a href="/admin/writer?post_id={{ post.id }}">edit</a>
     </div>
+    {% endif %}
+
+    <div class="pre-blog-post"></div>
 
     {% if post.featured_image %}
         <img src="{{ post.featured_image }}" alt="">
@@ -31,6 +37,12 @@
             <a href="/tag/{{tag}}">#{{ tag }}</a>&nbsp;
         {% endfor %}
     </div>
+    {%  if related_post %}
+        <div>
+            <h3>Related Post 👇</h3>
+            <li><a href="{{ related_post.link }}">{{ related_post.title }}</a></li>
+        </div>
+    {%  endif %}
 
     <script src="https://utteranc.es/client.js"
             repo="ash84-io/utterances-ash84"
@@ -48,6 +60,9 @@
             }
         });
     </script>
+
+
+    {% include '/themes/zen_tree/footer.html' %}
 </div>
 </body>
 </html>

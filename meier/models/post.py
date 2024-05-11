@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, Column, Integer, String, Text
 
 from meier.extensions import db
 from meier.models.base import MixinBase
-from meier.utils.time import YYYY_MM_DD
+from meier.utils.time import YYYY_MM_DD, POST_DETAIL_DATE_FORMAT
 
 
 class PostVisibility(IntEnum):
@@ -18,8 +18,10 @@ class PostStatus(IntEnum):
 
 
 class Post(db.Model, MixinBase):
+
     __tablename__ = "post"
     __table_args__ = {"extend_existing": True, "mysql_engine": "InnoDB"}
+
     post_name = Column(String(255), nullable=True, unique=True, default=None)
     title = Column(String(255), nullable=False, index=True)
     content = Column(Text, nullable=False)
@@ -46,8 +48,16 @@ class Post(db.Model, MixinBase):
 
     @property
     def for_detail(self):
-        created_at = self.in_date.strftime(YYYY_MM_DD) if self.in_date else ""
-        modified_at = self.mo_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        created_at = (
+            self.in_date.strftime(POST_DETAIL_DATE_FORMAT)
+            if self.in_date
+            else ""
+        )
+        modified_at = (
+            self.mo_date.strftime(POST_DETAIL_DATE_FORMAT)
+            if self.in_date
+            else ""
+        )
         link = self.link
         return {
             "id": self.id,
@@ -59,6 +69,18 @@ class Post(db.Model, MixinBase):
             "link": link,
             "featured_image": self.featured_image,
             "is_page": self.is_page,
+        }
+
+    @property
+    def for_list(self):
+        created_at = self.in_date.strftime(YYYY_MM_DD) if self.in_date else ""
+        link = self.link
+        return {
+            "title": self.title,
+            "content": self.content,
+            "created_at": created_at,
+            "featured_image": self.featured_image,
+            "link": link,
         }
 
     @property

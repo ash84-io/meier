@@ -7,13 +7,14 @@
     {% include '/themes/zen_tree/list_header.html' %}
 <div class="content">
     <ul class="blog-posts">
-    {% for post in post_list %}
+    {% for post in post_list[:50]%}
         <li>
             <span>{{ post.created_at }}</span>
             <a href="{{ post.link }}">{{ post.title }}</a>
         </li>
     {% endfor %}
     </ul>
+    {% include '/themes/zen_tree/footer.html' %}
 </div>
 </body>
 <script>
