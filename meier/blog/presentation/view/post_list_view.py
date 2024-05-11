@@ -36,7 +36,7 @@ def get_post_list_view():
         .order_by(order_by)
         .paginate(page, settings.post_per_page, error_out=False)
     )
-    post_list = [post.for_detail for post in post_paging_result.items]
+    post_list = [post.for_list for post in post_paging_result.items]
     if sort == PostListSort.RANDOM:
         random.shuffle(post_list)
     first_post = post_list[0]
