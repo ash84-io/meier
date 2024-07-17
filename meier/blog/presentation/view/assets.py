@@ -2,10 +2,10 @@ from flask import Blueprint, send_from_directory
 
 from meier.models.settings import Settings
 
-assets = Blueprint("assets", __name__, url_prefix="/assets")
+asset = Blueprint("assets", __name__, url_prefix="/assets")
 
 
-@assets.route("/css/<string:file_name>", methods=["GET"])
+@asset.route("/css/<string:file_name>", methods=["GET"])
 def get_assets_css_file(file_name: str):
     settings = Settings.query.first()
     return response_assets(
