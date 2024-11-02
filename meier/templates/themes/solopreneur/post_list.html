@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <head>
+        {% include '/themes/solopreneur/post_list_head.html' %}
+    </head>
+</head>
+<body>
+
+<div class="main-container">
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <div class="name">ASH84</div>
+        <div class="description">
+            Software Engineer focused on turning complexity into simplicity. Co-founder at <a href="https://payhere.in">Payhere</a>. Previously Tech Lead of remit team at <a href="https://banksalad.com">Banksalad</a>.
+        </div>
+
+        <div class="experience">
+            <div class="experience-title">Experience</div>
+            <ul class="experience-list">
+                <li>Head of tech <span>Payhere.Inc, 2024—present</span></li>
+                <li>CTO <span>Payhere.Inc, 2020—2023</span></li>
+                <li>TechLead, <span>Banksalad, 2018—2020</span></li>
+                <li>Senior Software Engineer <span>Danal, 2014—2018</span></li>
+            </ul>
+            <div class="extra-links">
+                <a href="https://ash84.notion.site/me-74b5672978464fa899e34ebe6510b859">More on Read.cv</a> <a href="https://www.linkedin.com/in/seonghyun-ahn-9098a640/">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="links">
+            <div class="links-title">Links</div>
+            <ul class="links-list">
+                <li class="link-item"><a href="https://x.com/sh84ahn">Twitter</a></li>
+                <li class="link-item"><a href="https://www.instagram.com/ash84/">Instagram</a></li>
+                <li class="link-item"><a href="https://github.com/AhnSeongHyun/">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Blog Section -->
+    <div class="blog-container">
+        <div class="blog-title">Latest Blog Posts</div>
+        <ul class="blog-list">
+
+            {% for post in post_list %}
+                <li class="blog-list-item">
+                    <div class="blog-date">{{ post.created_at }}</div>
+                    <a href="{{ post.link }}" class="blog-title-item">{{ post.title }}</a>
+                    <div class="blog-summary">{{ post.content[:300] | clean }}...</div>
+                </li>
+
+            {%  endfor %}
+        </ul>
+    </div>
+</div>
+</body>
+</html>

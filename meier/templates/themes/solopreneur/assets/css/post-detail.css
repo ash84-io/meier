@@ -1,0 +1,130 @@
+:root {
+    --width: 720px;
+    --font-main: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;;
+    --font-secondary: Verdana, sans-serif;
+    --font-code:"Fira Mono", "Fira Code", Courier, monospace;
+    --font-scale: 1em;
+    --background-color: #fff;
+    --heading-color: #222;
+    --text-color: #444;
+    --link-color: #3273dc;
+    --visited-color:  #8b6fcb;
+    --code-color: #222;
+    --blockquote-color: #222;
+}
+
+.content {
+    font-family: var(--font-main);
+    font-size: var(--font-scale);
+    text-align: justify;
+}
+
+.blog-posts{
+
+}
+
+.blog-post{
+    font-size: 1.2em;
+}
+
+
+.blog-post-title{
+    margin-block-end: 0;
+}
+
+
+.pre-blog-post{
+    margin-bottom: 30px;
+}
+
+.content {
+    line-height: 1.75;
+}
+
+.related-post-title{
+    margin-bottom: 2px;
+}
+.notification {
+    padding: 0.2em 0.9em;
+    border-left: 4px solid #1DA1F2;
+}
+
+
+body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-scale);
+    margin: auto;
+    padding: 20px;
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+nav a {
+    margin-right: 8px;
+}
+
+
+ul.blog-posts {
+    list-style-type: none;
+    padding: unset;
+}
+
+ul.blog-posts li {
+    display: flex;
+}
+
+ul.blog-posts li span {
+    flex: 0 0 110px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+}
+
+h1 a {
+    color: var(--heading-color);
+    cursor: pointer;
+}
+
+a {
+    color: var(--link-color);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    border-radius: .25rem;
+}
+
+code {
+    font-family: var(--font-code);
+    font-size: 80%;
+    background-color: #ffd50080;
+    padding: .25rem;
+    font-weight: 600;
+    border-radius: .25rem;
+}
+
+blockquote{
+    padding: 0.2em 0.9em;
+    border-left: 4px solid var(--link-color);
+}
+
+footer{
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    font-size: 0.8em;
+    color: #666;
+}
