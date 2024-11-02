@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% include '/themes/solopreneur/post_detail_head.html' %}
+</head>
+<body class="font">
+{% include '/themes/solopreneur/detail_header.html' %}
+<div class="content">
+    <h1 class="blog-post-title">{{ post.title }}</h1>
+    <div class="blog-post-meta">
+        {% if post.created_at == post.modified_at %}
+            <small>  {{ post.created_at }}</small>
+        {% else %}
+            <small>  {{ post.created_at }}/{{ post.modified_at }}</small>
+        {% endif %}
+    </div>
+
+    {% if current_user %}
+        <div style="text-align: right">
+            <a href="/admin/writer?post_id={{ post.id }}">edit</a>
+        </div>
+    {% endif %}
+
+    <div class="pre-blog-post"></div>
+
+    {% if post.featured_image %}
+        <img src="{{ post.featured_image }}" alt="">
+    {% endif %}
+
+    <div class="blog-post">
+        {{post.html | safe}}
+    </div>
+
+    <hr/>
+    <div>
+        {% for tag in tag_list %}
+            <a href="/tag/{{tag}}">#{{ tag }}</a>&nbsp;
+        {% endfor %}
+    </div>
+
+    {%  if related_post %}
+        <div>
+            <h3 class="related-post-title">Related Post 👇</h3>
+            <li><a href="{{ related_post.link }}">{{ related_post.title }}</a></li>
+        </div>
+    {%  endif %}
+
+    <script>
+        document.addEventListener('keydown', (event) => {
+            // key
+            if (event.ctrlKey && event.key === 'r') {
+                moveRandomPostURL();
+                return false;
+            }
+        });
+    </script>
+
+
+    {% include '/themes/solopreneur/footer.html' %}
+</div>
+</body>
+</html>

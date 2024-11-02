@@ -1,0 +1,160 @@
+body {
+    font-family: 'SFProDisplay-Bold', Pretendard;
+    background-color: #FFFFFF;
+    color: #1A1A1A;
+    margin: 0;
+    padding: 40px 0 0 0; /* 상단에 40px 여백 추가 */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    gap: 40px;
+}
+
+.profile-container {
+    max-width: 600px;
+    min-width: 600px;
+    line-height: 1.2;
+}
+
+.blog-container {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-height: 80vh; /* 고정 높이 설정 */
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 활성화 */
+}
+
+.name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #666;
+}
+
+.description {
+    font-size: 32px;
+    margin-top: 10px;
+    color: #1A1A1A;
+    font-family: 'SFProDisplay-Bold';
+}
+
+/* Description의 a 태그 기본 스타일과 Hover 스타일 설정 */
+.description a {
+    color: #1A1A1A;
+    text-decoration: none; /* 기본 밑줄 제거 */
+}
+
+.description a:hover {
+    color: #666; /* 마우스 오버 시 회색으로 변경 */
+    text-decoration: underline; /* 마우스 오버 시 밑줄 표시 */
+}
+
+.experience, .links {
+    margin-top: 30px;
+}
+
+.experience-title, .links-title {
+    font-size: 16px;
+    color: #999;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.experience-list, .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience-list li, .links-list li {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+}
+
+.experience-list li span {
+    color: #666;
+}
+
+.link-item a {
+    color: #1A1A1A;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-item a:hover {
+    text-decoration: underline;
+}
+
+.extra-links {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #666;
+}
+
+.extra-links a {
+    color: #666;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
+.blog-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.blog-list {
+    list-style: none;
+    padding: 0;
+}
+
+.blog-list-item {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.blog-date {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.blog-title-item {
+    font-size: 18px;
+    color: #1A1A1A;
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.blog-title-item:hover {
+    text-decoration: underline;
+}
+
+.blog-summary {
+    font-size: 16px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 3줄까지만 표시 */
+    -webkit-box-orient: vertical;
+}
