@@ -1,7 +1,10 @@
 from flask import Blueprint, abort, render_template
 from flask import request
 
-from meier.application.admin.base import get_current_user_from_token, UnauthorizedException
+from meier.application.admin.base import (
+    get_current_user_from_token,
+    UnauthorizedException,
+)
 from meier.application.blog.services.opengraph import OpenGraphMetaTagGenerator
 from meier.infrastructure.models.post import Post, PostStatus, PostVisibility
 from meier.infrastructure.models.post_tag import PostTag
