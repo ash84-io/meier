@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <head>
-        {% include '/themes/solopreneur/post_list_head.html' %}
-    </head>
+    {% include '/themes/solopreneur/post_list_head.html' %}
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,7 +23,8 @@
                 <li>Senior Software Engineer <span>Danal, 2014—2018</span></li>
             </ul>
             <div class="extra-links">
-                <a href="https://ash84.notion.site/me-74b5672978464fa899e34ebe6510b859">More on Read.cv</a> <a href="https://www.linkedin.com/in/seonghyun-ahn-9098a640/">LinkedIn</a>
+                <a href="https://ash84.notion.site/me-74b5672978464fa899e34ebe6510b859">More on Read.cv</a>
+                <a href="https://www.linkedin.com/in/seonghyun-ahn-9098a640/">LinkedIn</a>
             </div>
         </div>
 
@@ -49,7 +49,6 @@
                     <a href="{{ post.link }}" class="blog-title-item">{{ post.title }}</a>
                     <div class="blog-summary">{{ post.content[:300] | clean }}...</div>
                 </li>
-
             {%  endfor %}
         </ul>
     </div>

@@ -158,3 +158,22 @@ body {
     -webkit-line-clamp: 3; /* 3줄까지만 표시 */
     -webkit-box-orient: vertical;
 }
+
+/* 모바일 대응: 화면 너비가 768px 이하일 때 세로 배치 및 좌우 여백 추가 */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* 세로 배치 */
+        align-items: center; /* 가운데 정렬 */
+        padding: 20px 20px; /* 좌우 20px 여백 추가 */
+    }
+
+    .profile-container, .blog-container {
+        max-width: 100%; /* 가로 폭을 100%로 확장 */
+        min-width: 0; /* 최소 너비 제한 해제 */
+    }
+
+    .blog-container {
+        max-height: none; /* 고정 높이 해제 */
+        margin-top: 20px; /* 프로필 섹션과 간격 추가 */
+    }
+}
