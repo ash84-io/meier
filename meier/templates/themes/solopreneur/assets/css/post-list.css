@@ -164,7 +164,8 @@ body {
     .main-container {
         flex-direction: column; /* 세로 배치 */
         align-items: center; /* 가운데 정렬 */
-        padding: 20px 20px; /* 좌우 20px 여백 추가 */
+        padding: 20px; /* 좌우 20px 여백 추가 */
+        margin: 0 10px; /* 모바일에서 좌우 여백 추가 */
     }
 
     .profile-container, .blog-container {
