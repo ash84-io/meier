@@ -14,7 +14,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update && apt-get install -y gcc make  build-essential
-        pip install -U pip
+        pip install -U pip setuptools wheel
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
     - name: CHECK
